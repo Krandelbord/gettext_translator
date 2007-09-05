@@ -1,6 +1,7 @@
-main.o: main.cc MainWindow.h TranslateTxtView.h
+Configuration.o: Configuration.cc config.h Configuration.h
+main.o: main.cc MainWindow.h TranslateTxtView.h Configuration.h
 MainWindow.o: MainWindow.cc MainWindow.h TranslateTxtView.h Utils.h \
-  MenuBar.h
+  MenuBar.h Configuration.h config.h
 MenuBar.o: MenuBar.cc MenuBar.h
 TranslateTxtView.o: TranslateTxtView.cc TranslateTxtView.h
 Utils.o: Utils.cc Utils.h

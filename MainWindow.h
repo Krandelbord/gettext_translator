@@ -9,6 +9,8 @@ class MainWindow : public Gtk::Window {
 		MainWindow(guint width, guint hieght);
 
 	private:
+		void onPanedChaged(Gtk::Requisition *r);
+		Gtk::HPaned m_hpan;
 		Gtk::VBox m_box;
 		Gtk::ComboBoxText m_combo;
 		TranslateTxtView  m_tr_view;
