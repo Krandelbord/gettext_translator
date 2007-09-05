@@ -16,7 +16,7 @@ MainWindow::MainWindow(guint width, guint height) {
 	this->set_default_size(width, height);
 	this->add(m_box);
 
-	m_box.pack_start(*new MenuBar(), false, false);
+	m_box.pack_start(*new MenuBar(*this), false, false);
 
 	m_box.add(m_hpan);
 	Configuration conf;
