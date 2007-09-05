@@ -1,14 +1,16 @@
 #include "MainWindow.h"
 #include "Utils.h"
+#include "MenuBar.h"
 
 MainWindow::MainWindow(guint width, guint height) {
 	this->set_size_request(width, height);
 	this->add(m_box);
 
+	m_box.pack_start(*new MenuBar(), false, false);
 	m_tr_view.setLanguage("pl");
 	m_box.add(m_tr_view);
 
-	m_box.pack_end(m_combo, false, false);
+	m_box.pack_start(m_combo, false, false);
 	
 	std::vector<Glib::ustring> dict_list = getDictionaryList();
 	for (std::vector<Glib::ustring>::iterator it = dict_list.begin(); it != dict_list.end(); ++it) {
@@ -16,6 +18,8 @@ MainWindow::MainWindow(guint width, guint height) {
 	}
 	m_combo.signal_changed().connect(sigc::mem_fun(this, &MainWindow::onLanguageChanged));
 	m_combo.set_active(0);
+
+	m_box.pack_end(*new Gtk::Statusbar(), false, false);
 }
 
 void MainWindow::onLanguageChanged() {
