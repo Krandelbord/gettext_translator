@@ -41,8 +41,22 @@ MainWindow::MainWindow(guint width, guint height) {
 	m_combo.set_active(0);
 
 	m_box.pack_end(*new Gtk::Statusbar(), false, false);
+	this->signal_size_request().connect(sigc::mem_fun(this, &MainWindow::onSizeChanged));
 }
 
 void MainWindow::onLanguageChanged() {
 	m_tr_view.setLanguage(m_combo.get_active_text());
+}
+
+void MainWindow::onSizeChanged(Gtk::Requisition *r) {
+	Configuration conf;
+	
+	Glib::RefPtr<Gdk::Screen> scr = Gdk::Screen::get_default();
+	int width  = scr->get_width();
+	int height = scr->get_height();
+
+	width = this->get_width()*100.0/width;
+	height = this->get_height()*100.0/height;
+	if (width > 0)  conf.setValue("GUI", "width percentage", width);
+	if (height > 0) conf.setValue("GUI", "height percentage", height);
 }
