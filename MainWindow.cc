@@ -22,7 +22,6 @@ MainWindow::MainWindow(guint width, guint height) {
 	m_box.pack_start(*new MenuBar(*this), false, false);
 	
 	m_box.pack_start(m_toolbar, false, false);
-	m_box.pack_start(m_toolbar, false, false);
 	m_box.pack_start(*new Gtk::HSeparator(), false, false);
 
 	m_box.add(m_hpan);
