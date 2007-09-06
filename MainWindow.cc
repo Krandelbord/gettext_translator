@@ -2,6 +2,8 @@
 #include "Utils.h"
 #include "MenuBar.h"
 #include "Configuration.h"
+#include "TextPanel.h"
+#include "TranslatedTextPanel.h"
 #include "config.h"
 
 void MainWindow::onPanedChaged(Gtk::Requisition *r) {
@@ -17,6 +19,7 @@ MainWindow::MainWindow(guint width, guint height) {
 	this->add(m_box);
 
 	m_box.pack_start(*new MenuBar(*this), false, false);
+	m_box.pack_start(*new Gtk::HSeparator(), false, false);
 
 	m_box.add(m_hpan);
 	Configuration conf;
@@ -27,25 +30,28 @@ MainWindow::MainWindow(guint width, guint height) {
 	debug("Window width = %d\n", this->get_width());
 	debug("Read %d%%. Setting hpane to %d pixels\n",proc, pixels);
 	m_hpan.signal_size_request().connect(sigc::mem_fun(this, &MainWindow::onPanedChaged));
-	m_tr_view.setLanguage("pl");
-	m_hpan.pack1(m_tr_view);
-	m_hpan.pack2(*new Gtk::Label("cokolwiek"));
+	m_hpan.pack1(m_vpan);
+	m_hpan.pack2(*new Gtk::Label("Let panel with\nsome stuff here."));
 
-	m_box.pack_start(m_combo, false, false);
+	m_vpan.pack1(*new TextPanel("Original text (msgid):"));
+	m_vpan.pack2(*new TranslatedTextPanel());
+
 	
 	std::vector<Glib::ustring> dict_list = getDictionaryList();
-	for (std::vector<Glib::ustring>::iterator it = dict_list.begin(); it != dict_list.end(); ++it) {
+	/*for (std::vector<Glib::ustring>::iterator it = dict_list.begin(); it != dict_list.end(); ++it) {
 		m_combo.append_text(*it);
 	}
 	m_combo.signal_changed().connect(sigc::mem_fun(this, &MainWindow::onLanguageChanged));
 	m_combo.set_active(0);
-
+	*/
 	m_box.pack_end(*new Gtk::Statusbar(), false, false);
 	this->signal_size_request().connect(sigc::mem_fun(this, &MainWindow::onSizeChanged));
+	this->show_all();
+
 }
 
 void MainWindow::onLanguageChanged() {
-	m_tr_view.setLanguage(m_combo.get_active_text());
+	//m_tr_view.setLanguage(m_combo.get_active_text());
 }
 
 void MainWindow::onSizeChanged(Gtk::Requisition *r) {

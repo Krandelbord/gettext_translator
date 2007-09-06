@@ -9,7 +9,8 @@ ifdef DEBUG
 	CXXFLAGS+=-g3 -DDEBUG
 endif
 
-translator: main.o Utils.o TranslateTxtView.o MainWindow.o MenuBar.o Configuration.o
+translator: main.o Utils.o TranslateTxtView.o MainWindow.o MenuBar.o Configuration.o TextPanel.o \
+			TranslatedTextPanel.o IndicatorWidget.o
 	$(CXX) $(LDFLAGS) $^ -o $@
 
 

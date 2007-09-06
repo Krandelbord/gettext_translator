@@ -11,10 +11,10 @@ class MainWindow : public Gtk::Window {
 	private:
 		void onPanedChaged(Gtk::Requisition *r);
 		void onSizeChanged(Gtk::Requisition *r);
+
 		Gtk::HPaned m_hpan;
+		Gtk::VPaned m_vpan;
 		Gtk::VBox m_box;
-		Gtk::ComboBoxText m_combo;
-		TranslateTxtView  m_tr_view;
 
 		void onLanguageChanged();
 };
