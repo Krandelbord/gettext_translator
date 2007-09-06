@@ -12,9 +12,11 @@ TranslatedTextPanel::TranslatedTextPanel() :
 
 	m_title_box.pack_start(m_title_label, false, false);
 
-	m_title_box.pack_start(m_fuzzy_ind, false, false, 10);
-	m_title_box.pack_start(m_untr_ind, false, false, 10);
-	m_title_box.pack_start(m_err_ind, false, false, 10);
+	m_title_box.pack_end(m_indicators_box, false, false);
+
+	m_indicators_box.pack_start(m_fuzzy_ind, false, false, 10);
+	m_indicators_box.pack_start(m_untr_ind, false, false, 10);
+	m_indicators_box.pack_start(m_err_ind, false, false, 10);
 	
 	this->show_all_children();
 
