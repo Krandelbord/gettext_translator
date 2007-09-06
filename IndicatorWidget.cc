@@ -7,7 +7,7 @@ IndicatorWidget::IndicatorWidget(const Glib::ustring &name, Gdk::Color off_color
 	m_DrawingArea.modify_bg(Gtk::STATE_NORMAL, off_color);
 
 	m_Frame.add(m_DrawingArea);
-	this->pack_start(m_Frame, false, false);
+	this->pack_start(m_Frame, false, false, 2);
 	this->pack_end(m_Label, false, false);
 	
 	m_Label.show_all();
