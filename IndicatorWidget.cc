@@ -1,8 +1,6 @@
 #include "IndicatorWidget.h"
 
-IndicatorWidget::IndicatorWidget(const Glib::ustring &name, 
-		Gdk::Color off_color=Gdk::Color("brown"),
-		Gdk::Color on_color=Gdk::Color("red")) {
+IndicatorWidget::IndicatorWidget(const Glib::ustring &name, Gdk::Color off_color, Gdk::Color on_color) {
 
 	m_Frame.set_shadow_type(Gtk::SHADOW_IN);
 	m_Label.set_text(name);
