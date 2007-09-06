@@ -13,9 +13,14 @@ translator: main.o Utils.o TranslateTxtView.o MainWindow.o MenuBar.o Configurati
 			TranslatedTextPanel.o IndicatorWidget.o PoReader.o HelperPanel.o Toolbar.o
 	$(CXX) $(LDFLAGS) $^ -o $@
 
+tests: readerTest
+
+readerTest: PoReader.o tests/readerTest.o
+	$(CXX) $(LDFLAGS) $^ -o $@
 
 dep:
 	$(CXX) -MM *.cc >makefile.dep
+	$(CXX) -MM tests/*.cc >>makefile.dep
 
 include makefile.dep
 

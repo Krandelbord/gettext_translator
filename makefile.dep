@@ -6,10 +6,11 @@ MainWindow.o: MainWindow.cc MainWindow.h Toolbar.h Utils.h MenuBar.h \
   Configuration.h TextPanel.h TranslatedTextPanel.h TranslateTxtView.h \
   IndicatorWidget.h HelperPanel.h config.h
 MenuBar.o: MenuBar.cc MenuBar.h
-PoReader.o: PoReader.cc PoReader.h
+PoReader.o: PoReader.cc PoReader.h config.h
 TextPanel.o: TextPanel.cc TextPanel.h TranslateTxtView.h
 Toolbar.o: Toolbar.cc Toolbar.h
 TranslatedTextPanel.o: TranslatedTextPanel.cc TranslatedTextPanel.h \
   TranslateTxtView.h IndicatorWidget.h config.h
 TranslateTxtView.o: TranslateTxtView.cc TranslateTxtView.h
 Utils.o: Utils.cc Utils.h
+readerTest.o: tests/readerTest.cc tests/../PoReader.h
