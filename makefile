@@ -10,7 +10,7 @@ ifdef DEBUG
 endif
 
 translator: main.o Utils.o TranslateTxtView.o MainWindow.o MenuBar.o Configuration.o TextPanel.o \
-			TranslatedTextPanel.o IndicatorWidget.o PoReader.o
+			TranslatedTextPanel.o IndicatorWidget.o PoReader.o HelperPanel.o
 	$(CXX) $(LDFLAGS) $^ -o $@
 
 
