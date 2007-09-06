@@ -4,6 +4,7 @@
 #include "Configuration.h"
 #include "TextPanel.h"
 #include "TranslatedTextPanel.h"
+#include "HelperPanel.h"
 #include "config.h"
 
 void MainWindow::onPanedChaged(Gtk::Requisition *r) {
@@ -31,7 +32,7 @@ MainWindow::MainWindow(guint width, guint height) {
 	debug("Read %d%%. Setting hpane to %d pixels\n",proc, pixels);
 	m_hpan.signal_size_request().connect(sigc::mem_fun(this, &MainWindow::onPanedChaged));
 	m_hpan.pack1(m_vpan);
-	m_hpan.pack2(*new Gtk::Label("Let panel with\nsome stuff here."));
+	m_hpan.pack2(*new HelperPanel());
 
 	m_vpan.pack1(*new TextPanel("Original text (msgid):"));
 	m_vpan.pack2(*new TranslatedTextPanel());
