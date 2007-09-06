@@ -2,7 +2,7 @@
 #define MAIN_WINDOW_H
 
 #include <gtkmm.h>
-#include "TranslateTxtView.h"
+#include "Toolbar.h"
 
 class MainWindow : public Gtk::Window {
 	public:
@@ -15,6 +15,8 @@ class MainWindow : public Gtk::Window {
 		Gtk::HPaned m_hpan;
 		Gtk::VPaned m_vpan;
 		Gtk::VBox m_box;
+
+		Toolbar m_toolbar;
 
 		void onLanguageChanged();
 };

@@ -1,13 +1,14 @@
 Configuration.o: Configuration.cc config.h Configuration.h
 HelperPanel.o: HelperPanel.cc HelperPanel.h
 IndicatorWidget.o: IndicatorWidget.cc IndicatorWidget.h
-main.o: main.cc MainWindow.h TranslateTxtView.h Configuration.h
-MainWindow.o: MainWindow.cc MainWindow.h TranslateTxtView.h Utils.h \
-  MenuBar.h Configuration.h TextPanel.h TranslatedTextPanel.h \
+main.o: main.cc MainWindow.h Toolbar.h Configuration.h
+MainWindow.o: MainWindow.cc MainWindow.h Toolbar.h Utils.h MenuBar.h \
+  Configuration.h TextPanel.h TranslatedTextPanel.h TranslateTxtView.h \
   IndicatorWidget.h HelperPanel.h config.h
 MenuBar.o: MenuBar.cc MenuBar.h
 PoReader.o: PoReader.cc PoReader.h
 TextPanel.o: TextPanel.cc TextPanel.h TranslateTxtView.h
+Toolbar.o: Toolbar.cc Toolbar.h
 TranslatedTextPanel.o: TranslatedTextPanel.cc TranslatedTextPanel.h \
   TranslateTxtView.h IndicatorWidget.h config.h
 TranslateTxtView.o: TranslateTxtView.cc TranslateTxtView.h
