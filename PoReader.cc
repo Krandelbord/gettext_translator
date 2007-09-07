@@ -1,11 +1,50 @@
 #include "PoReader.h"
 #include "config.h"
+void xerror_handler (int severity,
+		  po_message_t message,
+		  const char *filename, size_t lineno, size_t column,
+		  int multiline_p, const char *message_text) {
+	debug("\033[1;31mXerror handler \033[1;0m \n");
+	debug("Problem in line %d column %d decsription: %s\n", 
+			lineno, column,
+			Glib::locale_to_utf8(message_text).c_str());
+}
+
+void xerror2_handler(int severity,
+		   po_message_t message1,
+		   const char *filename1, size_t lineno1, size_t column1,
+		   int multiline_p1, const char *message_text1,
+		   po_message_t message2,
+		   const char *filename2, size_t lineno2, size_t column2,
+		   int multiline_p2, const char *message_text2) {
+	debug("\033[1;31mXerror2 handler \033[1;0m\n");
+	debug("Error int two messages:\n\tFirst in line %d column %d"
+			"\n\tSecond in line %d column %d\n", 
+			lineno1, column1, lineno2, column2);
+	debug("Problem with first message %s\n", Glib::locale_to_utf8(message_text1).c_str());
+	debug("Problem with second message %s\n", Glib::locale_to_utf8(message_text2).c_str());
+}
+
 
 PoReader::PoReader(const Glib::ustring &file_path) {
-	po_xerror_handler_t error_handler;
-	m_pofile = po_file_read(file_path.c_str(), error_handler);
+	m_msg_number = 0;
+	struct po_xerror_handler error_handler;
+	error_handler.xerror = xerror_handler;
+	error_handler.xerror2 = xerror2_handler;
+	debug("Otwieranie pliku %s\n", file_path.c_str());
+	m_pofile = po_file_read(file_path.c_str(), &error_handler);
 
 	m_file_encoding = this->getEncoding();
+
+	m_miter = po_message_iterator(m_pofile, NULL);
+	size_t fuzzys = 0;
+	po_message_t po_msg = NULL;
+	do {
+		po_msg = po_next_message(m_miter);
+		//++fuzzys;
+		if (po_msg && po_message_is_fuzzy(po_msg)) fuzzys++;;
+	} while (po_msg!=NULL);
+	debug("Mamy %d\n", fuzzys);
 }
 
 Glib::ustring PoReader::getEncoding() {
@@ -32,6 +71,34 @@ Glib::ustring PoReader::getHeader(const Glib::ustring &header_name) {
 	return retval;
 }
 
+bool PoReader::nextMessage() {
+	debug("Nastepena\n");
+	po_message_t msg = po_next_message(m_miter);
+	if (msg) {
+		m_msg_number++;
+		m_current_msg = msg;
+		return true;
+	} else return false;
+}
+
+bool PoReader::previousMessage() {
+	po_message_iterator_free(m_miter);
+	m_miter = po_message_iterator(m_pofile, NULL);
+	po_message_t msg;
+	size_t cur_number = 0;
+	do {
+		msg = po_next_message(m_miter);
+		cur_number++;
+	} while (cur_number < m_msg_number-1);
+
+	if (msg) {
+		m_msg_number-=1;
+		m_current_msg = msg;
+		return true;
+	} else return false;
+}
+
 PoReader::~PoReader() {
+	po_message_iterator_free(m_miter);
 	po_file_free(m_pofile);
 }
