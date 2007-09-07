@@ -13,4 +13,3 @@ TranslatedTextPanel.o: TranslatedTextPanel.cc TranslatedTextPanel.h \
   TranslateTxtView.h IndicatorWidget.h config.h
 TranslateTxtView.o: TranslateTxtView.cc TranslateTxtView.h
 Utils.o: Utils.cc Utils.h
-tests/readerTest.o: tests/readerTest.cc tests/../PoReader.h
