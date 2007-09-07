@@ -2,6 +2,7 @@
 #define PO_READER_H
 
 #include <glibmm.h>
+#include <gettext-po.h>
 
 class PoReader {
 	public:
@@ -9,7 +10,9 @@ class PoReader {
 		Glib::ustring getHeader(const Glib::ustring &header_name);
 		Glib::ustring getEncoding();
 
+		~PoReader();
 	private:
-		Glib::ustring m_file_path;
+		po_file_t     m_pofile;
+		Glib::ustring m_file_encoding;
 };
 #endif /* PO_READER_H */
