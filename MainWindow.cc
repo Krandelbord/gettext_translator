@@ -15,13 +15,22 @@ void MainWindow::onPanedChaged(Gtk::Requisition *r) {
 		conf.setValue("GUI", "Left pane percentage", proc );
 }
 
-MainWindow::MainWindow(guint width, guint height) {
+void MainWindow::onMessageChanged() {
+	debug("Message %s\n", m_po_reader->getMsgid().c_str());
+	m_text_panel.setText(m_po_reader->getMsgid());
+}
+
+MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_panel("Original text (msgid):") {
 	this->set_default_size(width, height);
 	this->add(m_box);
 
 	m_box.pack_start(*new MenuBar(*this), false, false);
+
+	m_po_reader = new PoReader("claws3.0-pl.po");
 	
+	m_toolbar.setPoReader(m_po_reader);
 	m_box.pack_start(m_toolbar, false, false);
+	m_toolbar.signal_message_changed().connect(sigc::mem_fun(this, &MainWindow::onMessageChanged));
 	m_box.pack_start(*new Gtk::HSeparator(), false, false);
 
 	m_box.add(m_hpan);
@@ -36,7 +45,7 @@ MainWindow::MainWindow(guint width, guint height) {
 	m_hpan.pack1(m_vpan);
 	m_hpan.pack2(*new HelperPanel());
 
-	m_vpan.pack1(*new TextPanel("Original text (msgid):"));
+	m_vpan.pack1(m_text_panel);
 	m_vpan.pack2(*new TranslatedTextPanel());
 
 	

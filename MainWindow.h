@@ -3,6 +3,8 @@
 
 #include <gtkmm.h>
 #include "Toolbar.h"
+#include "TextPanel.h"
+#include "PoReader.h"
 
 class MainWindow : public Gtk::Window {
 	public:
@@ -17,8 +19,11 @@ class MainWindow : public Gtk::Window {
 		Gtk::VBox m_box;
 
 		Toolbar m_toolbar;
+		TextPanel m_text_panel;
+		PoReader *m_po_reader;
 
 		void onLanguageChanged();
+		void onMessageChanged();
 };
 
 #endif /* MAIN_WINDOW_H */

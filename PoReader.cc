@@ -37,14 +37,18 @@ PoReader::PoReader(const Glib::ustring &file_path) {
 	m_file_encoding = this->getEncoding();
 
 	m_miter = po_message_iterator(m_pofile, NULL);
+	po_next_message(m_miter); po_next_message(m_miter);
+	/*
 	size_t fuzzys = 0;
 	po_message_t po_msg = NULL;
 	do {
 		po_msg = po_next_message(m_miter);
 		//++fuzzys;
 		if (po_msg && po_message_is_fuzzy(po_msg)) fuzzys++;;
+		if (po_msg) debug("po-message = %s\n", po_message_msgid(po_msg));
 	} while (po_msg!=NULL);
-	debug("Mamy %d\n", fuzzys);
+	debug("Mamy %d fuzzy\n", fuzzys);
+	*/
 }
 
 Glib::ustring PoReader::getEncoding() {
@@ -72,13 +76,18 @@ Glib::ustring PoReader::getHeader(const Glib::ustring &header_name) {
 }
 
 bool PoReader::nextMessage() {
-	debug("Nastepena\n");
+	m_current_msg = Glib::ustring("nic");
 	po_message_t msg = po_next_message(m_miter);
 	if (msg) {
 		m_msg_number++;
-		m_current_msg = msg;
+		char *msg_dup = strdup(po_message_msgid(msg));
+		m_current_msg = Glib::convert_with_fallback(msg_dup, "UTF-8", m_file_encoding);
+		debug("Message = %s\n", m_current_msg.c_str());
 		return true;
-	} else return false;
+	} else {
+		debug("Nastepna wiadomosc - ERRRO \n");
+		return false;
+	}
 }
 
 bool PoReader::previousMessage() {
@@ -93,9 +102,14 @@ bool PoReader::previousMessage() {
 
 	if (msg) {
 		m_msg_number-=1;
-		m_current_msg = msg;
+		//m_current_msg = msg;
 		return true;
 	} else return false;
+}
+
+Glib::ustring PoReader::getMsgid() {
+	debug("Wtf sie tu dzieje %s\n", m_current_msg.c_str());
+	return m_current_msg;
 }
 
 PoReader::~PoReader() {
