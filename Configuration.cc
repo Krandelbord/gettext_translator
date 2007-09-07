@@ -12,15 +12,10 @@ Configuration::Configuration() {
 }
 
 int Configuration::getValue(const Glib::ustring &category, const Glib::ustring &name) const {
-	debug("\033[1;31m Getting value \033[1;0m = %s / %s = %d\n", 
-			category.c_str(), name.c_str(), 
-			g_key_file_get_integer(m_key_file, category.c_str(), name.c_str(), NULL));
-
 	return g_key_file_get_integer(m_key_file, category.c_str(), name.c_str(), NULL);
 }
 
 void Configuration::setValue(const Glib::ustring &category, const Glib::ustring &name, int value) {
-	debug("\033[1;32m Setting \033[1;0m value = %s / %s = %d\n", category.c_str(), name.c_str(), value);
 	g_key_file_set_integer(m_key_file, category.c_str(), name.c_str(), value);
 }
 
