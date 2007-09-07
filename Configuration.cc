@@ -1,5 +1,3 @@
-#include "config.h"
-
 #include "Configuration.h"
 #include <glibmm.h>
 
