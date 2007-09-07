@@ -6,6 +6,7 @@
 class TextPanel : public Gtk::VBox {
 	public:
 		TextPanel(const Glib::ustring &title);
+		void setText(const Glib::ustring &new_txt);
 	private:
 		Gtk::Label m_title_label;
 		Gtk::TextView m_text_view;
