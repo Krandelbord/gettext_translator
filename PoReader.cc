@@ -88,9 +88,12 @@ bool PoReader::nextMessage() {
 }
 
 bool PoReader::previousMessage() {
+	if (m_msg_number<=1) return false;
+
 	po_message_iterator_free(m_miter);
 	m_miter = po_message_iterator(m_pofile, NULL);
 	po_message_t msg;
+	debug("We are looking for msg number %d\n", m_msg_number-1);
 	size_t cur_number = 0;
 	do {
 		msg = po_next_message(m_miter);
