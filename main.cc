@@ -1,5 +1,4 @@
 #include <gtkmm.h>
-#include <iostream>
 #include "MainWindow.h"
 #include "Configuration.h"
 
