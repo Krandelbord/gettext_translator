@@ -21,4 +21,5 @@ TranslatedTextPanel::TranslatedTextPanel() :
 	this->show_all_children();
 
 	this->add(m_tr_tv);
+	m_tr_tv.set_wrap_mode(Gtk::WRAP_WORD);
 }
