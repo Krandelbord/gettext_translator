@@ -5,12 +5,13 @@ HelperPanel.o: HelperPanel.cc HelperPanel.h
 IndicatorWidget.o: IndicatorWidget.cc IndicatorWidget.h
 main.o: main.cc MainWindow.h Toolbar.h PoReader.h TextPanel.h \
   TranslatedTextPanel.h TranslateTxtView.h IndicatorWidget.h \
-  Configuration.h
+  Configuration.h Utils.h config.h
 MainWindow.o: MainWindow.cc MainWindow.h Toolbar.h PoReader.h TextPanel.h \
   TranslatedTextPanel.h TranslateTxtView.h IndicatorWidget.h MenuBar.h \
   Configuration.h HelperPanel.h config.h
 MenuBar.o: MenuBar.cc MenuBar.h
-PoReader.o: PoReader.cc PoReader.h config.h
+PoReader.o: PoReader.cc PoReader.h Utils.h config.h
+test_replace.o: test_replace.cc Utils.h
 TextPanel.o: TextPanel.cc TextPanel.h TranslateTxtView.h
 Toolbar.o: Toolbar.cc Toolbar.h PoReader.h DictionariesMenu.h config.h
 TranslatedTextPanel.o: TranslatedTextPanel.cc TranslatedTextPanel.h \

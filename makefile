@@ -13,6 +13,10 @@ translator: main.o Utils.o TranslateTxtView.o MainWindow.o MenuBar.o Configurati
 			TranslatedTextPanel.o IndicatorWidget.o PoReader.o HelperPanel.o Toolbar.o DictionariesMenu.o
 	$(CXX) $(LDFLAGS) $^ -o $@
 
+test_replace: test_replace.o Utils.o
+	$(CXX) $(LDFLAGS) $^ -o $@
+
+
 dep:
 	$(CXX) -MM *.cc >makefile.dep
 
