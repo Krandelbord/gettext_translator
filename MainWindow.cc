@@ -1,5 +1,4 @@
 #include "MainWindow.h"
-#include "Utils.h"
 #include "MenuBar.h"
 #include "Configuration.h"
 #include "TextPanel.h"
@@ -49,14 +48,6 @@ MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_pane
 	m_tr_panel.setSpellCheck("pl");
 	m_vpan.pack2(m_tr_panel);
 
-	
-	std::vector<Glib::ustring> dict_list = getDictionaryList();
-	/*for (std::vector<Glib::ustring>::iterator it = dict_list.begin(); it != dict_list.end(); ++it) {
-		m_combo.append_text(*it);
-	}
-	m_combo.signal_changed().connect(sigc::mem_fun(this, &MainWindow::onLanguageChanged));
-	m_combo.set_active(0);
-	*/
 	m_box.pack_end(*new Gtk::Statusbar(), false, false);
 	this->signal_size_request().connect(sigc::mem_fun(this, &MainWindow::onSizeChanged));
 	this->show_all();
