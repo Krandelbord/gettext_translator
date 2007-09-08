@@ -3,7 +3,6 @@
 #include "MenuBar.h"
 #include "Configuration.h"
 #include "TextPanel.h"
-#include "TranslatedTextPanel.h"
 #include "HelperPanel.h"
 #include "config.h"
 
@@ -18,6 +17,7 @@ void MainWindow::onPanedChaged(Gtk::Requisition *r) {
 void MainWindow::onMessageChanged() {
 	debug("Message %s\n", m_po_reader->getMsgid().c_str());
 	m_text_panel.setText(m_po_reader->getMsgid());
+	m_tr_panel.setText(m_po_reader->getMsgstr());
 }
 
 MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_panel("Original text (msgid):") {
@@ -46,7 +46,7 @@ MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_pane
 	m_hpan.pack2(*new HelperPanel());
 
 	m_vpan.pack1(m_text_panel);
-	m_vpan.pack2(*new TranslatedTextPanel());
+	m_vpan.pack2(m_tr_panel);
 
 	
 	std::vector<Glib::ustring> dict_list = getDictionaryList();

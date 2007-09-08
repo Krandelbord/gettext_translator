@@ -118,6 +118,17 @@ Glib::ustring PoReader::getMsgid() {
 	return retval;
 }
 
+Glib::ustring PoReader::getMsgstr() {
+	Glib::ustring retval = Glib::convert_with_fallback(po_message_msgstr(m_current_msg), "UTF-8", m_file_encoding);
+	Glib::ustring::size_type newline_pos = retval.find('\n');
+	
+	while (newline_pos!=std::string::npos) {
+		retval.insert(newline_pos, "\\n");
+		newline_pos = retval.find(newline_pos+3, '\n');
+	} 
+	return retval;
+}
+
 void PoReader::saveToFile(const Glib::ustring &out_fname) {
 	debug("Zapis do pliku %s\n", out_fname.c_str());
 	struct po_xerror_handler error_handler;

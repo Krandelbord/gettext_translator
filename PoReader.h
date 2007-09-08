@@ -11,6 +11,8 @@ class PoReader {
 		Glib::ustring getEncoding();
 
 		Glib::ustring getMsgid();
+		Glib::ustring getMsgstr();
+
 		bool nextMessage();
 		bool previousMessage();
 		void saveToFile(const Glib::ustring &out_fname);
