@@ -37,7 +37,7 @@ PoReader::PoReader(const Glib::ustring &file_path) {
 	m_file_encoding = this->getEncoding();
 
 	m_miter = po_message_iterator(m_pofile, NULL);
-	po_next_message(m_miter); po_next_message(m_miter);
+	po_next_message(m_miter);
 	/*
 	size_t fuzzys = 0;
 	po_message_t po_msg = NULL;
@@ -109,6 +109,12 @@ bool PoReader::previousMessage() {
 
 Glib::ustring PoReader::getMsgid() {
 	Glib::ustring retval = Glib::convert_with_fallback(po_message_msgid(m_current_msg), "UTF-8", m_file_encoding);
+	Glib::ustring::size_type newline_pos = retval.find('\n');
+	
+	while (newline_pos!=std::string::npos) {
+		retval.insert(newline_pos, "\\n");
+		newline_pos = retval.find(newline_pos+3, '\n');
+	} 
 	return retval;
 }
 
