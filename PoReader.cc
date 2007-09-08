@@ -114,12 +114,8 @@ bool PoReader::previousMessage() {
 Glib::ustring PoReader::getMsgid() {
 	debug("Message number %d\n", m_msg_number);
 	Glib::ustring retval = Glib::convert_with_fallback(po_message_msgid(m_current_msg), "UTF-8", m_file_encoding);
-	Glib::ustring::size_type newline_pos = retval.find('\n');
-	
-	while (newline_pos!=std::string::npos) {
-		retval.insert(newline_pos, "\\n");
-		newline_pos = retval.find(newline_pos+3, '\n');
-	}
+
+	replaceAll(retval, "\n", "\\n\n");
 	return retval;
 }
 
