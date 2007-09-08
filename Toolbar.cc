@@ -1,4 +1,5 @@
 #include "Toolbar.h"
+#include "DictionariesMenu.h"
 
 Toolbar::Toolbar(PoReader *po_reader) {
 	m_po_reader = po_reader;
@@ -20,6 +21,7 @@ Toolbar::Toolbar(PoReader *po_reader) {
 
 	Gtk::MenuToolButton *spell_tb = new Gtk::MenuToolButton(Gtk::Stock::SPELL_CHECK);
 	this->append(*spell_tb);
+	spell_tb->set_menu(*new DictionariesMenu());
 	this->append(*new Gtk::SeparatorToolItem());
 
 	this->append(*new Gtk::ToolButton(Gtk::Stock::GO_BACK));
