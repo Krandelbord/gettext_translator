@@ -1,5 +1,7 @@
 #include "PoReader.h"
+#include "Utils.h"
 #include "config.h"
+
 void xerror_handler (int severity,
 		  po_message_t message,
 		  const char *filename, size_t lineno, size_t column,
@@ -120,12 +122,7 @@ Glib::ustring PoReader::getMsgid() {
 
 Glib::ustring PoReader::getMsgstr() {
 	Glib::ustring retval = Glib::convert_with_fallback(po_message_msgstr(m_current_msg), "UTF-8", m_file_encoding);
-	Glib::ustring::size_type newline_pos = retval.find('\n');
-	
-	while (newline_pos!=std::string::npos) {
-		retval.insert(newline_pos, "\\n");
-		newline_pos = retval.find(newline_pos+3, '\n');
-	} 
+	replaceAll(retval, "\n", "\\n\n");
 	return retval;
 }
 
