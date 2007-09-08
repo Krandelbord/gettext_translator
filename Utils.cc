@@ -26,3 +26,9 @@ void replaceAll(Glib::ustring &string, const Glib::ustring &search, const Glib::
 		found_pos = string.find(search, found_pos+search.length());
 	}
 }
+
+Glib::ustring replaceAllReturn(const Glib::ustring &string, const Glib::ustring &search, const Glib::ustring &sub) {
+	Glib::ustring retval(string);
+	replaceAll(retval, search, sub);
+	return retval;
+}
