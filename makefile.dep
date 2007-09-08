@@ -1,5 +1,7 @@
+a.o: a.cc
 Configuration.o: Configuration.cc Configuration.h
-DictionariesMenu.o: DictionariesMenu.cc DictionariesMenu.h Utils.h
+DictionariesMenu.o: DictionariesMenu.cc DictionariesMenu.h Utils.h \
+  config.h
 HelperPanel.o: HelperPanel.cc HelperPanel.h
 IndicatorWidget.o: IndicatorWidget.cc IndicatorWidget.h
 main.o: main.cc MainWindow.h Toolbar.h PoReader.h TextPanel.h \
@@ -11,8 +13,8 @@ MainWindow.o: MainWindow.cc MainWindow.h Toolbar.h PoReader.h TextPanel.h \
 MenuBar.o: MenuBar.cc MenuBar.h
 PoReader.o: PoReader.cc PoReader.h config.h
 TextPanel.o: TextPanel.cc TextPanel.h TranslateTxtView.h
-Toolbar.o: Toolbar.cc Toolbar.h PoReader.h DictionariesMenu.h
+Toolbar.o: Toolbar.cc Toolbar.h PoReader.h DictionariesMenu.h config.h
 TranslatedTextPanel.o: TranslatedTextPanel.cc TranslatedTextPanel.h \
   TranslateTxtView.h IndicatorWidget.h config.h
-TranslateTxtView.o: TranslateTxtView.cc TranslateTxtView.h
+TranslateTxtView.o: TranslateTxtView.cc TranslateTxtView.h config.h
 Utils.o: Utils.cc Utils.h

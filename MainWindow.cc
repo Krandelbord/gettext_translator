@@ -30,6 +30,7 @@ MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_pane
 	m_toolbar.setPoReader(m_po_reader);
 	m_box.pack_start(m_toolbar, false, false);
 	m_toolbar.signal_message_changed().connect(sigc::mem_fun(this, &MainWindow::onMessageChanged));
+	m_toolbar.signal_language_changed().connect(sigc::mem_fun(m_tr_panel, &TranslatedTextPanel::setSpellCheck));
 	m_box.pack_start(*new Gtk::HSeparator(), false, false);
 
 	m_box.add(m_hpan);
@@ -52,10 +53,6 @@ MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_pane
 	this->signal_size_request().connect(sigc::mem_fun(this, &MainWindow::onSizeChanged));
 	this->show_all();
 
-}
-
-void MainWindow::onLanguageChanged() {
-	//m_tr_view.setLanguage(m_combo.get_active_text());
 }
 
 void MainWindow::onSizeChanged(Gtk::Requisition *r) {

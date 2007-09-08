@@ -1,5 +1,6 @@
 #include "Toolbar.h"
 #include "DictionariesMenu.h"
+#include "config.h"
 
 Toolbar::Toolbar(PoReader *po_reader) {
 	m_po_reader = po_reader;
@@ -21,7 +22,10 @@ Toolbar::Toolbar(PoReader *po_reader) {
 
 	Gtk::MenuToolButton *spell_tb = new Gtk::MenuToolButton(Gtk::Stock::SPELL_CHECK);
 	this->append(*spell_tb);
-	spell_tb->set_menu(*new DictionariesMenu());
+	DictionariesMenu *dict_menu = new DictionariesMenu();
+	dict_menu->signal_language_changed().connect(sigc::mem_fun(this, &Toolbar::onLanguageChanged));
+	spell_tb->set_menu(*dict_menu);
+
 	this->append(*new Gtk::SeparatorToolItem());
 
 	this->append(*new Gtk::ToolButton(Gtk::Stock::GO_BACK));
@@ -53,8 +57,16 @@ void Toolbar::onNextClicked() {
 	if (m_po_reader->nextMessage()) m_signal_message_changed.emit();
 }
 
+void Toolbar::onLanguageChanged(const Glib::ustring &new_lang) {
+	m_signal_language_changed.emit(new_lang);
+}
+
 sigc::signal<void> &Toolbar::signal_message_changed() {
 	return m_signal_message_changed;
+}
+
+sigc::signal<void, Glib::ustring> &Toolbar::signal_language_changed() {
+	return m_signal_language_changed;
 }
 
 void Toolbar::setPoReader(PoReader *po_reader) {
