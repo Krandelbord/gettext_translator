@@ -129,6 +129,10 @@ Glib::ustring PoReader::getMsgstr() {
 	return retval;
 }
 
+bool PoReader::isFuzzy() {
+	return po_message_is_fuzzy(m_current_msg);
+}
+
 void PoReader::saveToFile(const Glib::ustring &out_fname) {
 	debug("Zapis do pliku %s\n", out_fname.c_str());
 	struct po_xerror_handler error_handler;

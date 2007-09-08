@@ -7,7 +7,7 @@
 class TranslatedTextPanel : public Gtk::VBox {
 	public:
 		TranslatedTextPanel();
-		void setText(const Glib::ustring &new_txt);
+		void setText(const Glib::ustring &new_txt, bool is_fuzzy);
 
 	private:
 		Gtk::HBox m_title_box;

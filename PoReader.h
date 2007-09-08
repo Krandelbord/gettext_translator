@@ -12,6 +12,7 @@ class PoReader {
 
 		Glib::ustring getMsgid();
 		Glib::ustring getMsgstr();
+		bool isFuzzy();
 
 		bool nextMessage();
 		bool previousMessage();

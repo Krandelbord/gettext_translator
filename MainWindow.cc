@@ -17,7 +17,7 @@ void MainWindow::onPanedChaged(Gtk::Requisition *r) {
 void MainWindow::onMessageChanged() {
 	debug("Message %s\n", m_po_reader->getMsgid().c_str());
 	m_text_panel.setText(m_po_reader->getMsgid());
-	m_tr_panel.setText(m_po_reader->getMsgstr());
+	m_tr_panel.setText(m_po_reader->getMsgstr(), m_po_reader->isFuzzy());
 }
 
 MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_panel("Original text (msgid):") {
