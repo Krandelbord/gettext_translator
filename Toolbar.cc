@@ -17,6 +17,9 @@ Toolbar::Toolbar(PoReader *po_reader) {
 
 	this->append(*new Gtk::ToolButton(Gtk::Stock::FIND));
 	this->append(*new Gtk::ToolButton(Gtk::Stock::FIND_AND_REPLACE));
+
+	Gtk::MenuToolButton *spell_tb = new Gtk::MenuToolButton(Gtk::Stock::SPELL_CHECK);
+	this->append(*spell_tb);
 	this->append(*new Gtk::SeparatorToolItem());
 
 	this->append(*new Gtk::ToolButton(Gtk::Stock::GO_BACK));
