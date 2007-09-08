@@ -8,10 +8,12 @@ Toolbar::Toolbar(PoReader *po_reader) {
 	this->append(*new Gtk::ToolButton(Gtk::Stock::SAVE));
 	this->append(*new Gtk::SeparatorToolItem());
 
+	/*
 	this->append(*new Gtk::ToolButton(Gtk::Stock::COPY));
 	this->append(*new Gtk::ToolButton(Gtk::Stock::CUT));
 	this->append(*new Gtk::ToolButton(Gtk::Stock::PASTE));
 	this->append(*new Gtk::SeparatorToolItem());
+	*/
 
 	this->append(*new Gtk::ToolButton(Gtk::Stock::FIND));
 	this->append(*new Gtk::ToolButton(Gtk::Stock::FIND_AND_REPLACE));
