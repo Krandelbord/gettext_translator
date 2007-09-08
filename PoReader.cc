@@ -39,7 +39,7 @@ PoReader::PoReader(const Glib::ustring &file_path) {
 	m_file_encoding = this->getEncoding();
 
 	m_miter = po_message_iterator(m_pofile, NULL);
-	po_next_message(m_miter);
+	po_next_message(m_miter); //we skip header which is msgid
 	/*
 	size_t fuzzys = 0;
 	po_message_t po_msg = NULL;
@@ -100,7 +100,7 @@ bool PoReader::previousMessage() {
 	do {
 		msg = po_next_message(m_miter);
 		cur_number++;
-	} while (cur_number < m_msg_number-1);
+	} while (cur_number <= m_msg_number-1);
 
 	if (msg) {
 		m_msg_number-=1;
