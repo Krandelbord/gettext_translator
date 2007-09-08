@@ -3,6 +3,7 @@
 
 #include <glibmm.h>
 #include <gettext-po.h>
+#include <vector>
 
 class PoReader {
 	public:
@@ -13,6 +14,12 @@ class PoReader {
 		Glib::ustring getMsgid();
 		Glib::ustring getMsgstr();
 		bool isFuzzy();
+		bool isCFormat();
+		bool isObsolete();
+
+		std::vector<Glib::ustring> getFilesUsage();
+		std::vector<Glib::ustring> getMsgstrPlural();
+
 
 		bool nextMessage();
 		bool previousMessage();

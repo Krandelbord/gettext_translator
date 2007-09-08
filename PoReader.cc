@@ -1,5 +1,6 @@
 #include "PoReader.h"
 #include "Utils.h"
+#include <sstream>
 #include "config.h"
 
 void xerror_handler (int severity,
@@ -40,6 +41,7 @@ PoReader::PoReader(const Glib::ustring &file_path) {
 
 	m_miter = po_message_iterator(m_pofile, NULL);
 	po_next_message(m_miter); //we skip header which is msgid
+
 	/*
 	size_t fuzzys = 0;
 	po_message_t po_msg = NULL;
@@ -110,13 +112,14 @@ bool PoReader::previousMessage() {
 }
 
 Glib::ustring PoReader::getMsgid() {
+	debug("Message number %d\n", m_msg_number);
 	Glib::ustring retval = Glib::convert_with_fallback(po_message_msgid(m_current_msg), "UTF-8", m_file_encoding);
 	Glib::ustring::size_type newline_pos = retval.find('\n');
 	
 	while (newline_pos!=std::string::npos) {
 		retval.insert(newline_pos, "\\n");
 		newline_pos = retval.find(newline_pos+3, '\n');
-	} 
+	}
 	return retval;
 }
 
@@ -128,6 +131,50 @@ Glib::ustring PoReader::getMsgstr() {
 
 bool PoReader::isFuzzy() {
 	return po_message_is_fuzzy(m_current_msg);
+}
+
+bool PoReader::isCFormat() {
+	return po_message_is_format(m_current_msg, "c-format");
+}
+
+bool PoReader::isObsolete() {
+	return po_message_is_obsolete(m_current_msg);
+}
+
+std::vector<Glib::ustring> PoReader::getFilesUsage() {
+	std::vector<Glib::ustring> ret;
+
+	size_t index=0;
+	po_filepos_t file_position;
+	do {
+		file_position = po_message_filepos(m_current_msg, index);
+		if (file_position) {
+			std::ostringstream out;
+			out << "Used in file " << po_filepos_file(file_position);
+			out << " in line " << po_filepos_start_line(file_position);
+			ret.push_back(out.str());
+		}
+		++index;
+	} while (file_position);
+
+	return ret;
+}
+
+std::vector<Glib::ustring> PoReader::getMsgstrPlural() {
+	std::vector<Glib::ustring> out;
+	size_t index = 0;
+	const char *msgstr_plural = NULL;
+	do {
+		msgstr_plural = po_message_msgstr_plural(m_current_msg, index);
+		if (msgstr_plural) {
+			Glib::ustring msg(msgstr_plural);
+			replaceAll(msg, "\n", "\\n\n");
+			out.push_back(msg);
+		}
+		++index;
+	} while(msgstr_plural)	;
+
+	return out;
 }
 
 void PoReader::saveToFile(const Glib::ustring &out_fname) {
