@@ -7,6 +7,8 @@
 class TranslatedTextPanel : public Gtk::VBox {
 	public:
 		TranslatedTextPanel();
+		void setText(const Glib::ustring &new_txt);
+
 	private:
 		Gtk::HBox m_title_box;
 		Gtk::Label m_title_label;

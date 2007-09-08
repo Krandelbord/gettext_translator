@@ -23,3 +23,8 @@ TranslatedTextPanel::TranslatedTextPanel() :
 	this->add(m_tr_tv);
 	m_tr_tv.set_wrap_mode(Gtk::WRAP_WORD);
 }
+
+void TranslatedTextPanel::setText(const Glib::ustring &new_txt) {
+	Glib::RefPtr<Gtk::TextBuffer> buf = m_tr_tv.get_buffer();
+	buf->set_text(new_txt);
+}
