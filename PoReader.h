@@ -13,6 +13,7 @@ class PoReader {
 		Glib::ustring getMsgid();
 		bool nextMessage();
 		bool previousMessage();
+		void saveToFile(const Glib::ustring &out_fname);
 
 		~PoReader();
 	private:

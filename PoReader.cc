@@ -112,6 +112,16 @@ Glib::ustring PoReader::getMsgid() {
 	return retval;
 }
 
+void PoReader::saveToFile(const Glib::ustring &out_fname) {
+	debug("Zapis do pliku %s\n", out_fname.c_str());
+	struct po_xerror_handler error_handler;
+	error_handler.xerror = xerror_handler;
+	error_handler.xerror2 = xerror2_handler;
+
+	po_file_t out_file = po_file_write(m_pofile, out_fname.c_str(), &error_handler);
+	if (!out_file) debug("ERRROR przy zapisie\n"); 
+}
+
 PoReader::~PoReader() {
 	po_message_iterator_free(m_miter);
 	po_file_free(m_pofile);
