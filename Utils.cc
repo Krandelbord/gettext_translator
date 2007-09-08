@@ -5,8 +5,6 @@
 std::vector<Glib::ustring> getDictionaryList() {
 	std::vector<Glib::ustring> list;
 
-	
-	
 	struct AspellConfig *a_config = new_aspell_config();
 	
 	AspellDictInfoList *dlist = get_aspell_dict_info_list(a_config);
@@ -22,8 +20,9 @@ std::vector<Glib::ustring> getDictionaryList() {
 void replaceAll(Glib::ustring &string, const Glib::ustring &search, const Glib::ustring &sub) {
 	Glib::ustring::size_type found_pos = string.find(search);
 	while (found_pos!=Glib::ustring::npos) {
+		Glib::ustring::size_type search_start = found_pos+sub.length();
 		string.replace(found_pos, search.length(), sub);
-		found_pos = string.find(search, found_pos+search.length());
+		found_pos = string.find(search, search_start);
 	}
 }
 
