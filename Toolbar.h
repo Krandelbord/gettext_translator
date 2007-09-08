@@ -13,6 +13,7 @@ class Toolbar : public Gtk::Toolbar {
 	private:
 		PoReader *m_po_reader;
 		void onNextClicked();
+		void onPreviousClicked();
 		sigc::signal<void>  m_signal_message_changed;
 };
 

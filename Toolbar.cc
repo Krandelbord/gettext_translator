@@ -23,9 +23,10 @@ Toolbar::Toolbar(PoReader *po_reader) {
 	Gtk::Tooltips *tooltips = new Gtk::Tooltips();
 
 	Gtk::ToolButton *first_tb = new Gtk::ToolButton(Gtk::Stock::GOTO_FIRST);
-	first_tb->set_state(Gtk::STATE_INSENSITIVE);
+	//first_tb->set_state(Gtk::STATE_INSENSITIVE);
 	first_tb->set_label("Previous");
 	first_tb->set_tooltip(*tooltips, "Jumps to previous fuzzy or untranslated message");
+	first_tb->signal_clicked().connect(sigc::mem_fun(this, &Toolbar::onPreviousClicked));
 	this->append(*first_tb);
 
 	Gtk::ToolButton *last_tb = new Gtk::ToolButton(Gtk::Stock::GOTO_LAST);
@@ -35,6 +36,10 @@ Toolbar::Toolbar(PoReader *po_reader) {
 	this->append(*last_tb);
 
 	this->show_all();
+}
+
+void Toolbar::onPreviousClicked() {
+	if (m_po_reader->previousMessage()) m_signal_message_changed.emit();
 }
 
 void Toolbar::onNextClicked() {
