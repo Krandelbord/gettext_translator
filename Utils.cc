@@ -1,4 +1,6 @@
 #include "Utils.h"
+#include <aspell.h>
+#include <vector>
 
 std::vector<Glib::ustring> getDictionaryList() {
 	std::vector<Glib::ustring> list;
