@@ -24,6 +24,10 @@ TranslatedTextPanel::TranslatedTextPanel() :
 	m_tr_tv.set_wrap_mode(Gtk::WRAP_WORD);
 }
 
+void TranslatedTextPanel::setSpellCheck(const Glib::ustring &spl_lang) {
+	m_tr_tv.setLanguage(spl_lang);
+}
+
 void TranslatedTextPanel::setText(const Glib::ustring &new_txt, bool is_fuzzy) {
 	is_fuzzy ? m_fuzzy_ind.turnOn() : m_fuzzy_ind.turnOff();
 

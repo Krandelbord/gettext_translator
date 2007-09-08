@@ -46,6 +46,7 @@ MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_pane
 	m_hpan.pack2(*new HelperPanel());
 
 	m_vpan.pack1(m_text_panel);
+	m_tr_panel.setSpellCheck("pl");
 	m_vpan.pack2(m_tr_panel);
 
 	
