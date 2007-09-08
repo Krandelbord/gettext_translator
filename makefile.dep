@@ -1,4 +1,3 @@
-a.o: a.cc
 Configuration.o: Configuration.cc Configuration.h
 DictionariesMenu.o: DictionariesMenu.cc DictionariesMenu.h Utils.h \
   config.h
