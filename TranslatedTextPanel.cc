@@ -25,6 +25,10 @@ TranslatedTextPanel::TranslatedTextPanel() :
 }
 
 void TranslatedTextPanel::setText(const Glib::ustring &new_txt) {
+	if (new_txt.length()==0) {
+		m_untr_ind.turnOn();
+	} else m_untr_ind.turnOff();
+
 	Glib::RefPtr<Gtk::TextBuffer> buf = m_tr_tv.get_buffer();
 	buf->set_text(new_txt);
 }
