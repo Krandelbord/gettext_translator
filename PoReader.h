@@ -19,7 +19,7 @@ class PoReader {
 		po_file_t             m_pofile;
 		Glib::ustring         m_file_encoding;
 		po_message_iterator_t m_miter;
-		Glib::ustring         m_current_msg;
+		po_message_t          m_current_msg;
 		size_t				  m_msg_number;
 };
 #endif /* PO_READER_H */

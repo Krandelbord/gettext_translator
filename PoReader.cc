@@ -76,13 +76,10 @@ Glib::ustring PoReader::getHeader(const Glib::ustring &header_name) {
 }
 
 bool PoReader::nextMessage() {
-	m_current_msg = Glib::ustring("nic");
 	po_message_t msg = po_next_message(m_miter);
 	if (msg) {
 		m_msg_number++;
-		char *msg_dup = strdup(po_message_msgid(msg));
-		m_current_msg = Glib::convert_with_fallback(msg_dup, "UTF-8", m_file_encoding);
-		debug("Message = %s\n", m_current_msg.c_str());
+		m_current_msg = msg;
 		return true;
 	} else {
 		debug("Nastepna wiadomosc - ERRRO \n");
@@ -102,14 +99,14 @@ bool PoReader::previousMessage() {
 
 	if (msg) {
 		m_msg_number-=1;
-		//m_current_msg = msg;
+		m_current_msg = msg;
 		return true;
 	} else return false;
 }
 
 Glib::ustring PoReader::getMsgid() {
-	debug("Wtf sie tu dzieje %s\n", m_current_msg.c_str());
-	return m_current_msg;
+	Glib::ustring retval = Glib::convert_with_fallback(po_message_msgid(m_current_msg), "UTF-8", m_file_encoding);
+	return retval;
 }
 
 PoReader::~PoReader() {
