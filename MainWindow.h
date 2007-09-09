@@ -11,6 +11,7 @@
 class MainWindow : public Gtk::Window {
 	public:
 		MainWindow(guint width, guint hieght);
+		void onFileOpened(PoReader *po_reader);
 
 	private:
 		void onPanedChaged(Gtk::Requisition *r);

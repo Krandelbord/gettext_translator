@@ -26,10 +26,7 @@ MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_pane
 	this->add(m_box);
 
 	m_box.pack_start(*new MenuBar(*this), false, false);
-
-	m_po_reader = new PoReader("claws3.0-pl.po");
 	
-	m_toolbar.setPoReader(m_po_reader);
 	m_box.pack_start(m_toolbar, false, false);
 	m_toolbar.signal_message_changed().connect(sigc::mem_fun(this, &MainWindow::onMessageChanged));
 	m_toolbar.signal_language_changed().connect(sigc::mem_fun(m_tr_panel, &TranslatedTextPanel::setSpellCheck));
@@ -55,6 +52,11 @@ MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_pane
 	this->signal_size_request().connect(sigc::mem_fun(this, &MainWindow::onSizeChanged));
 	this->show_all();
 
+}
+
+void MainWindow::onFileOpened(PoReader *po_reader) {
+	m_po_reader = po_reader;
+	m_toolbar.setPoReader(m_po_reader);
 }
 
 void MainWindow::onSizeChanged(Gtk::Requisition *r) {

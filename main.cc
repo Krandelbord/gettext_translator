@@ -1,6 +1,7 @@
 #include <gtkmm.h>
 #include "MainWindow.h"
 #include "Configuration.h"
+#include "PoReader.h"
 
 void saveDefaults() {
 	Configuration conf;
@@ -32,6 +33,9 @@ int main(int argc, char **argv) {
 
 	MainWindow okno(width, height);
 	okno.show_all();
+
+	PoReader *po_reader = new PoReader("claws3.0-pl.po");
+	okno.onFileOpened(po_reader);
 
 	app.run(okno);
 
