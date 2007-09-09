@@ -9,10 +9,11 @@ main.o: main.cc MainWindow.h Toolbar.h PoReader.h TextPanel.h \
   Configuration.h
 MainWindow.o: MainWindow.cc MainWindow.h Toolbar.h PoReader.h TextPanel.h \
   TranslatedTextPanel.h TranslateTxtView.h IndicatorWidget.h MenuBar.h \
-  Configuration.h HelperPanel.h config.h
+  Configuration.h HelperPanel.h StatusBar.h config.h
 MenuBar.o: MenuBar.cc MenuBar.h
 PoReader.o: PoReader.cc PoReader.h Utils.h ErrorHandlers.h config.h
-Statistics.o: Statistics.cc Statistics.h
+Statistics.o: Statistics.cc Statistics.h ErrorHandlers.h config.h
+StatusBar.o: StatusBar.cc StatusBar.h
 test_replace.o: test_replace.cc Utils.h
 TextPanel.o: TextPanel.cc TextPanel.h TranslateTxtView.h
 Toolbar.o: Toolbar.cc Toolbar.h PoReader.h DictionariesMenu.h config.h

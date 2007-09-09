@@ -3,6 +3,7 @@
 #include "Configuration.h"
 #include "TextPanel.h"
 #include "HelperPanel.h"
+#include "StatusBar.h"
 #include "config.h"
 
 void MainWindow::onPanedChaged(Gtk::Requisition *r) {
@@ -49,7 +50,7 @@ MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_pane
 	m_tr_panel.setSpellCheck("pl");
 	m_vpan.pack2(m_tr_panel);
 
-	m_box.pack_end(*new Gtk::Statusbar(), false, false);
+	m_box.pack_end(*new StatusBar(), false, false);
 	this->signal_size_request().connect(sigc::mem_fun(this, &MainWindow::onSizeChanged));
 	this->show_all();
 
