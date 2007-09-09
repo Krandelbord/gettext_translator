@@ -32,3 +32,14 @@ Statistics::Statistics(const Glib::ustring &filename) {
 	po_file_free(pofile);
 }
 
+size_t Statistics::getTotal() const {
+	return m_msg_count;
+}
+
+size_t Statistics::getFuzzy() const {
+	return m_fuzzy_count;
+}
+
+size_t Statistics::getUntranslated() const {
+	return m_untranslated_count;
+}
