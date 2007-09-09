@@ -3,15 +3,33 @@
 MenuBar::MenuBar(Gtk::Window &main_win) {
 	m_main_win = &main_win;
 	this->items().push_back(Gtk::Menu_Helpers::MenuElem("_File", *this->createFileMenu()));
-	this->append(*new Gtk::MenuItem("Edit", true));
+	this->items().push_back(Gtk::Menu_Helpers::MenuElem("_Edit", *this->createEditMenu()));
+	this->items().push_back(Gtk::Menu_Helpers::MenuElem("_Tools", *this->createToolsMenu()));
+	this->append(*new Gtk::MenuItem("Dummy", true));
 }
 
 Gtk::Menu *MenuBar::createFileMenu() {
 	Gtk::Menu *file_menu = new Gtk::Menu();
 	file_menu->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::OPEN,  sigc::mem_fun(*this, &MenuBar::onOpenMenuitem) ) );
-	file_menu->items().push_back( Gtk::Menu_Helpers::MenuElem("Cokolwiek", sigc::mem_fun(*this, &MenuBar::onOpenMenuitem) ) );
+	file_menu->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::SAVE) );
+	file_menu->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::SAVE_AS) );
 	file_menu->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::QUIT,  sigc::mem_fun(*this, &MenuBar::onQuitMenuitem) ) );
 	return file_menu;
+}
+
+Gtk::Menu *MenuBar::createEditMenu() {
+	Gtk::Menu *m = new Gtk::Menu();
+	m->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::CUT) );
+	m->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::COPY) );
+	m->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::PASTE) );
+	return m;
+}
+
+Gtk::Menu *MenuBar::createToolsMenu() {
+	Gtk::Menu *m = new Gtk::Menu();
+	m->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::ZOOM_IN) );
+	m->items().push_back( Gtk::Menu_Helpers::MenuElem("Kill'em all", sigc::mem_fun(*this, &MenuBar::onOpenMenuitem) ) );
+	return m;
 }
 
 void MenuBar::onQuitMenuitem() {

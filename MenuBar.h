@@ -9,6 +9,9 @@ class MenuBar : public Gtk::MenuBar {
 
 	private:
 		Gtk::Menu *createFileMenu();
+		Gtk::Menu *createEditMenu();
+		Gtk::Menu *createToolsMenu();
+
 		void onQuitMenuitem();
 		void onOpenMenuitem();
 		Gtk::Window *m_main_win;
