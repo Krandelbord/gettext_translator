@@ -3,7 +3,6 @@
 #include "Configuration.h"
 #include "TextPanel.h"
 #include "HelperPanel.h"
-#include "StatusBar.h"
 #include "config.h"
 
 void MainWindow::onPanedChaged(Gtk::Requisition *r) {
@@ -18,6 +17,8 @@ void MainWindow::onMessageChanged() {
 	debug("Message %s\n", m_po_reader->getMsgid().c_str());
 	m_text_panel.setText(m_po_reader->getMsgid());
 	m_tr_panel.setText(m_po_reader->getMsgstr(), m_po_reader->isFuzzy());
+
+	m_status_bar.setCurrent(m_po_reader->getMessageNumber());
 }
 
 MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_panel("Original text (msgid):") {
@@ -50,7 +51,7 @@ MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_pane
 	m_tr_panel.setSpellCheck("pl");
 	m_vpan.pack2(m_tr_panel);
 
-	m_box.pack_end(*new StatusBar(), false, false);
+	m_box.pack_end(m_status_bar, false, false);
 	this->signal_size_request().connect(sigc::mem_fun(this, &MainWindow::onSizeChanged));
 	this->show_all();
 

@@ -6,6 +6,7 @@
 #include "TextPanel.h"
 #include "PoReader.h"
 #include "TranslatedTextPanel.h"
+#include "StatusBar.h"
 
 class MainWindow : public Gtk::Window {
 	public:
@@ -22,6 +23,7 @@ class MainWindow : public Gtk::Window {
 		Toolbar m_toolbar;
 		TextPanel m_text_panel;
 		TranslatedTextPanel m_tr_panel;
+		StatusBar m_status_bar;
 		PoReader *m_po_reader;
 
 		void onLanguageChanged();
