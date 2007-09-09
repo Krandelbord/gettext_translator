@@ -3,6 +3,7 @@
 #include "Configuration.h"
 #include "TextPanel.h"
 #include "HelperPanel.h"
+#include "Statistics.h"
 #include "config.h"
 
 void MainWindow::onPanedChaged(Gtk::Requisition *r) {
@@ -22,6 +23,7 @@ void MainWindow::onMessageChanged() {
 }
 
 MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_panel("Original text (msgid):") {
+	m_po_reader = NULL;
 	this->set_default_size(width, height);
 	this->add(m_box);
 
@@ -54,9 +56,15 @@ MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_pane
 
 }
 
-void MainWindow::onFileOpened(PoReader *po_reader) {
-	m_po_reader = po_reader;
+void MainWindow::onFileOpened(const Glib::ustring &file_path) {
+	if (m_po_reader!=NULL) delete m_po_reader;
+	m_po_reader = new PoReader(file_path);
 	m_toolbar.setPoReader(m_po_reader);
+	
+	Statistics stat(file_path);
+	m_status_bar.setFuzzy(stat.getFuzzy());
+	m_status_bar.setTotal(stat.getTotal());
+	m_status_bar.setUntranslated(stat.getUntranslated());
 }
 
 void MainWindow::onSizeChanged(Gtk::Requisition *r) {
