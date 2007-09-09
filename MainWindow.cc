@@ -4,6 +4,7 @@
 #include "TextPanel.h"
 #include "HelperPanel.h"
 #include "Statistics.h"
+#include "HelpMenu.h"
 #include "config.h"
 
 void MainWindow::onPanedChaged(Gtk::Requisition *r) {
@@ -27,7 +28,12 @@ MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_pane
 	this->set_default_size(width, height);
 	this->add(m_box);
 
-	m_box.pack_start(*new MenuBar(*this), false, false);
+	Gtk::HBox *menu_box = new Gtk::HBox();
+	menu_box->pack_start(*new MenuBar(*this), false, false);
+	menu_box->pack_start(*new Gtk::MenuBar(), true, true); // separator
+	menu_box->pack_start(*new HelpMenu(this), false, false);
+
+	m_box.pack_start(*menu_box, false, false);
 	
 	m_box.pack_start(m_toolbar, false, false);
 	m_toolbar.signal_message_changed().connect(sigc::mem_fun(this, &MainWindow::onMessageChanged));
