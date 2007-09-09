@@ -13,6 +13,9 @@ class PoReader {
 
 		Glib::ustring getMsgid();
 		Glib::ustring getMsgstr();
+		Glib::ustring getMsgctx();
+		Glib::ustring getExtractedComments();
+		Glib::ustring getComments();
 		bool isFuzzy();
 		bool isCFormat();
 		bool isObsolete();

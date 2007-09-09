@@ -116,6 +116,7 @@ Glib::ustring PoReader::getMsgid() {
 	Glib::ustring retval = Glib::convert_with_fallback(po_message_msgid(m_current_msg), "UTF-8", m_file_encoding);
 
 	replaceAll(retval, "\n", "\\n\n");
+
 	return retval;
 }
 
@@ -123,6 +124,18 @@ Glib::ustring PoReader::getMsgstr() {
 	Glib::ustring retval = Glib::convert_with_fallback(po_message_msgstr(m_current_msg), "UTF-8", m_file_encoding);
 	replaceAll(retval, "\n", "\\n\n");
 	return retval;
+}
+
+Glib::ustring PoReader::getMsgctx() {
+	return po_message_msgctxt(m_current_msg);
+}
+
+Glib::ustring PoReader::getExtractedComments() {
+	return Glib::convert_with_fallback(po_message_extracted_comments(m_current_msg), "UTF-8", m_file_encoding);
+}
+
+Glib::ustring PoReader::getComments() {
+	return Glib::convert_with_fallback(po_message_comments(m_current_msg), "UTF-8", m_file_encoding);
 }
 
 bool PoReader::isFuzzy() {
