@@ -19,6 +19,7 @@ class PoReader {
 		bool isFuzzy();
 		bool isCFormat();
 		bool isObsolete();
+		size_t getMessageNumber();
 
 		std::vector<Glib::ustring> getFilesUsage();
 		std::vector<Glib::ustring> getMsgstrPlural();

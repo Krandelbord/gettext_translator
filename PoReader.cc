@@ -125,6 +125,10 @@ bool PoReader::isObsolete() {
 	return po_message_is_obsolete(m_current_msg);
 }
 
+size_t PoReader::getMessageNumber() {
+	return m_msg_number;
+}
+
 std::vector<Glib::ustring> PoReader::getFilesUsage() {
 	std::vector<Glib::ustring> ret;
 
