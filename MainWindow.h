@@ -4,6 +4,7 @@
 #include <gtkmm.h>
 #include "Toolbar.h"
 #include "TextPanel.h"
+#include "HelperPanel.h"
 #include "PoReader.h"
 #include "TranslatedTextPanel.h"
 #include "StatusBar.h"
@@ -23,6 +24,7 @@ class MainWindow : public Gtk::Window {
 
 		Toolbar m_toolbar;
 		TextPanel m_text_panel;
+		HelperPanel m_helper_panel;
 		TranslatedTextPanel m_tr_panel;
 		StatusBar m_status_bar;
 		PoReader *m_po_reader;

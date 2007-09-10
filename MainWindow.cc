@@ -2,7 +2,6 @@
 #include "MenuBar.h"
 #include "Configuration.h"
 #include "TextPanel.h"
-#include "HelperPanel.h"
 #include "Statistics.h"
 #include "HelpMenu.h"
 #include "config.h"
@@ -21,6 +20,7 @@ void MainWindow::onMessageChanged() {
 	m_tr_panel.setText(m_po_reader->getMsgstr(), m_po_reader->isFuzzy());
 
 	m_status_bar.setCurrent(m_po_reader->getMessageNumber());
+	m_helper_panel.setUsageLines(m_po_reader->getFilesUsage());
 }
 
 MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_panel("Original text (msgid):") {
@@ -50,7 +50,7 @@ MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_pane
 	debug("Read %d%%. Setting hpane to %d pixels\n",proc, pixels);
 	m_hpan.signal_size_request().connect(sigc::mem_fun(this, &MainWindow::onPanedChaged));
 	m_hpan.pack1(m_vpan);
-	m_hpan.pack2(*new HelperPanel());
+	m_hpan.pack2(m_helper_panel);
 
 	m_vpan.pack1(m_text_panel);
 	m_tr_panel.setSpellCheck("pl");
