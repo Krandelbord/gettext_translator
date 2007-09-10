@@ -1,5 +1,8 @@
 #include "HelperPanel.h"
+#include <sstream>
 #define SPACING 6
+using namespace Glib;
+using namespace std;
 
 HelperPanel::HelperPanel() {
 	this->pack_start(m_vsep, false, false);
@@ -8,7 +11,9 @@ HelperPanel::HelperPanel() {
 	
 	m_main_box.pack_start(m_usage_lines, false, false, SPACING);
 	m_usage_lines.set_alignment(Gtk::ALIGN_LEFT, Gtk::ALIGN_CENTER);
-	this->setUsageLines("main.c:32");
+	m_usage_lines.set_markup("<b>Used in</b>:");
+	m_main_box.pack_start(m_usage_lines_content, false, false);
+	m_usage_lines_content.set_alignment(Gtk::ALIGN_LEFT, Gtk::ALIGN_CENTER);
 
 	m_main_box.pack_start(m_context, false, false, SPACING);
 	m_context.set_alignment(Gtk::ALIGN_LEFT, Gtk::ALIGN_CENTER);
@@ -29,8 +34,12 @@ HelperPanel::HelperPanel() {
 	this->show_all();
 }
 
-void HelperPanel::setUsageLines(const Glib::ustring &usage_lines) {
-	m_usage_lines.set_markup("<b>Used in</b>:\n\t"+usage_lines);
+void HelperPanel::setUsageLines(std::vector<Glib::ustring> usage_lines) {
+	ostringstream ostr;
+	for (vector<ustring>::iterator it = usage_lines.begin(); it < usage_lines.end(); ++it) {
+		ostr << "\t" << *it << "\n";
+	}
+	m_usage_lines_content.set_text(ostr.str());
 }
 
 void HelperPanel::setContext(const Glib::ustring &context) {

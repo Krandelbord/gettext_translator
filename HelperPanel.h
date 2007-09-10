@@ -2,11 +2,12 @@
 #define HELPER_PANEL_H
 
 #include <gtkmm.h>
+#include <vector>
 
 class HelperPanel : public Gtk::HBox {
 	public:
 		HelperPanel();
-		void setUsageLines(const Glib::ustring &usage_lines);
+		void setUsageLines(std::vector<Glib::ustring> lines);
 		void setContext(const Glib::ustring &context);
 		void setExtractedComments(const Glib::ustring &extracted_comments);
 		void setComment(const Glib::ustring &comment);
@@ -16,6 +17,7 @@ class HelperPanel : public Gtk::HBox {
 		Gtk::VSeparator m_vsep;
 		
 		Gtk::Label m_usage_lines;
+		Gtk::Label m_usage_lines_content;
 		Gtk::Label m_context;
 		Gtk::Label m_extracted_comments;
 
