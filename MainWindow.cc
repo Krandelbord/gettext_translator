@@ -40,7 +40,7 @@ MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_pane
 	m_toolbar.signal_language_changed().connect(sigc::mem_fun(m_tr_panel, &TranslatedTextPanel::setSpellCheck));
 	m_box.pack_start(*new Gtk::HSeparator(), false, false);
 
-	m_box.add(m_hpan);
+	m_box.pack_start(m_hpan, true, true, 2);
 	Configuration conf;
 	this->show_all();
 	int proc = conf.getValue("GUI", "Left pane percentage");
