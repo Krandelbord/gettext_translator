@@ -21,6 +21,9 @@ void MainWindow::onMessageChanged() {
 
 	m_status_bar.setCurrent(m_po_reader->getMessageNumber());
 	m_helper_panel.setUsageLines(m_po_reader->getFilesUsage());
+	m_helper_panel.setContext(m_po_reader->getMsgctx());
+	m_helper_panel.setExtractedComments(m_po_reader->getExtractedComments());
+	m_helper_panel.setComment(m_po_reader->getComments());
 }
 
 MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_panel("Original text (msgid):") {
