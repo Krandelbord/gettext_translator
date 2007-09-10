@@ -138,8 +138,8 @@ std::vector<Glib::ustring> PoReader::getFilesUsage() {
 		file_position = po_message_filepos(m_current_msg, index);
 		if (file_position) {
 			std::ostringstream out;
-			out << "Used in file " << po_filepos_file(file_position);
-			out << " in line " << po_filepos_start_line(file_position);
+			out << po_filepos_file(file_position);
+			out << ":" << po_filepos_start_line(file_position);
 			ret.push_back(out.str());
 		}
 		++index;
