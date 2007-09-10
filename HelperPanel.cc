@@ -17,12 +17,12 @@ HelperPanel::HelperPanel() {
 
 	m_main_box.pack_start(m_context, false, false, SPACING);
 	m_context.set_alignment(Gtk::ALIGN_LEFT, Gtk::ALIGN_CENTER);
-	this->setContext("File|Open");
+	this->setContext("");
 
 	m_main_box.pack_start(m_extracted_comments, false, false, SPACING);
 	m_extracted_comments.set_alignment(Gtk::ALIGN_LEFT, Gtk::ALIGN_CENTER);
 	m_extracted_comments.set_line_wrap(true);
-	this->setExtractedComments("This is  good string good string good string good string");
+	this->setExtractedComments("");
 
 	m_main_box.pack_start(m_comment_lb, false, false);
 	m_main_box.pack_start(m_scr);
