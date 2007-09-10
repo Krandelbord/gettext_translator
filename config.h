@@ -1,6 +1,8 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+#define PROGRAM_NAME "Gettext Translator"
+
 #ifdef DEBUG
 #include <glib.h>
 #  define debug(args...) { \

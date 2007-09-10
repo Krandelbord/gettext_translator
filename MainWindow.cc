@@ -28,6 +28,7 @@ void MainWindow::onMessageChanged() {
 
 MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_panel("Original text (msgid):") {
 	m_po_reader = NULL;
+	this->set_title(PROGRAM_NAME);
 	this->set_default_size(width, height);
 	this->add(m_box);
 
