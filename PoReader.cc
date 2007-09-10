@@ -102,7 +102,10 @@ Glib::ustring PoReader::getMsgstr() {
 }
 
 Glib::ustring PoReader::getMsgctx() {
-	return po_message_msgctxt(m_current_msg);
+	const char *ctx_cstr = po_message_msgctxt(m_current_msg);
+	if (ctx_cstr) {
+		return Glib::convert_with_fallback(ctx_cstr, "UTF-8", m_file_encoding);
+	} else return Glib::ustring("");
 }
 
 Glib::ustring PoReader::getExtractedComments() {
