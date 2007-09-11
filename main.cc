@@ -1,6 +1,7 @@
 #include <gtkmm.h>
 #include "MainWindow.h"
 #include "Configuration.h"
+#include "config.h"
 
 void saveDefaults() {
 	Configuration conf;
@@ -17,6 +18,7 @@ void saveDefaults() {
 	}
 }
 int main(int argc, char **argv) {
+	Glib::set_application_name(PROGRAM_NAME);
 	Gtk::Main app(argc, argv);
 	saveDefaults();
 
