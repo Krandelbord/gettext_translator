@@ -28,6 +28,9 @@ Gtk::Menu *MenuBar::createEditMenu() {
 Gtk::Menu *MenuBar::createToolsMenu() {
 	Gtk::Menu *m = new Gtk::Menu();
 	m->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::ZOOM_IN) );
+
+	Gtk::Widget *img = Gtk::manage(new Gtk::Image(Gtk::Stock::JUMP_TO, Gtk::ICON_SIZE_MENU));
+	m->items().push_back(Gtk::Menu_Helpers::ImageMenuElem("Jump to...", *img, sigc::mem_fun(this, &MenuBar::onJumpTo)));
 	m->items().push_back( Gtk::Menu_Helpers::MenuElem("Kill'em all", sigc::mem_fun(*this, &MenuBar::onOpenMenuitem) ) );
 	return m;
 }
@@ -39,4 +42,7 @@ void MenuBar::onQuitMenuitem() {
 void MenuBar::onOpenMenuitem() {
 	Gtk::FileChooserDialog fc_dialog(*m_main_win, "open file");
 	fc_dialog.run();
+}
+
+void MenuBar::onJumpTo() {
 }

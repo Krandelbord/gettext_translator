@@ -14,6 +14,7 @@ class MenuBar : public Gtk::MenuBar {
 
 		void onQuitMenuitem();
 		void onOpenMenuitem();
+		void onJumpTo();
 		Gtk::Window *m_main_win;
 };
 
