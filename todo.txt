@@ -3,3 +3,4 @@
 * disable/enable toolbar buttons when file is not open
 * hande msgstr_plural
 * add some syntax highlighting
+# implement do/undo functionaliy
