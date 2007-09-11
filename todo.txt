@@ -1,4 +1,5 @@
 * Reading message to gui and updateing in-memory representation of .po file
 * adding signal to save/open file
 * disable/enable toolbar buttons when file is not open
+* hande msgstr_plural
 * add some syntax highlighting
