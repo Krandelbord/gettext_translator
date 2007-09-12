@@ -120,10 +120,11 @@ bool PoReader::isFuzzy() {
 	return po_message_is_fuzzy(m_current_msg);
 }
 
-bool PoReader::isUntranslated() {
-	const char *ctx_cstr = po_message_msgctxt(m_current_msg);
-	if (ctx_cstr) return true;
-	return false;
+bool PoReader::isTranslated() {
+	const char *msg_str = po_message_msgstr(m_current_msg);
+	if (msg_str[0]=='\0') {
+		return false;
+	} else return true;
 }
 
 bool PoReader::isCFormat() {
