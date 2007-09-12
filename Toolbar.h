@@ -17,6 +17,8 @@ class Toolbar : public Gtk::Toolbar {
 
 		void onNextClicked();
 		void onPreviousClicked();
+		void onJumpNextClicked();
+		void onJumpPreviousClicked();
 		void onLanguageChanged(const Glib::ustring &new_lang);
 
 		sigc::signal<void>  m_signal_message_changed;
