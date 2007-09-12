@@ -17,6 +17,7 @@ class PoReader {
 		Glib::ustring getExtractedComments();
 		Glib::ustring getComments();
 		bool isFuzzy();
+		bool isUntranslated();
 		bool isCFormat();
 		bool isObsolete();
 		size_t getMessageNumber();
