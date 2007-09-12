@@ -2,6 +2,7 @@
 #define MAIN_WINDOW_H
 
 #include <gtkmm.h>
+#include "MenuBar.h"
 #include "Toolbar.h"
 #include "TextPanel.h"
 #include "HelperPanel.h"
@@ -23,6 +24,7 @@ class MainWindow : public Gtk::Window {
 		Gtk::VBox m_box;
 
 		Toolbar m_toolbar;
+		MenuBar m_menu_bar;
 		TextPanel m_text_panel;
 		HelperPanel m_helper_panel;
 		TranslatedTextPanel m_tr_panel;

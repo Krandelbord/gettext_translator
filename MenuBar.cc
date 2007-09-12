@@ -1,6 +1,8 @@
 #include "MenuBar.h"
+#include "config.h"
 
-MenuBar::MenuBar(Gtk::Window &main_win) {
+MenuBar::MenuBar(Gtk::Window &main_win, PoReader *po_reader) {
+	m_po_reader = po_reader;
 	m_main_win = &main_win;
 	this->items().push_back(Gtk::Menu_Helpers::MenuElem("_File", *this->createFileMenu()));
 	this->items().push_back(Gtk::Menu_Helpers::MenuElem("_Edit", *this->createEditMenu()));
@@ -45,4 +47,29 @@ void MenuBar::onOpenMenuitem() {
 }
 
 void MenuBar::onJumpTo() {
+	Gtk::Dialog dialog;
+	dialog.set_transient_for(*m_main_win);
+	Gtk::SpinButton *spin = new Gtk::SpinButton(3, 0);
+	spin->set_range(1, 1233); // TODO: enter max numer for file
+	spin->set_increments(1, 10);
+	Gtk::VBox *box = dialog.get_vbox();
+	//box->pack_start(Gtk::manage(*new Gtk::Label("Enter message number")));
+	box->pack_start(*spin, true, true, 5);
+	dialog.add_button(Gtk::Stock::OK, 1);
+	dialog.add_button(Gtk::Stock::CANCEL, 2);
+	dialog.show_all();
+	int ret = dialog.run();
+	if (ret==1) {
+		m_po_reader->jumpTo(spin->get_value());
+		m_signal_message_changed.emit();
+	}
+	delete spin;
+}
+
+void MenuBar::setPoReader(PoReader *po_reader) {
+	m_po_reader = po_reader;
+}
+
+sigc::signal<void> &MenuBar::signal_message_changed() {
+	return m_signal_message_changed;
 }
