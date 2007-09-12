@@ -13,6 +13,8 @@ class Toolbar : public Gtk::Toolbar {
 
 	private:
 		PoReader *m_po_reader;
+		Gtk::Tooltips m_tooltips;
+
 		void onNextClicked();
 		void onPreviousClicked();
 		void onLanguageChanged(const Glib::ustring &new_lang);
