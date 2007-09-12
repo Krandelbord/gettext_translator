@@ -54,6 +54,30 @@ Glib::ustring PoReader::getHeader(const Glib::ustring &header_name) {
 	return retval;
 }
 
+bool PoReader::jumpTo(size_t search_msg_number) {
+	if (search_msg_number<=0) return false;
+	//TODO: add checking if someone is trying to jump after end of the file
+	//
+	po_message_iterator_free(m_miter);
+	m_miter = po_message_iterator(m_pofile, NULL);
+	po_message_t msg;
+
+	size_t cur_number = 0;
+	do {
+		msg = po_next_message(m_miter);
+		cur_number++;
+	} while (cur_number < search_msg_number );
+	
+	if (msg) {
+		m_msg_number = search_msg_number;
+		m_current_msg = msg;
+		return true;
+	} else return false; /* TODO: if this return happens we we have iterarator 
+						  * pointing to msgid = null.
+						  *	But I guess it never happens.
+						  */
+}
+
 bool PoReader::nextMessage() {
 	po_message_t msg = po_next_message(m_miter);
 	if (msg) {

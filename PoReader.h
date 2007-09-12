@@ -25,7 +25,7 @@ class PoReader {
 		std::vector<Glib::ustring> getFilesUsage();
 		std::vector<Glib::ustring> getMsgstrPlural();
 
-
+		bool jumpTo(size_t msg_number);
 		bool nextMessage();
 		bool previousMessage();
 		void saveToFile(const Glib::ustring &out_fname);
