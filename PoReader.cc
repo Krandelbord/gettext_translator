@@ -66,7 +66,7 @@ bool PoReader::jumpTo(size_t search_msg_number) {
 	do {
 		msg = po_next_message(m_miter);
 		cur_number++;
-	} while (cur_number < search_msg_number );
+	} while (cur_number <= search_msg_number );
 	
 	if (msg) {
 		m_msg_number = search_msg_number;
@@ -93,21 +93,7 @@ bool PoReader::nextMessage() {
 bool PoReader::previousMessage() {
 	if (m_msg_number<=1) return false;
 
-	po_message_iterator_free(m_miter);
-	m_miter = po_message_iterator(m_pofile, NULL);
-	po_message_t msg;
-	debug("We are looking for msg number %d\n", m_msg_number-1);
-	size_t cur_number = 0;
-	do {
-		msg = po_next_message(m_miter);
-		cur_number++;
-	} while (cur_number <= m_msg_number-1);
-
-	if (msg) {
-		m_msg_number-=1;
-		m_current_msg = msg;
-		return true;
-	} else return false;
+	return this->jumpTo(m_msg_number-1);
 }
 
 Glib::ustring PoReader::getMsgid() {
