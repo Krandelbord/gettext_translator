@@ -2,7 +2,7 @@
 #include "DictionariesMenu.h"
 #include "config.h"
 
-Toolbar::Toolbar(PoReader *po_reader) {
+Toolbar::Toolbar(PoReader *po_reader) : m_spell_tb(Gtk::Stock::SPELL_CHECK) {
 	m_po_reader = po_reader;
 	this->set_tooltips(true);
 
@@ -20,11 +20,11 @@ Toolbar::Toolbar(PoReader *po_reader) {
 	this->append(*new Gtk::ToolButton(Gtk::Stock::FIND));
 	this->append(*new Gtk::ToolButton(Gtk::Stock::FIND_AND_REPLACE));
 
-	Gtk::MenuToolButton *spell_tb = new Gtk::MenuToolButton(Gtk::Stock::SPELL_CHECK);
-	this->append(*spell_tb);
+	m_spell_tb.set_label("Spellcheker");
+	this->append(m_spell_tb);
 	DictionariesMenu *dict_menu = new DictionariesMenu();
 	dict_menu->signal_language_changed().connect(sigc::mem_fun(this, &Toolbar::onLanguageChanged));
-	spell_tb->set_menu(*dict_menu);
+	m_spell_tb.set_menu(*dict_menu);
 
 	this->append(*new Gtk::SeparatorToolItem());
 
@@ -81,6 +81,7 @@ void Toolbar::onJumpNextClicked() {
 }
 
 void Toolbar::onLanguageChanged(const Glib::ustring &new_lang) {
+	m_spell_tb.set_label("Spellcheker - "+new_lang);
 	m_signal_language_changed.emit(new_lang);
 }
 

@@ -14,6 +14,7 @@ class Toolbar : public Gtk::Toolbar {
 	private:
 		PoReader *m_po_reader;
 		Gtk::Tooltips m_tooltips;
+		Gtk::MenuToolButton m_spell_tb;
 
 		void onNextClicked();
 		void onPreviousClicked();
