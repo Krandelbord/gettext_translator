@@ -7,7 +7,7 @@ Toolbar::Toolbar(PoReader *po_reader) : m_spell_tb(Gtk::Stock::SPELL_CHECK) {
 	this->set_tooltips(true);
 
 	this->append(*new Gtk::ToolButton(Gtk::Stock::OPEN));
-	this->append(*new Gtk::ToolButton(Gtk::Stock::SAVE));
+	this->append(*new Gtk::ToolButton(Gtk::Stock::SAVE), sigc::mem_fun(this, &Toolbar::onSaveFile));
 	this->append(*new Gtk::SeparatorToolItem());
 
 	/*
@@ -83,6 +83,15 @@ void Toolbar::onJumpNextClicked() {
 void Toolbar::onLanguageChanged(const Glib::ustring &new_lang) {
 	m_spell_tb.set_label("Spellcheker - "+new_lang);
 	m_signal_language_changed.emit(new_lang);
+}
+
+void Toolbar::onSaveFile() {
+	debug("On save file\n");
+	Gtk::FileChooserDialog save_dialog("Save file", Gtk::FILE_CHOOSER_ACTION_SAVE);
+	save_dialog.add_button(Gtk::Stock::CANCEL, 0);
+	save_dialog.add_button(Gtk::Stock::SAVE, 1);
+
+	if (save_dialog.run()) m_po_reader->saveToFile(save_dialog.get_filename());
 }
 
 sigc::signal<void> &Toolbar::signal_message_changed() {
