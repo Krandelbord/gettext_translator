@@ -111,6 +111,11 @@ Glib::ustring PoReader::getMsgstr() {
 	return retval;
 }
 
+void PoReader::setMsgstr(const Glib::ustring &msgstr) {
+	debug("Setting content for message number %d\n", m_msg_number);
+	po_message_set_msgstr(m_current_msg, msgstr.c_str());
+}
+
 Glib::ustring PoReader::getMsgctx() {
 	const char *ctx_cstr = po_message_msgctxt(m_current_msg);
 	if (ctx_cstr) {
