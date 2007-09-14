@@ -86,6 +86,7 @@ void Toolbar::onLanguageChanged(const Glib::ustring &new_lang) {
 }
 
 void Toolbar::onSaveFile() {
+	//TODO: add transiet 
 	debug("On save file\n");
 	Gtk::FileChooserDialog save_dialog("Save file", Gtk::FILE_CHOOSER_ACTION_SAVE);
 	save_dialog.add_button(Gtk::Stock::CANCEL, 0);
