@@ -42,10 +42,17 @@ void test_newlines() {
 	assertEquals("Some txt\\n\nWith newlines\\n\nThree lines", str);
 }
 
+void test_long2short() {
+	Glib::ustring str("Some txt\\n\nWith newlines\\n\nThree lines");
+	replaceAll(str, "\\n\n", "\n");
+	assertEquals("Some txt\nWith newlines\nThree lines", str);
+}
+
 int main(int argc, char **argv) {
 	test_oneToTwo();
 	test_ThreeToOne();
 	test_UnderScores();
 	test_newlines();
+	test_long2short();
 	return 0;
 }
