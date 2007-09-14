@@ -6,26 +6,6 @@
 #include "HelpMenu.h"
 #include "config.h"
 
-void MainWindow::onPanedChaged(Gtk::Requisition *r) {
-	Configuration conf;
-	
-	int proc = static_cast<int>(m_hpan.property_position()*100.0)/(this->get_width()*1.0);
-	if (proc>0) 
-		conf.setValue("GUI", "Left pane percentage", proc );
-}
-
-void MainWindow::onMessageChanged() {
-	debug("Message %s\n", m_po_reader->getMsgid().c_str());
-	m_text_panel.setText(m_po_reader->getMsgid());
-	m_tr_panel.setText(m_po_reader->getMsgstr(), m_po_reader->isFuzzy());
-
-	m_status_bar.setCurrent(m_po_reader->getMessageNumber());
-	m_helper_panel.setUsageLines(m_po_reader->getFilesUsage());
-	m_helper_panel.setContext(m_po_reader->getMsgctx());
-	m_helper_panel.setExtractedComments(m_po_reader->getExtractedComments());
-	m_helper_panel.setComment(m_po_reader->getComments());
-}
-
 MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_menu_bar(*this, NULL), m_text_panel("Original text (msgid):") {
 	m_po_reader = NULL;
 	this->set_title(PROGRAM_NAME);
@@ -90,4 +70,24 @@ void MainWindow::onSizeChanged(Gtk::Requisition *r) {
 	height = this->get_height()*100.0/height;
 	if (width > 0)  conf.setValue("GUI", "width percentage", width);
 	if (height > 0) conf.setValue("GUI", "height percentage", height);
+}
+
+void MainWindow::onPanedChaged(Gtk::Requisition *r) {
+	Configuration conf;
+	
+	int proc = static_cast<int>(m_hpan.property_position()*100.0)/(this->get_width()*1.0);
+	if (proc>0) 
+		conf.setValue("GUI", "Left pane percentage", proc );
+}
+
+void MainWindow::onMessageChanged() {
+	debug("Message %s\n", m_po_reader->getMsgid().c_str());
+	m_text_panel.setText(m_po_reader->getMsgid());
+	m_tr_panel.setText(m_po_reader->getMsgstr(), m_po_reader->isFuzzy());
+
+	m_status_bar.setCurrent(m_po_reader->getMessageNumber());
+	m_helper_panel.setUsageLines(m_po_reader->getFilesUsage());
+	m_helper_panel.setContext(m_po_reader->getMsgctx());
+	m_helper_panel.setExtractedComments(m_po_reader->getExtractedComments());
+	m_helper_panel.setComment(m_po_reader->getComments());
 }
