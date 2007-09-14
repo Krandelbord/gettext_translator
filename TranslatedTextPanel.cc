@@ -38,3 +38,8 @@ void TranslatedTextPanel::setText(const Glib::ustring &new_txt, bool is_fuzzy) {
 	Glib::RefPtr<Gtk::TextBuffer> buf = m_tr_tv.get_buffer();
 	buf->set_text(new_txt);
 }
+
+Glib::ustring TranslatedTextPanel::getText() {
+	Glib::RefPtr<Gtk::TextBuffer> buf = m_tr_tv.get_buffer();
+	return buf->get_text();
+}

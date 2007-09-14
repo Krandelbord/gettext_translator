@@ -9,6 +9,7 @@ class TranslatedTextPanel : public Gtk::VBox {
 		TranslatedTextPanel();
 		void setText(const Glib::ustring &new_txt, bool is_fuzzy);
 		void setSpellCheck(const Glib::ustring &spl_lang);
+		Glib::ustring getText();
 
 	private:
 		Gtk::HBox m_title_box;
