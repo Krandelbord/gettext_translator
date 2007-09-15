@@ -8,7 +8,7 @@ class MenuBar : public Gtk::MenuBar {
 	public:
 		MenuBar(Gtk::Window &main_win, PoReader *po_reader);
 		void setPoReader(PoReader *po_reader);
-		sigc::signal<void> &signal_message_changed();
+		sigc::signal<void> &signal_jump_to();
 
 	private:
 		PoReader *m_po_reader;
@@ -18,9 +18,8 @@ class MenuBar : public Gtk::MenuBar {
 
 		void onQuitMenuitem();
 		void onOpenMenuitem();
-		void onJumpTo();
 		Gtk::Window *m_main_win;
-		sigc::signal<void>  m_signal_message_changed;
+		sigc::signal<void>  m_signal_jump_to;
 };
 
 #endif /* MENU_BAR_H */

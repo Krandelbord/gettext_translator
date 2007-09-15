@@ -14,6 +14,7 @@ MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_menu_bar(
 	this->add(m_box);
 
 	//m_menu_bar.signal_message_changed().connect(sigc::mem_fun(this, &MainWindow::onMessageChanged));
+	m_menu_bar.signal_jump_to().connect(sigc::mem_fun(this, &MainWindow::onJumpTo));
 	Gtk::HBox *menu_box = new Gtk::HBox();
 	menu_box->pack_start(m_menu_bar, false, false);
 	menu_box->pack_start(*new Gtk::MenuBar(), true, true); // separator
@@ -85,6 +86,8 @@ void MainWindow::onPanedChaged(Gtk::Requisition *r) {
 }
 
 void MainWindow::fromGui2Po() {
+	if (m_po_reader->getMessageNumber()<=0) return;
+
 	m_po_reader->setMsgstr(replaceAllReturn(m_tr_panel.getText(), "\\n\n", "\n"));
 }
 
@@ -101,7 +104,7 @@ void MainWindow::fromPo2Gui() {
 }
 
 void MainWindow::onNextMessage() {
-	if (m_po_reader->getMessageNumber()>0) this->fromGui2Po();
+	this->fromGui2Po();
 	m_po_reader->nextMessage();
 	this->fromPo2Gui();
 }
@@ -130,4 +133,25 @@ void MainWindow::onJumpPreviousMessage() {
 		if (!not_end) break;
 	} while (!m_po_reader->isFuzzy() && m_po_reader->isTranslated());
 	this->fromPo2Gui();
+}
+
+void MainWindow::onJumpTo() {
+	Gtk::Dialog dialog;
+	dialog.set_transient_for(*this);
+	Gtk::SpinButton *spin = new Gtk::SpinButton(3, 0);
+	spin->set_range(1, 1233); // TODO: enter max numer for file
+	spin->set_increments(1, 10);
+	Gtk::VBox *box = dialog.get_vbox();
+	//box->pack_start(Gtk::manage(*new Gtk::Label("Enter message number")));
+	box->pack_start(*spin, true, true, 5);
+	dialog.add_button(Gtk::Stock::OK, 1);
+	dialog.add_button(Gtk::Stock::CANCEL, 2);
+	dialog.show_all();
+	int ret = dialog.run();
+	if (ret==1) {
+		this->fromGui2Po();
+		m_po_reader->jumpTo(spin->get_value());
+		this->fromPo2Gui();
+	}
+	delete spin;
 }
