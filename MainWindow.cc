@@ -7,7 +7,7 @@
 #include "Utils.h"
 #include "config.h"
 
-MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_menu_bar(*this, NULL), m_text_panel("Original text (msgid):") {
+MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_panel("Original text (msgid):") {
 	m_po_reader = NULL;
 	this->set_title(PROGRAM_NAME);
 	this->set_default_size(width, height);
@@ -56,7 +56,6 @@ void MainWindow::onFileOpened(const Glib::ustring &file_path) {
 	if (m_po_reader!=NULL) delete m_po_reader;
 	m_po_reader = new PoReader(file_path);
 	m_toolbar.setPoReader(m_po_reader);
-	m_menu_bar.setPoReader(m_po_reader);
 	
 	Statistics stat(file_path);
 	m_status_bar.setFuzzy(stat.getFuzzy());

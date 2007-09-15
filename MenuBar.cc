@@ -1,9 +1,7 @@
 #include "MenuBar.h"
 #include "config.h"
 
-MenuBar::MenuBar(Gtk::Window &main_win, PoReader *po_reader) {
-	m_po_reader = po_reader;
-	m_main_win = &main_win;
+MenuBar::MenuBar() {
 	this->items().push_back(Gtk::Menu_Helpers::MenuElem("_File", *this->createFileMenu()));
 	this->items().push_back(Gtk::Menu_Helpers::MenuElem("_Edit", *this->createEditMenu()));
 	this->items().push_back(Gtk::Menu_Helpers::MenuElem("_Tools", *this->createToolsMenu()));
@@ -42,14 +40,9 @@ void MenuBar::onQuitMenuitem() {
 }
 
 void MenuBar::onOpenMenuitem() {
-	Gtk::FileChooserDialog fc_dialog(*m_main_win, "open file");
-	fc_dialog.run();
+	//Gtk::FileChooserDialog fc_dialog(*m_main_win, "open file");
+	//fc_dialog.run();
 }
-
-void MenuBar::setPoReader(PoReader *po_reader) {
-	m_po_reader = po_reader;
-}
-
 
 sigc::signal<void> &MenuBar::signal_jump_to() {
 	return m_signal_jump_to;

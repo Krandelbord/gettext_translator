@@ -5,14 +5,14 @@ ErrorHandlers.o: ErrorHandlers.cc ErrorHandlers.h config.h
 HelperPanel.o: HelperPanel.cc HelperPanel.h
 HelpMenu.o: HelpMenu.cc HelpMenu.h
 IndicatorWidget.o: IndicatorWidget.cc IndicatorWidget.h
-main.o: main.cc MainWindow.h MenuBar.h PoReader.h Toolbar.h TextPanel.h \
+main.o: main.cc MainWindow.h MenuBar.h Toolbar.h PoReader.h TextPanel.h \
   HelperPanel.h TranslatedTextPanel.h TranslateTxtView.h \
   IndicatorWidget.h StatusBar.h Configuration.h config.h
-MainWindow.o: MainWindow.cc MainWindow.h MenuBar.h PoReader.h Toolbar.h \
+MainWindow.o: MainWindow.cc MainWindow.h MenuBar.h Toolbar.h PoReader.h \
   TextPanel.h HelperPanel.h TranslatedTextPanel.h TranslateTxtView.h \
   IndicatorWidget.h StatusBar.h Configuration.h Statistics.h HelpMenu.h \
   Utils.h config.h
-MenuBar.o: MenuBar.cc MenuBar.h PoReader.h config.h
+MenuBar.o: MenuBar.cc MenuBar.h config.h
 PoReader.o: PoReader.cc PoReader.h Utils.h ErrorHandlers.h config.h
 Statistics.o: Statistics.cc Statistics.h ErrorHandlers.h config.h
 StatusBar.o: StatusBar.cc StatusBar.h
