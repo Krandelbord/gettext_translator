@@ -185,7 +185,7 @@ std::vector<Glib::ustring> PoReader::getMsgstrPlural() {
 	do {
 		msgstr_plural = po_message_msgstr_plural(m_current_msg, index);
 		if (msgstr_plural) {
-			Glib::ustring msg(msgstr_plural);
+			Glib::ustring msg( Glib::convert_with_fallback(msgstr_plural, "UTF-8", m_file_encoding) );
 			replaceAll(msg, "\n", "\\n\n");
 			out.push_back(msg);
 		}
