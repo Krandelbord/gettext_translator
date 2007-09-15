@@ -196,7 +196,13 @@ MsgContainer PoReader::getMsgstrPlural() {
 }
 
 void PoReader::setMsgstrPlural(MsgContainer msgs) {
+	guint num = 0;
 
+	for (MsgContainer::iterator it = msgs.begin(); it!=msgs.end(); ++it, ++num) {
+		Glib::ustring msg =	Glib::convert_with_fallback(*it, m_file_encoding, "UTF-8" );
+		replaceAll(msg, "\\n\n", "\n");
+		po_message_set_msgstr_plural(m_current_msg, num, msg.c_str());
+	}
 }
 
 void PoReader::saveToFile(const Glib::ustring &out_fname) {
