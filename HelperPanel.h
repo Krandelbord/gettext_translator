@@ -11,6 +11,7 @@ class HelperPanel : public Gtk::HBox {
 		void setContext(const Glib::ustring &context);
 		void setExtractedComments(const Glib::ustring &extracted_comments);
 		void setComment(const Glib::ustring &comment);
+		Glib::ustring getComment();
 
 	private:
 		Gtk::VBox m_main_box;

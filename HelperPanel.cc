@@ -54,3 +54,8 @@ void HelperPanel::setComment(const Glib::ustring &comment) {
 	Glib::RefPtr<Gtk::TextBuffer> buf = m_comment_entry.get_buffer();
 	buf->set_text(comment);
 }
+
+Glib::ustring HelperPanel::getComment() {
+	Glib::RefPtr<Gtk::TextBuffer> buf = m_comment_entry.get_buffer();
+	return buf->get_text();
+}
