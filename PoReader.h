@@ -30,6 +30,7 @@ class PoReader {
 		bool isCFormat();
 		bool isObsolete();
 		size_t getMessageNumber();
+		guint getPluralFormsNumber();
 
 		std::vector<Glib::ustring> getFilesUsage();
 		std::vector<Glib::ustring> getMsgstrPlural();

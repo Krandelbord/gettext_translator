@@ -42,6 +42,19 @@ Glib::ustring PoReader::getHeader(const Glib::ustring &header_name) {
 	return retval;
 }
 
+guint PoReader::getPluralFormsNumber() {
+	Glib::ustring plural_forms = this->getHeader("Plural-Forms");
+	if (plural_forms.length()<=0) return 0;
+
+	Glib::ustring::size_type pos = plural_forms.find("nplurals")+8; // 8 is length of "nplurals" string
+	if (pos==Glib::ustring::npos) return 0; // Number of plural forms not defined. TODO: is this header malfolmed?
+
+	pos = plural_forms.find("=", pos)+1;
+	Glib::ustring::size_type end_pos = plural_forms.find(";", pos);
+	Glib::ustring num = plural_forms.substr(pos, end_pos-pos);
+	return atoi(num.c_str());
+}
+
 bool PoReader::jumpTo(size_t search_msg_number) {
 	if (search_msg_number<=0) return false;
 	//TODO: add checking if someone is trying to jump after end of the file
