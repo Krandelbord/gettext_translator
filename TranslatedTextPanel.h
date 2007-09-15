@@ -11,6 +11,7 @@ class TranslatedTextPanel : public Gtk::VBox {
 		void setText(std::vector<Glib::ustring> msgs, int plural_forms);
 		void setSpellCheck(const Glib::ustring &spl_lang);
 		Glib::ustring getText();
+		std::vector<Glib::ustring> getPluralTexts();
 
 	private:
 		Gtk::HBox m_title_box;
@@ -18,7 +19,10 @@ class TranslatedTextPanel : public Gtk::VBox {
 		TranslateTxtView m_tr_tv;
 		Gtk::HBox m_indicators_box;
 		Gtk::Notebook m_notebook;
-		std::list<TranslateTxtView*> m_tr_list;
+		
+		typedef std::list<TranslateTxtView*> TrTViewList;
+		TrTViewList m_tr_list;
+
 		IndicatorWidget m_fuzzy_ind, m_untr_ind, m_err_ind;
 };
 #endif /* TRANSLATED_TEXT_PANEL_H */

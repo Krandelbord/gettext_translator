@@ -88,3 +88,14 @@ Glib::ustring TranslatedTextPanel::getText() {
 	Glib::RefPtr<Gtk::TextBuffer> buf = m_tr_tv.get_buffer();
 	return buf->get_text();
 }
+
+std::vector<Glib::ustring> TranslatedTextPanel::getPluralTexts() {
+	std::vector<Glib::ustring> txts;
+	for (TrTViewList::iterator tr_it = m_tr_list.begin(); tr_it!=m_tr_list.end(); ++tr_it) {
+		TranslateTxtView *tr_tv = *tr_it;
+		Glib::RefPtr<Gtk::TextBuffer> buf = tr_tv->get_buffer();
+		txts.push_back(buf->get_text());
+	}
+	return txts;
+}
+

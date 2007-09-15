@@ -87,7 +87,11 @@ void MainWindow::onPanedChaged(Gtk::Requisition *r) {
 void MainWindow::fromGui2Po() {
 	if (m_po_reader->getMessageNumber()<=0) return;
 
-	m_po_reader->setMsgstr(replaceAllReturn(m_tr_panel.getText(), "\\n\n", "\n"));
+	if (m_po_reader->getMsgstrPlural().size()>0) {
+		m_po_reader->setMsgstrPlural( m_tr_panel.getPluralTexts() );
+	} else {
+		m_po_reader->setMsgstr(replaceAllReturn(m_tr_panel.getText(), "\\n\n", "\n"));
+	}
 	m_po_reader->setComments(m_helper_panel.getComment());
 }
 
