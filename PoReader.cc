@@ -159,8 +159,8 @@ size_t PoReader::getMessageNumber() {
 	return m_msg_number;
 }
 
-std::vector<Glib::ustring> PoReader::getFilesUsage() {
-	std::vector<Glib::ustring> ret;
+MsgContainer PoReader::getFilesUsage() {
+	MsgContainer ret;
 
 	size_t index=0;
 	po_filepos_t file_position;
@@ -178,8 +178,8 @@ std::vector<Glib::ustring> PoReader::getFilesUsage() {
 	return ret;
 }
 
-std::vector<Glib::ustring> PoReader::getMsgstrPlural() {
-	std::vector<Glib::ustring> out;
+MsgContainer PoReader::getMsgstrPlural() {
+	MsgContainer out;
 	size_t index = 0;
 	const char *msgstr_plural = NULL;
 	do {
@@ -193,6 +193,10 @@ std::vector<Glib::ustring> PoReader::getMsgstrPlural() {
 	} while(msgstr_plural)	;
 
 	return out;
+}
+
+void PoReader::setMsgstrPlural(MsgContainer msgs) {
+
 }
 
 void PoReader::saveToFile(const Glib::ustring &out_fname) {

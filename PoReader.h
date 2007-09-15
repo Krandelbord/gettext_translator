@@ -5,6 +5,8 @@
 #include <gettext-po.h>
 #include <vector>
 
+typedef std::vector<Glib::ustring> MsgContainer;
+
 class PoReader {
 	public:
 		PoReader(const Glib::ustring &file_path);
@@ -32,8 +34,9 @@ class PoReader {
 		size_t getMessageNumber();
 		guint getPluralFormsNumber();
 
-		std::vector<Glib::ustring> getFilesUsage();
-		std::vector<Glib::ustring> getMsgstrPlural();
+		MsgContainer getFilesUsage();
+		MsgContainer getMsgstrPlural();
+		void setMsgstrPlural(MsgContainer msgs);
 
 		bool jumpTo(size_t msg_number);
 		bool nextMessage();
