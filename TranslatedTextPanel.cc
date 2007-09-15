@@ -55,7 +55,7 @@ void TranslatedTextPanel::setText(std::vector<Glib::ustring> msgs, int plural_fo
 	
 	if (m_notebook.get_n_pages() < plural_forms) {
 		for (int i=m_notebook.get_n_pages(); i < plural_forms; ++i) {
-			TranslateTxtView *tr_tv = Gtk::manage(new TranslateTxtView());
+			SpellTxtView *tr_tv = Gtk::manage(new SpellTxtView());
 			m_notebook.append_page(*tr_tv);
 			m_tr_list.push_back(tr_tv);
 		}
@@ -64,10 +64,10 @@ void TranslatedTextPanel::setText(std::vector<Glib::ustring> msgs, int plural_fo
 	guint num = 0;
 	m_notebook.set_show_tabs(true);
 	std::vector<Glib::ustring>::iterator it = msgs.begin();
-	std::list<TranslateTxtView*>::iterator tr_it = m_tr_list.begin();
+	std::list<SpellTxtView*>::iterator tr_it = m_tr_list.begin();
 
 	do {
-		TranslateTxtView *tr_tv = *tr_it;
+		SpellTxtView *tr_tv = *tr_it;
 		Glib::RefPtr<Gtk::TextBuffer> buf = tr_tv->get_buffer();
 		if (it!=msgs.end()) {
 			buf->set_text(*it);
@@ -92,7 +92,7 @@ Glib::ustring TranslatedTextPanel::getText() {
 std::vector<Glib::ustring> TranslatedTextPanel::getPluralTexts() {
 	std::vector<Glib::ustring> txts;
 	for (TrTViewList::iterator tr_it = m_tr_list.begin(); tr_it!=m_tr_list.end(); ++tr_it) {
-		TranslateTxtView *tr_tv = *tr_it;
+		SpellTxtView *tr_tv = *tr_it;
 		Glib::RefPtr<Gtk::TextBuffer> buf = tr_tv->get_buffer();
 		txts.push_back(buf->get_text());
 	}

@@ -1,11 +1,11 @@
-#include "TranslateTxtView.h"
+#include "SpellTxtView.h"
 #include "config.h"
 
-TranslateTxtView::TranslateTxtView() {
+SpellTxtView::SpellTxtView() {
 	m_gtk_spell = NULL;
 }
 
-void TranslateTxtView::setLanguage(const Glib::ustring &lang) {
+void SpellTxtView::setLanguage(const Glib::ustring &lang) {
 	debug("Setting spellcheker to %s\n", lang.c_str())
 	if (m_gtk_spell != NULL) {
 		GtkTextView *txt_view = this->gobj();
@@ -17,6 +17,6 @@ void TranslateTxtView::setLanguage(const Glib::ustring &lang) {
 	}
 }
 
-TranslateTxtView::~TranslateTxtView() {
+SpellTxtView::~SpellTxtView() {
 	if (m_gtk_spell) gtkspell_detach(m_gtk_spell);
 }

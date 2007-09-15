@@ -1,7 +1,7 @@
 #ifndef TRANSLATED_TEXT_PANEL_H
 #define TRANSLATED_TEXT_PANEL_H
 
-#include "TranslateTxtView.h"
+#include "SpellTxtView.h"
 #include "IndicatorWidget.h"
 
 class TranslatedTextPanel : public Gtk::VBox {
@@ -16,11 +16,11 @@ class TranslatedTextPanel : public Gtk::VBox {
 	private:
 		Gtk::HBox m_title_box;
 		Gtk::Label m_title_label;
-		TranslateTxtView m_tr_tv;
+		SpellTxtView m_tr_tv;
 		Gtk::HBox m_indicators_box;
 		Gtk::Notebook m_notebook;
 		
-		typedef std::list<TranslateTxtView*> TrTViewList;
+		typedef std::list<SpellTxtView*> TrTViewList;
 		TrTViewList m_tr_list;
 
 		IndicatorWidget m_fuzzy_ind, m_untr_ind, m_err_ind;

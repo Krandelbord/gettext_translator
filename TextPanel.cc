@@ -1,5 +1,4 @@
 #include "TextPanel.h"
-#include "TranslateTxtView.h"
 
 TextPanel::TextPanel(const Glib::ustring &title) : m_title_label(title) {
 	this->pack_start(m_title_label, false, false);
