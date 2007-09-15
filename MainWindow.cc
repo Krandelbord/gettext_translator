@@ -93,7 +93,12 @@ void MainWindow::fromGui2Po() {
 
 void MainWindow::fromPo2Gui() {
 	m_text_panel.setText(m_po_reader->getMsgid());
-	m_tr_panel.setText(m_po_reader->getMsgstr(), m_po_reader->isFuzzy());
+	std::vector<Glib::ustring> msgstr_plurals = m_po_reader->getMsgstrPlural();
+	if (msgstr_plurals.empty()) {
+		m_tr_panel.setText(m_po_reader->getMsgstr(), m_po_reader->isFuzzy());
+	} else {
+		m_tr_panel.setText(msgstr_plurals, m_po_reader->getPluralFormsNumber());
+	}
 
 	m_status_bar.setCurrent(m_po_reader->getMessageNumber());
 	m_helper_panel.setUsageLines(m_po_reader->getFilesUsage());
