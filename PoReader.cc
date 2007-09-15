@@ -119,6 +119,10 @@ Glib::ustring PoReader::getComments() {
 	return Glib::convert_with_fallback(po_message_comments(m_current_msg), "UTF-8", m_file_encoding);
 }
 
+void PoReader::setComments(const Glib::ustring &comments) {
+	po_message_set_comments(m_current_msg, Glib::convert_with_fallback(comments, m_file_encoding, "UTF-8").c_str());
+}
+
 bool PoReader::isFuzzy() {
 	return po_message_is_fuzzy(m_current_msg);
 }
