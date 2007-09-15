@@ -16,18 +16,6 @@ PoReader::PoReader(const Glib::ustring &file_path) {
 
 	m_miter = po_message_iterator(m_pofile, NULL);
 	po_next_message(m_miter); //we skip header which is msgid
-
-	/*
-	size_t fuzzys = 0;
-	po_message_t po_msg = NULL;
-	do {
-		po_msg = po_next_message(m_miter);
-		//++fuzzys;
-		if (po_msg && po_message_is_fuzzy(po_msg)) fuzzys++;;
-		if (po_msg) debug("po-message = %s\n", po_message_msgid(po_msg));
-	} while (po_msg!=NULL);
-	debug("Mamy %d fuzzy\n", fuzzys);
-	*/
 }
 
 Glib::ustring PoReader::getEncoding() {
