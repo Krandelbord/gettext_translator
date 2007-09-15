@@ -113,7 +113,6 @@ Glib::ustring PoReader::getMsgstr() {
 }
 
 void PoReader::setMsgstr(const Glib::ustring &msgstr) {
-	debug("Setting content for message number %d\n", m_msg_number);
 	po_message_set_msgstr(m_current_msg, Glib::convert_with_fallback(msgstr, m_file_encoding, "UTF-8").c_str());
 }
 
