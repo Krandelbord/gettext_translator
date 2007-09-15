@@ -9,6 +9,10 @@ class Toolbar : public Gtk::Toolbar {
 		Toolbar(PoReader *po_reader);
 		void setPoReader(PoReader *po_reader);
 		sigc::signal<void> &signal_message_changed();
+		sigc::signal<void> &signal_next_message();
+		sigc::signal<void> &signal_jump_next_message();
+		sigc::signal<void> &signal_previous_message();
+		sigc::signal<void> &signal_jump_previous_message();
 		sigc::signal<void, Glib::ustring> &signal_language_changed();
 
 	private:
@@ -16,14 +20,15 @@ class Toolbar : public Gtk::Toolbar {
 		Gtk::Tooltips m_tooltips;
 		Gtk::MenuToolButton m_spell_tb;
 
-		void onNextClicked();
-		void onPreviousClicked();
-		void onJumpNextClicked();
-		void onJumpPreviousClicked();
 		void onLanguageChanged(const Glib::ustring &new_lang);
 		void onSaveFile();
 
 		sigc::signal<void>  m_signal_message_changed;
+		sigc::signal<void>  m_signal_next_message;
+		sigc::signal<void>  m_signal_jump_next_message;
+		sigc::signal<void>  m_signal_previous_message;
+		sigc::signal<void>  m_signal_jump_previous_message;
+
 		sigc::signal<void, Glib::ustring> m_signal_language_changed;
 };
 

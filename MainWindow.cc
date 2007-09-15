@@ -4,6 +4,7 @@
 #include "TextPanel.h"
 #include "Statistics.h"
 #include "HelpMenu.h"
+#include "Utils.h"
 #include "config.h"
 
 MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_menu_bar(*this, NULL), m_text_panel("Original text (msgid):") {
@@ -12,7 +13,7 @@ MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_menu_bar(
 	this->set_default_size(width, height);
 	this->add(m_box);
 
-	m_menu_bar.signal_message_changed().connect(sigc::mem_fun(this, &MainWindow::onMessageChanged));
+	//m_menu_bar.signal_message_changed().connect(sigc::mem_fun(this, &MainWindow::onMessageChanged));
 	Gtk::HBox *menu_box = new Gtk::HBox();
 	menu_box->pack_start(m_menu_bar, false, false);
 	menu_box->pack_start(*new Gtk::MenuBar(), true, true); // separator
@@ -21,7 +22,10 @@ MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_menu_bar(
 	m_box.pack_start(*menu_box, false, false);
 	
 	m_box.pack_start(m_toolbar, false, false);
-	m_toolbar.signal_message_changed().connect(sigc::mem_fun(this, &MainWindow::onMessageChanged));
+	m_toolbar.signal_previous_message().connect(sigc::mem_fun(this, &MainWindow::onPreviousMessage));
+	m_toolbar.signal_next_message().connect(sigc::mem_fun(this, &MainWindow::onNextMessage));
+	m_toolbar.signal_jump_next_message().connect(sigc::mem_fun(this, &MainWindow::onJumpNextMessage));
+	m_toolbar.signal_jump_previous_message().connect(sigc::mem_fun(this, &MainWindow::onJumpPreviousMessage));
 	m_toolbar.signal_language_changed().connect(sigc::mem_fun(m_tr_panel, &TranslatedTextPanel::setSpellCheck));
 	m_box.pack_start(*new Gtk::HSeparator(), false, false);
 
@@ -80,8 +84,11 @@ void MainWindow::onPanedChaged(Gtk::Requisition *r) {
 		conf.setValue("GUI", "Left pane percentage", proc );
 }
 
-void MainWindow::onMessageChanged() {
-	debug("Message %s\n", m_po_reader->getMsgid().c_str());
+void MainWindow::fromGui2Po() {
+	m_po_reader->setMsgstr(replaceAllReturn(m_tr_panel.getText(), "\\n\n", "\n"));
+}
+
+void MainWindow::fromPo2Gui() {
 	m_text_panel.setText(m_po_reader->getMsgid());
 	m_tr_panel.setText(m_po_reader->getMsgstr(), m_po_reader->isFuzzy());
 
@@ -90,4 +97,37 @@ void MainWindow::onMessageChanged() {
 	m_helper_panel.setContext(m_po_reader->getMsgctx());
 	m_helper_panel.setExtractedComments(m_po_reader->getExtractedComments());
 	m_helper_panel.setComment(m_po_reader->getComments());
+
+}
+
+void MainWindow::onNextMessage() {
+	if (m_po_reader->getMessageNumber()>0) this->fromGui2Po();
+	m_po_reader->nextMessage();
+	this->fromPo2Gui();
+}
+
+void MainWindow::onPreviousMessage() {
+	this->fromGui2Po();
+	if (m_po_reader->previousMessage()) {
+		this->fromPo2Gui();
+	}
+	//TODO: some rollback
+}
+
+void MainWindow::onJumpNextMessage() {
+	this->fromGui2Po();
+	do {
+		bool not_end = m_po_reader->nextMessage();
+		if (!not_end) break;
+	} while (!m_po_reader->isFuzzy() && m_po_reader->isTranslated());
+	this->fromPo2Gui();
+}
+
+void MainWindow::onJumpPreviousMessage() {
+	this->fromGui2Po();
+	do {
+		bool not_end = m_po_reader->previousMessage();
+		if (!not_end) break;
+	} while (!m_po_reader->isFuzzy() && m_po_reader->isTranslated());
+	this->fromPo2Gui();
 }

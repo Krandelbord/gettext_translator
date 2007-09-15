@@ -31,8 +31,13 @@ class MainWindow : public Gtk::Window {
 		StatusBar m_status_bar;
 		PoReader *m_po_reader;
 
+		void fromGui2Po();
+		void fromPo2Gui();
 		void onLanguageChanged();
-		void onMessageChanged();
+		void onNextMessage();
+		void onPreviousMessage();
+		void onJumpNextMessage();
+		void onJumpPreviousMessage();
 };
 
 #endif /* MAIN_WINDOW_H */
