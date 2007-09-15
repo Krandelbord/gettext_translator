@@ -17,8 +17,10 @@ class HelperPanel : public Gtk::HBox {
 		Gtk::VBox m_main_box;
 		Gtk::VSeparator m_vsep;
 		
-		Gtk::Label m_usage_lines;
-		Gtk::Label m_usage_lines_content;
+		Gtk::Label          m_usage_lines;	
+		Gtk::ScrolledWindow m_usage_scr;
+		Gtk::TextView       m_usage_lines_content;
+
 		Gtk::Label m_context;
 		Gtk::Label m_extracted_comments;
 
