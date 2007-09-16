@@ -6,7 +6,7 @@ Toolbar::Toolbar(PoReader *po_reader) : m_spell_tb(Gtk::Stock::SPELL_CHECK) {
 	m_po_reader = po_reader;
 	this->set_tooltips(true);
 
-	this->append(*new Gtk::ToolButton(Gtk::Stock::OPEN));
+	this->append(*new Gtk::ToolButton(Gtk::Stock::OPEN), m_signal_open_file);
 	this->append(*new Gtk::ToolButton(Gtk::Stock::SAVE), sigc::mem_fun(this, &Toolbar::onSaveFile));
 	this->append(*new Gtk::SeparatorToolItem());
 
@@ -93,6 +93,10 @@ sigc::signal<void> &Toolbar::signal_jump_previous_message() {
 
 sigc::signal<void, Glib::ustring> &Toolbar::signal_language_changed() {
 	return m_signal_language_changed;
+}
+
+sigc::signal<void> &Toolbar::signal_open_file() {
+	return m_signal_open_file;
 }
 
 void Toolbar::setPoReader(PoReader *po_reader) {

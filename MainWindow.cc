@@ -24,6 +24,7 @@ MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_pane
 	m_box.pack_start(*menu_box, false, false);
 	
 	m_box.pack_start(m_toolbar, false, false);
+	m_toolbar.signal_open_file().connect(sigc::mem_fun(this, &MainWindow::onOpenFile));
 	m_toolbar.signal_previous_message().connect(sigc::mem_fun(this, &MainWindow::onPreviousMessage));
 	m_toolbar.signal_next_message().connect(sigc::mem_fun(this, &MainWindow::onNextMessage));
 	m_toolbar.signal_jump_next_message().connect(sigc::mem_fun(this, &MainWindow::onJumpNextMessage));

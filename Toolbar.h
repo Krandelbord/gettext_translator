@@ -14,6 +14,7 @@ class Toolbar : public Gtk::Toolbar {
 		sigc::signal<void> &signal_previous_message();
 		sigc::signal<void> &signal_jump_previous_message();
 		sigc::signal<void, Glib::ustring> &signal_language_changed();
+		sigc::signal<void> &signal_open_file();
 
 	private:
 		PoReader *m_po_reader;
@@ -28,6 +29,7 @@ class Toolbar : public Gtk::Toolbar {
 		sigc::signal<void>  m_signal_jump_next_message;
 		sigc::signal<void>  m_signal_previous_message;
 		sigc::signal<void>  m_signal_jump_previous_message;
+		sigc::signal<void>  m_signal_open_file;
 
 		sigc::signal<void, Glib::ustring> m_signal_language_changed;
 };
