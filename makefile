@@ -28,3 +28,4 @@ include makefile.dep
 clean:
 	-rm *.o
 	-rm  translator
+	-rm test_replace
