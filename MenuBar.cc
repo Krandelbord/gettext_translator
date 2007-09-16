@@ -10,7 +10,7 @@ MenuBar::MenuBar() {
 
 Gtk::Menu *MenuBar::createFileMenu() {
 	Gtk::Menu *file_menu = new Gtk::Menu();
-	file_menu->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::OPEN,  sigc::mem_fun(*this, &MenuBar::onOpenMenuitem) ) );
+	file_menu->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::OPEN,  m_signal_open_file) );
 	file_menu->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::SAVE) );
 	file_menu->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::SAVE_AS) );
 	file_menu->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::QUIT,  sigc::mem_fun(*this, &MenuBar::onQuitMenuitem) ) );
@@ -31,7 +31,7 @@ Gtk::Menu *MenuBar::createToolsMenu() {
 
 	Gtk::Widget *img = Gtk::manage(new Gtk::Image(Gtk::Stock::JUMP_TO, Gtk::ICON_SIZE_MENU));
 	m->items().push_back(Gtk::Menu_Helpers::ImageMenuElem("Jump to...", *img, m_signal_jump_to));
-	m->items().push_back( Gtk::Menu_Helpers::MenuElem("Kill'em all", sigc::mem_fun(*this, &MenuBar::onOpenMenuitem) ) );
+	m->items().push_back( Gtk::Menu_Helpers::MenuElem("Kill'em all", sigc::mem_fun(*this, &MenuBar::onQuitMenuitem) ) );
 	return m;
 }
 
@@ -39,11 +39,10 @@ void MenuBar::onQuitMenuitem() {
 	Gtk::Main::quit();
 }
 
-void MenuBar::onOpenMenuitem() {
-	//Gtk::FileChooserDialog fc_dialog(*m_main_win, "open file");
-	//fc_dialog.run();
-}
-
 sigc::signal<void> &MenuBar::signal_jump_to() {
 	return m_signal_jump_to;
+}
+
+sigc::signal<void> &MenuBar::signal_open_file() {
+	return m_signal_open_file;
 }

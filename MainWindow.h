@@ -39,6 +39,7 @@ class MainWindow : public Gtk::Window {
 		void onJumpNextMessage();
 		void onJumpPreviousMessage();
 		void onJumpTo();
+		void onOpenFile();
 };
 
 #endif /* MAIN_WINDOW_H */

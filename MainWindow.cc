@@ -15,6 +15,7 @@ MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_pane
 
 	//m_menu_bar.signal_message_changed().connect(sigc::mem_fun(this, &MainWindow::onMessageChanged));
 	m_menu_bar.signal_jump_to().connect(sigc::mem_fun(this, &MainWindow::onJumpTo));
+	m_menu_bar.signal_open_file().connect(sigc::mem_fun(this, &MainWindow::onOpenFile));
 	Gtk::HBox *menu_box = new Gtk::HBox();
 	menu_box->pack_start(m_menu_bar, false, false);
 	menu_box->pack_start(*new Gtk::MenuBar(), true, true); // separator
@@ -163,4 +164,19 @@ void MainWindow::onJumpTo() {
 		this->fromPo2Gui();
 	}
 	delete spin;
+}
+
+void MainWindow::onOpenFile() {
+	Gtk::FileChooserDialog fc_dialog(*this, "open file");
+	Gtk::FileFilter po_filter;
+	po_filter.add_pattern("*.po");
+	po_filter.add_pattern("*.pot");
+	po_filter.set_name("gettext files (*.po, *.pot)");
+	fc_dialog.add_filter(po_filter);
+
+	Gtk::FileFilter all_filter;
+	all_filter.add_pattern("*.*");
+	all_filter.set_name("all files (*.*)");
+	fc_dialog.add_filter(all_filter);
+	fc_dialog.run();
 }
