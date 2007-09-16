@@ -156,7 +156,8 @@ void MainWindow::onJumpTo() {
 	//box->pack_start(Gtk::manage(*new Gtk::Label("Enter message number")));
 	box->pack_start(*spin, true, true, 5);
 	dialog.add_button(Gtk::Stock::CANCEL, 0);
-	dialog.add_button(Gtk::Stock::OK, 1);
+	Gtk::Button *btn = dialog.add_button(Gtk::Stock::OK, 1); 
+	dialog.set_default(*btn);
 	dialog.show_all();
 	if (dialog.run()) {
 		this->fromGui2Po();
@@ -180,8 +181,9 @@ void MainWindow::onOpenFile() {
 	fc_dialog.add_filter(all_filter);
 
 	fc_dialog.add_button(Gtk::Stock::CANCEL, 0);
-	fc_dialog.add_button(Gtk::Stock::OK, 1);
+	Gtk::Button *btn = fc_dialog.add_button(Gtk::Stock::OK, 1);
+	fc_dialog.set_default(*btn);
 	if (fc_dialog.run()) {
-		debug("Okej\n");
+		this->onFileOpened(fc_dialog.get_filename());
 	}
 }
