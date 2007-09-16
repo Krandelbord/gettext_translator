@@ -21,6 +21,7 @@ TranslatedTextPanel::TranslatedTextPanel() :
 	this->show_all_children();
 
 	m_notebook.set_show_tabs(false);
+	m_notebook.set_show_border(false);
 	this->add(m_notebook);
 	m_notebook.append_page(m_tr_tv, "plural 1");
 	m_tr_tv.set_wrap_mode(Gtk::WRAP_WORD);
