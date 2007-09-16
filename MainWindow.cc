@@ -5,6 +5,7 @@
 #include "Statistics.h"
 #include "HelpMenu.h"
 #include "Utils.h"
+#include "HeaderEdit.h"
 #include "config.h"
 
 MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_panel("Original text (msgid):") {
@@ -190,5 +191,7 @@ void MainWindow::onOpenFile() {
 }
 
 void MainWindow::onHeaderEdit() {
+	HeaderEdit *he = new HeaderEdit();
+	he->show_all();
 
 }
