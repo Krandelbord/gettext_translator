@@ -52,7 +52,8 @@ MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_pane
 
 	m_box.pack_end(m_status_bar, false, false);
 	this->signal_size_request().connect(sigc::mem_fun(this, &MainWindow::onSizeChanged));
-	this->show_all();
+	this->signal_key_press_event().connect(sigc::mem_fun(this, &MainWindow::onKeyPressed));
+	//this->show_all();
 
 }
 
@@ -185,7 +186,7 @@ void MainWindow::onOpenFile() {
 	fc_dialog.add_button(Gtk::Stock::CANCEL, 0);
 	Gtk::Button *btn = fc_dialog.add_button(Gtk::Stock::OK, 1);
 	fc_dialog.set_default(*btn);
-	if (fc_dialog.run()) {
+	if (fc_dialog.run()==1) {
 		this->onFileOpened(fc_dialog.get_filename());
 	}
 }
@@ -204,4 +205,8 @@ bool MainWindow::on_delete_event(GdkEventAny *event) {
 	conf.setValue("GUI", "default window x-position", x);
 	conf.setValue("GUI", "default window y-position", y);
 	return false;
+}
+
+bool  MainWindow::onKeyPressed(GdkEventKey *ev) {
+	debug("Key %s pressed\n", ev->string);
 }

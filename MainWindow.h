@@ -42,6 +42,7 @@ class MainWindow : public Gtk::Window {
 		void onJumpTo();
 		void onOpenFile();
 		void onHeaderEdit();
+		bool onKeyPressed(GdkEventKey *ev);
 };
 
 #endif /* MAIN_WINDOW_H */
