@@ -8,6 +8,7 @@ class MenuBar : public Gtk::MenuBar {
 		MenuBar();
 		sigc::signal<void> &signal_jump_to();
 		sigc::signal<void> &signal_open_file();
+		sigc::signal<void> &signal_header_edit();
 
 	private:
 		Gtk::Menu *createFileMenu();
@@ -17,6 +18,7 @@ class MenuBar : public Gtk::MenuBar {
 		void onQuitMenuitem();
 		sigc::signal<void>  m_signal_jump_to;
 		sigc::signal<void>  m_signal_open_file;
+		sigc::signal<void>  m_signal_header_edit;
 };
 
 #endif /* MENU_BAR_H */

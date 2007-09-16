@@ -22,6 +22,11 @@ Gtk::Menu *MenuBar::createEditMenu() {
 	m->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::CUT) );
 	m->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::COPY) );
 	m->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::PASTE) );
+
+	m->items().push_back( Gtk::Menu_Helpers::SeparatorElem());
+
+	Gtk::Widget *img = Gtk::manage(new Gtk::Image(Gtk::Stock::EDIT, Gtk::ICON_SIZE_MENU));
+	m->items().push_back(Gtk::Menu_Helpers::ImageMenuElem("Edit Headers...", *img, m_signal_header_edit));
 	return m;
 }
 
@@ -45,4 +50,8 @@ sigc::signal<void> &MenuBar::signal_jump_to() {
 
 sigc::signal<void> &MenuBar::signal_open_file() {
 	return m_signal_open_file;
+}
+
+sigc::signal<void> &MenuBar::signal_header_edit() {
+	return m_signal_header_edit;
 }
