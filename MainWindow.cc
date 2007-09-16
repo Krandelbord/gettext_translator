@@ -16,6 +16,7 @@ MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_pane
 	//m_menu_bar.signal_message_changed().connect(sigc::mem_fun(this, &MainWindow::onMessageChanged));
 	m_menu_bar.signal_jump_to().connect(sigc::mem_fun(this, &MainWindow::onJumpTo));
 	m_menu_bar.signal_open_file().connect(sigc::mem_fun(this, &MainWindow::onOpenFile));
+	m_menu_bar.signal_header_edit().connect(sigc::mem_fun(this, &MainWindow::onHeaderEdit));
 	Gtk::HBox *menu_box = new Gtk::HBox();
 	menu_box->pack_start(m_menu_bar, false, false);
 	menu_box->pack_start(*new Gtk::MenuBar(), true, true); // separator
@@ -186,4 +187,8 @@ void MainWindow::onOpenFile() {
 	if (fc_dialog.run()) {
 		this->onFileOpened(fc_dialog.get_filename());
 	}
+}
+
+void MainWindow::onHeaderEdit() {
+
 }
