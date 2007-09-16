@@ -24,6 +24,8 @@ TranslatedTextPanel::TranslatedTextPanel() :
 	m_notebook.set_show_tabs(false);
 	m_notebook.set_show_border(false);
 	this->add(m_notebook);
+
+	m_tr_tv.signal_copy_msgid().connect(m_signal_copy_msgid);
 	m_notebook.append_page(m_tr_tv, "plural 1");
 	m_tr_tv.set_wrap_mode(Gtk::WRAP_WORD);
 	m_tr_list.push_back(&m_tr_tv);
@@ -103,3 +105,6 @@ std::vector<Glib::ustring> TranslatedTextPanel::getPluralTexts() {
 	return txts;
 }
 
+sigc::signal<void> &TranslatedTextPanel::signal_copy_msgid() {
+	return m_signal_copy_msgid;
+}

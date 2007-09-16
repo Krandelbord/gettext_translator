@@ -7,6 +7,8 @@
 class TranslatedTextPanel : public Gtk::VBox {
 	public:
 		TranslatedTextPanel();
+		sigc::signal<void> &signal_copy_msgid();
+
 		void setText(const Glib::ustring &new_txt, bool is_fuzzy);
 		void setText(std::vector<Glib::ustring> msgs, int plural_forms);
 		void setSpellCheck(const Glib::ustring &spl_lang);
@@ -14,6 +16,7 @@ class TranslatedTextPanel : public Gtk::VBox {
 		std::vector<Glib::ustring> getPluralTexts();
 
 	private:
+		bool onKeyPressed(GdkEventKey *ev);
 		Gtk::HBox m_title_box;
 		Gtk::Label m_title_label;
 		SpellTxtView m_tr_tv;
@@ -24,5 +27,6 @@ class TranslatedTextPanel : public Gtk::VBox {
 		TrTViewList m_tr_list;
 
 		IndicatorWidget m_fuzzy_ind, m_untr_ind, m_err_ind;
+		sigc::signal<void> m_signal_copy_msgid;
 };
 #endif /* TRANSLATED_TEXT_PANEL_H */

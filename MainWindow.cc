@@ -52,9 +52,7 @@ MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_pane
 
 	m_box.pack_end(m_status_bar, false, false);
 	this->signal_size_request().connect(sigc::mem_fun(this, &MainWindow::onSizeChanged));
-	this->signal_key_press_event().connect(sigc::mem_fun(this, &MainWindow::onKeyPressed));
-	//this->show_all();
-
+	m_tr_panel.signal_copy_msgid().connect(sigc::mem_fun(this, &MainWindow::onCopyMsgid));
 }
 
 void MainWindow::onFileOpened(const Glib::ustring &file_path) {
@@ -207,6 +205,6 @@ bool MainWindow::on_delete_event(GdkEventAny *event) {
 	return false;
 }
 
-bool  MainWindow::onKeyPressed(GdkEventKey *ev) {
-	debug("Key %s pressed\n", ev->string);
+void MainWindow::onCopyMsgid() {
+	m_tr_panel.setText(m_po_reader->getMsgid(), true);
 }
