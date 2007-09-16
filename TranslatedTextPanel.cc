@@ -1,6 +1,7 @@
 #include "TranslatedTextPanel.h"
 #include "config.h"
 #include "IndicatorWidget.h"
+#include <sstream>
 
 TranslatedTextPanel::TranslatedTextPanel() :
 	m_fuzzy_ind("Fuzzy"), m_untr_ind("Untranslated"), m_err_ind("Error") {
@@ -57,7 +58,9 @@ void TranslatedTextPanel::setText(std::vector<Glib::ustring> msgs, int plural_fo
 	if (m_notebook.get_n_pages() < plural_forms) {
 		for (int i=m_notebook.get_n_pages(); i < plural_forms; ++i) {
 			SpellTxtView *tr_tv = Gtk::manage(new SpellTxtView());
-			m_notebook.append_page(*tr_tv);
+			std::ostringstream ostr;
+			ostr << "plural " << i+1;
+			m_notebook.append_page(*tr_tv, ostr.str());
 			m_tr_list.push_back(tr_tv);
 		}
 	} // hmm.. maybe we should sometimes delete pages if we don't need them
