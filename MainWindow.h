@@ -18,6 +18,7 @@ class MainWindow : public Gtk::Window {
 	private:
 		void onPanedChaged(Gtk::Requisition *r);
 		void onSizeChanged(Gtk::Requisition *r);
+		bool on_delete_event(GdkEventAny *event);
 
 		Gtk::HPaned m_hpan;
 		Gtk::VPaned m_vpan;

@@ -16,6 +16,11 @@ void saveDefaults() {
 	if (conf.getValue("GUI", "Left pane percentage") <= 0) {
 		conf.setValue("GUI", "Left pane percentage", 82);
 	}
+
+	if (conf.getValue("GUI", "default window x-position") <= 0) {
+		conf.setValue("GUI", "default window x-position", 1);
+		conf.setValue("GUI", "default window y-position", 1);
+	}
 }
 int main(int argc, char **argv) {
 	Glib::set_application_name(PROGRAM_NAME);
@@ -26,13 +31,17 @@ int main(int argc, char **argv) {
 	int width  = scr->get_width();
 	int height = scr->get_height();
 
+	int x, y;
 	{
 		Configuration conf;
 		width = width*conf.getValue("GUI", "width percentage")/100.0;
 		height = height*conf.getValue("GUI", "height percentage")/100.0;
+		x = conf.getValue("GUI", "default window x-position");
+		y = conf.getValue("GUI", "default window y-position");
 	}
 
 	MainWindow okno(width, height);
+	okno.move(x, y);
 	okno.show_all();
 
 	okno.onFileOpened("claws3.0-pl.po");

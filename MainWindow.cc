@@ -195,3 +195,13 @@ void MainWindow::onHeaderEdit() {
 	he->show_all();
 
 }
+
+bool MainWindow::on_delete_event(GdkEventAny *event) {
+	Glib::RefPtr<Gdk::Window> gdk_win = this->get_window();
+	int x, y;
+	gdk_win->get_origin(x, y);
+	Configuration conf;
+	conf.setValue("GUI", "default window x-position", x);
+	conf.setValue("GUI", "default window y-position", y);
+	return false;
+}
