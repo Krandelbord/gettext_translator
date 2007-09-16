@@ -155,11 +155,10 @@ void MainWindow::onJumpTo() {
 	Gtk::VBox *box = dialog.get_vbox();
 	//box->pack_start(Gtk::manage(*new Gtk::Label("Enter message number")));
 	box->pack_start(*spin, true, true, 5);
+	dialog.add_button(Gtk::Stock::CANCEL, 0);
 	dialog.add_button(Gtk::Stock::OK, 1);
-	dialog.add_button(Gtk::Stock::CANCEL, 2);
 	dialog.show_all();
-	int ret = dialog.run();
-	if (ret==1) {
+	if (dialog.run()) {
 		this->fromGui2Po();
 		m_po_reader->jumpTo(spin->get_value());
 		this->fromPo2Gui();
@@ -179,5 +178,10 @@ void MainWindow::onOpenFile() {
 	all_filter.add_pattern("*.*");
 	all_filter.set_name("all files (*.*)");
 	fc_dialog.add_filter(all_filter);
-	fc_dialog.run();
+
+	fc_dialog.add_button(Gtk::Stock::CANCEL, 0);
+	fc_dialog.add_button(Gtk::Stock::OK, 1);
+	if (fc_dialog.run()) {
+		debug("Okej\n");
+	}
 }
