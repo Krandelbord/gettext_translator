@@ -2,8 +2,8 @@
 #include "DictionariesMenu.h"
 #include "config.h"
 
-Toolbar::Toolbar(PoReader *po_reader) : m_spell_tb(Gtk::Stock::SPELL_CHECK) {
-	m_po_reader = po_reader;
+Toolbar::Toolbar() : m_spell_tb(Gtk::Stock::SPELL_CHECK) {
+
 	this->set_tooltips(true);
 
 	this->append(*new Gtk::ToolButton(Gtk::Stock::OPEN), m_signal_open_file);
@@ -93,6 +93,3 @@ sigc::signal<void> &Toolbar::signal_save_file() {
 	return m_signal_save_file;
 }
 
-void Toolbar::setPoReader(PoReader *po_reader) {
-	m_po_reader = po_reader;
-}

@@ -6,11 +6,11 @@ HeaderEdit.o: HeaderEdit.cc HeaderEdit.h config.h
 HelperPanel.o: HelperPanel.cc HelperPanel.h
 HelpMenu.o: HelpMenu.cc HelpMenu.h
 IndicatorWidget.o: IndicatorWidget.cc IndicatorWidget.h
-main.o: main.cc MainWindow.h MenuBar.h Toolbar.h PoReader.h TextPanel.h \
-  HelperPanel.h TranslatedTextPanel.h SpellTxtView.h IndicatorWidget.h \
-  StatusBar.h Configuration.h config.h
-MainWindow.o: MainWindow.cc MainWindow.h MenuBar.h Toolbar.h PoReader.h \
-  TextPanel.h HelperPanel.h TranslatedTextPanel.h SpellTxtView.h \
+main.o: main.cc MainWindow.h MenuBar.h Toolbar.h TextPanel.h \
+  HelperPanel.h PoReader.h TranslatedTextPanel.h SpellTxtView.h \
+  IndicatorWidget.h StatusBar.h Configuration.h config.h
+MainWindow.o: MainWindow.cc MainWindow.h MenuBar.h Toolbar.h TextPanel.h \
+  HelperPanel.h PoReader.h TranslatedTextPanel.h SpellTxtView.h \
   IndicatorWidget.h StatusBar.h Configuration.h Statistics.h HelpMenu.h \
   Utils.h HeaderEdit.h config.h
 MenuBar.o: MenuBar.cc MenuBar.h config.h
@@ -20,7 +20,7 @@ Statistics.o: Statistics.cc Statistics.h ErrorHandlers.h config.h
 StatusBar.o: StatusBar.cc StatusBar.h
 test_replace.o: test_replace.cc Utils.h
 TextPanel.o: TextPanel.cc TextPanel.h
-Toolbar.o: Toolbar.cc Toolbar.h PoReader.h DictionariesMenu.h config.h
+Toolbar.o: Toolbar.cc Toolbar.h DictionariesMenu.h config.h
 TranslatedTextPanel.o: TranslatedTextPanel.cc TranslatedTextPanel.h \
   SpellTxtView.h IndicatorWidget.h config.h
 Utils.o: Utils.cc Utils.h

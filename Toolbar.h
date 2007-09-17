@@ -2,12 +2,11 @@
 #define TOOLBAR_H
 
 #include <gtkmm.h>
-#include "PoReader.h"
+
 
 class Toolbar : public Gtk::Toolbar {
 	public:
-		Toolbar(PoReader *po_reader);
-		void setPoReader(PoReader *po_reader);
+		Toolbar();
 		sigc::signal<void> &signal_message_changed();
 		sigc::signal<void> &signal_next_message();
 		sigc::signal<void> &signal_jump_next_message();
@@ -18,7 +17,6 @@ class Toolbar : public Gtk::Toolbar {
 		sigc::signal<void> &signal_save_file();
 
 	private:
-		PoReader *m_po_reader;
 		Gtk::Tooltips m_tooltips;
 		Gtk::MenuToolButton m_spell_tb;
 
