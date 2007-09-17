@@ -113,3 +113,9 @@ sigc::signal<void> &TranslatedTextPanel::signal_copy_msgid() {
 bool TranslatedTextPanel::getFuzzy() {
 	return m_fuzzy_ind.getStatus();
 }
+
+void TranslatedTextPanel::setFuzzy(bool fuzzy) {
+	if (fuzzy) {
+		m_fuzzy_ind.turnOn();
+	} else m_fuzzy_ind.turnOff();
+}
