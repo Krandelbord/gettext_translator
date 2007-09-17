@@ -28,7 +28,7 @@ Gtk::Menu *MenuBar::createEditMenu() {
 	Gtk::Widget *img = Gtk::manage(new Gtk::Image(Gtk::Stock::EDIT, Gtk::ICON_SIZE_MENU));
 	m->items().push_back(Gtk::Menu_Helpers::ImageMenuElem("Edit Headers...", *img, m_signal_header_edit));
 
-	m->items().push_back(Gtk::Menu_Helpers::MenuElem("Mark Fuzzy/Unfuzzy", Gtk::AccelKey("<control>U"), m_signal_switch_fuzzy));
+	m->items().push_back(Gtk::Menu_Helpers::MenuElem("Toggle Fuzzy", Gtk::AccelKey("<control>U"), m_signal_switch_fuzzy));
 	return m;
 }
 
@@ -39,6 +39,11 @@ Gtk::Menu *MenuBar::createToolsMenu() {
 	Gtk::Widget *img = Gtk::manage(new Gtk::Image(Gtk::Stock::JUMP_TO, Gtk::ICON_SIZE_MENU));
 	m->items().push_back(Gtk::Menu_Helpers::ImageMenuElem("Jump to...", *img, m_signal_jump_to));
 	m->items().push_back( Gtk::Menu_Helpers::MenuElem("Kill'em all", sigc::mem_fun(*this, &MenuBar::onQuitMenuitem) ) );
+	m->items().push_back(Gtk::Menu_Helpers::MenuElem("Previous Message", Gtk::AccelKey("Page_Up"), m_signal_prev_msg));
+	m->items().push_back(Gtk::Menu_Helpers::MenuElem("Next Message", Gtk::AccelKey("Page_Down"), m_signal_next_msg));
+
+	m->items().push_back(Gtk::Menu_Helpers::MenuElem("Jump to previous message", Gtk::AccelKey("<Control>Page_Up"), m_signal_jump_prev_msg));
+	m->items().push_back(Gtk::Menu_Helpers::MenuElem("Jump to next message", Gtk::AccelKey("<Control>Page_Down"), m_signal_jump_next_msg));
 	return m;
 }
 
@@ -60,4 +65,20 @@ sigc::signal<void> &MenuBar::signal_header_edit() {
 
 sigc::signal<void> &MenuBar::signal_switch_fuzzy() {
 	return m_signal_switch_fuzzy;
+}
+
+sigc::signal<void> &MenuBar::signal_next_msg() {
+	return m_signal_next_msg;
+}
+
+sigc::signal<void> &MenuBar::signal_prev_msg() {
+	return m_signal_prev_msg;
+}
+
+sigc::signal<void> &MenuBar::signal_jump_next_msg() {
+	return m_signal_jump_next_msg;
+}
+
+sigc::signal<void> &MenuBar::signal_jump_prev_msg() {
+	return m_signal_jump_prev_msg;
 }

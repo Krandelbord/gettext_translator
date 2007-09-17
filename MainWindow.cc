@@ -19,6 +19,10 @@ MainWindow::MainWindow(guint width, guint height) : m_text_panel("Original text 
 	m_menu_bar.signal_open_file().connect(sigc::mem_fun(this, &MainWindow::onOpenFile));
 	m_menu_bar.signal_header_edit().connect(sigc::mem_fun(this, &MainWindow::onHeaderEdit));
 	m_menu_bar.signal_switch_fuzzy().connect(sigc::mem_fun(this, &MainWindow::onSwitchFuzzy));
+	m_menu_bar.signal_prev_msg().connect(sigc::mem_fun(this, &MainWindow::onPreviousMessage));
+	m_menu_bar.signal_next_msg().connect(sigc::mem_fun(this, &MainWindow::onNextMessage));
+	m_menu_bar.signal_jump_prev_msg().connect(sigc::mem_fun(this, &MainWindow::onJumpPreviousMessage));
+	m_menu_bar.signal_jump_next_msg().connect(sigc::mem_fun(this, &MainWindow::onJumpNextMessage));
 	Gtk::HBox *menu_box = new Gtk::HBox();
 	menu_box->pack_start(m_menu_bar, false, false);
 	menu_box->pack_start(*new Gtk::MenuBar(), true, true); // separator
