@@ -7,8 +7,6 @@
 class TranslatedTextPanel : public Gtk::VBox {
 	public:
 		TranslatedTextPanel();
-		sigc::signal<void> &signal_copy_msgid();
-		sigc::signal<void> &signal_toggle_fuzzy();
 
 		void setText(const Glib::ustring &new_txt, bool is_fuzzy);
 		void setText(std::vector<Glib::ustring> msgs, int plural_forms, bool is_fuzzy);
@@ -30,7 +28,5 @@ class TranslatedTextPanel : public Gtk::VBox {
 		TrTViewList m_tr_list;
 
 		IndicatorWidget m_fuzzy_ind, m_untr_ind, m_err_ind;
-		sigc::signal<void> m_signal_copy_msgid;
-		sigc::signal<void> m_signal_toggle_fuzzy;
 };
 #endif /* TRANSLATED_TEXT_PANEL_H */

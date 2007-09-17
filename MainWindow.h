@@ -45,7 +45,6 @@ class MainWindow : public Gtk::Window {
 		void onHeaderEdit();
 		void onCopyMsgid();
 		void onSwitchFuzzy();
-		bool onKeyPressed(GdkEventKey *event);
 };
 
 #endif /* MAIN_WINDOW_H */

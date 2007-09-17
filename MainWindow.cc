@@ -6,7 +6,6 @@
 #include "HelpMenu.h"
 #include "Utils.h"
 #include "HeaderEdit.h"
-#include "keys.h"
 #include "config.h"
 
 MainWindow::MainWindow(guint width, guint height) : m_text_panel("Original text (msgid):") {
@@ -54,9 +53,6 @@ MainWindow::MainWindow(guint width, guint height) : m_text_panel("Original text 
 
 	m_box.pack_end(m_status_bar, false, false);
 	this->signal_size_request().connect(sigc::mem_fun(this, &MainWindow::onSizeChanged));
-	m_tr_panel.signal_copy_msgid().connect(sigc::mem_fun(this, &MainWindow::onCopyMsgid));
-	m_tr_panel.signal_toggle_fuzzy().connect(sigc::mem_fun(this, &MainWindow::onSwitchFuzzy));
-	this->signal_key_press_event().connect(sigc::mem_fun(this, &MainWindow::onKeyPressed));
 }
 
 void MainWindow::onFileOpened(const Glib::ustring &file_path) {
@@ -232,15 +228,4 @@ void MainWindow::onCopyMsgid() {
 
 void MainWindow::onSwitchFuzzy() {
 	m_tr_panel.setFuzzy(!m_tr_panel.getFuzzy());
-}
-
-bool MainWindow::onKeyPressed(GdkEventKey *event) {
-	if (KEY_COPY_MSGID) {
-		this->onCopyMsgid();
-	}
-
-	if (KEY_TOGGLE_FUZZY) {
-		this->onSwitchFuzzy();
-	}
-	return false; // Do not stop other handlers for this event
 }

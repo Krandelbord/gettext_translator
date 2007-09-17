@@ -28,7 +28,7 @@ Gtk::Menu *MenuBar::createEditMenu() {
 	Gtk::Widget *img = Gtk::manage(new Gtk::Image(Gtk::Stock::EDIT, Gtk::ICON_SIZE_MENU));
 	m->items().push_back(Gtk::Menu_Helpers::ImageMenuElem("Edit Headers...", *img, m_signal_header_edit));
 
-	m->items().push_back(Gtk::Menu_Helpers::MenuElem("Mark Fuzzy/Unfuzzy", m_signal_switch_fuzzy));
+	m->items().push_back(Gtk::Menu_Helpers::MenuElem("Mark Fuzzy/Unfuzzy", Gtk::AccelKey("<control>U"), m_signal_switch_fuzzy));
 	return m;
 }
 
