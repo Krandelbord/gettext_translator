@@ -1,6 +1,7 @@
 #include "HelpMenu.h"
 #include <sstream>
 #include <gettext-po.h>
+#include "config.h"
 
 using namespace Gtk;
 
@@ -26,7 +27,7 @@ void HelpMenu::onAbout(Window *main_win) {
 	authors.push_back("Author: Emil Nowak <emiml@wp.pl>");
 	about.set_authors(authors);
 	
-	about.set_version("0.01 alpha");
+	about.set_version(PROGRAM_VERSION);
 
 	about.set_translator_credits("");
 
