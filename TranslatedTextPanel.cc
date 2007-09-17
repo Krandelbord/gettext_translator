@@ -26,6 +26,7 @@ TranslatedTextPanel::TranslatedTextPanel() :
 	this->add(m_notebook);
 
 	m_tr_tv.signal_copy_msgid().connect(m_signal_copy_msgid);
+	m_tr_tv.signal_toggle_fuzzy().connect(m_signal_toggle_fuzzy);
 	m_notebook.append_page(m_tr_tv, "plural 1");
 	m_tr_tv.set_wrap_mode(Gtk::WRAP_WORD);
 	m_tr_list.push_back(&m_tr_tv);
@@ -61,6 +62,7 @@ void TranslatedTextPanel::setText(std::vector<Glib::ustring> msgs, int plural_fo
 		for (int i=m_notebook.get_n_pages(); i < plural_forms; ++i) {
 			SpellTxtView *tr_tv = Gtk::manage(new SpellTxtView());
 			tr_tv->signal_copy_msgid().connect(m_signal_copy_msgid);
+			tr_tv->signal_toggle_fuzzy().connect(m_signal_toggle_fuzzy);
 			std::ostringstream ostr;
 			ostr << "plural " << i+1;
 			m_notebook.append_page(*tr_tv, ostr.str());
@@ -118,4 +120,8 @@ void TranslatedTextPanel::setFuzzy(bool fuzzy) {
 	if (fuzzy) {
 		m_fuzzy_ind.turnOn();
 	} else m_fuzzy_ind.turnOff();
+}
+
+sigc::signal<void> &TranslatedTextPanel::signal_toggle_fuzzy() {
+	return m_signal_toggle_fuzzy;
 }

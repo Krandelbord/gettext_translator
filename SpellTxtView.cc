@@ -27,10 +27,17 @@ bool SpellTxtView::on_key_press_event(GdkEventKey* event) {
 		// ctrl + space pressed
 		m_signal_copy_msgid.emit();
 	}
+	if (KEY_TOGGLE_FUZZY) {
+		m_signal_toggle_fuzzy.emit();
+	}
 	Gtk::TextView::on_key_press_event(event);
 	return true;
 }
 
 sigc::signal<void> &SpellTxtView::signal_copy_msgid() {
 	return m_signal_copy_msgid;
+}
+
+sigc::signal<void> &SpellTxtView::signal_toggle_fuzzy() {
+	return m_signal_toggle_fuzzy;
 }

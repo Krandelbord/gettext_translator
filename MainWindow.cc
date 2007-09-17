@@ -55,6 +55,7 @@ MainWindow::MainWindow(guint width, guint height) : m_text_panel("Original text 
 	m_box.pack_end(m_status_bar, false, false);
 	this->signal_size_request().connect(sigc::mem_fun(this, &MainWindow::onSizeChanged));
 	m_tr_panel.signal_copy_msgid().connect(sigc::mem_fun(this, &MainWindow::onCopyMsgid));
+	m_tr_panel.signal_toggle_fuzzy().connect(sigc::mem_fun(this, &MainWindow::onSwitchFuzzy));
 	this->signal_key_press_event().connect(sigc::mem_fun(this, &MainWindow::onKeyPressed));
 }
 
