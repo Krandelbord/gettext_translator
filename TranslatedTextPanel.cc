@@ -109,3 +109,7 @@ std::vector<Glib::ustring> TranslatedTextPanel::getPluralTexts() {
 sigc::signal<void> &TranslatedTextPanel::signal_copy_msgid() {
 	return m_signal_copy_msgid;
 }
+
+bool TranslatedTextPanel::getFuzzy() {
+	return m_fuzzy_ind.getStatus();
+}

@@ -14,6 +14,7 @@ class TranslatedTextPanel : public Gtk::VBox {
 		void setSpellCheck(const Glib::ustring &spl_lang);
 		Glib::ustring getText();
 		std::vector<Glib::ustring> getPluralTexts();
+		bool getFuzzy();
 
 	private:
 		bool onKeyPressed(GdkEventKey *ev);
