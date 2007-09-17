@@ -1,7 +1,7 @@
 #include "IndicatorWidget.h"
 
 IndicatorWidget::IndicatorWidget(const Glib::ustring &name, Gdk::Color off_color, Gdk::Color on_color) {
-
+	m_status=false;
 	m_off_color = off_color;
 	m_on_color = on_color;
 
@@ -23,9 +23,15 @@ IndicatorWidget::IndicatorWidget(const Glib::ustring &name, Gdk::Color off_color
 }
 
 void IndicatorWidget::turnOn() {
+	m_status = true;
 	m_DrawingArea.modify_bg(Gtk::STATE_NORMAL, m_on_color);
 }
 
 void IndicatorWidget::turnOff() {
+	m_status = false;
 	m_DrawingArea.modify_bg(Gtk::STATE_NORMAL, m_off_color);
+}
+
+bool IndicatorWidget::getStatus() {
+	return m_status;
 }
