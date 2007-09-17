@@ -18,6 +18,7 @@ MainWindow::MainWindow(guint width, guint height) : m_text_panel("Original text 
 	m_menu_bar.signal_jump_to().connect(sigc::mem_fun(this, &MainWindow::onJumpTo));
 	m_menu_bar.signal_open_file().connect(sigc::mem_fun(this, &MainWindow::onOpenFile));
 	m_menu_bar.signal_header_edit().connect(sigc::mem_fun(this, &MainWindow::onHeaderEdit));
+	m_menu_bar.signal_switch_fuzzy().connect(sigc::mem_fun(this, &MainWindow::onSwitchFuzzy));
 	Gtk::HBox *menu_box = new Gtk::HBox();
 	menu_box->pack_start(m_menu_bar, false, false);
 	menu_box->pack_start(*new Gtk::MenuBar(), true, true); // separator
@@ -225,4 +226,8 @@ void MainWindow::onCopyMsgid() {
 		}
 		m_tr_panel.setText(msgs, m_po_reader->getPluralFormsNumber(), true);
 	}
+}
+
+void MainWindow::onSwitchFuzzy() {
+	m_tr_panel.setFuzzy(!m_tr_panel.getFuzzy());
 }
