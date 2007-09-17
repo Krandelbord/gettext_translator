@@ -23,7 +23,7 @@ SpellTxtView::~SpellTxtView() {
 }
 
 bool SpellTxtView::on_key_press_event(GdkEventKey* event) {
-	if (event->keyval==32 && MOD__CTRL_ONLY) {
+	if (KEY_COPY_MSGID) {
 		// ctrl + space pressed
 		m_signal_copy_msgid.emit();
 	}
