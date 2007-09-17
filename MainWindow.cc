@@ -23,6 +23,7 @@ MainWindow::MainWindow(guint width, guint height) : m_text_panel("Original text 
 	m_menu_bar.signal_next_msg().connect(sigc::mem_fun(this, &MainWindow::onNextMessage));
 	m_menu_bar.signal_jump_prev_msg().connect(sigc::mem_fun(this, &MainWindow::onJumpPreviousMessage));
 	m_menu_bar.signal_jump_next_msg().connect(sigc::mem_fun(this, &MainWindow::onJumpNextMessage));
+	m_menu_bar.signal_copy_msgid().connect(sigc::mem_fun(this, &MainWindow::onCopyMsgid));
 	Gtk::HBox *menu_box = new Gtk::HBox();
 	menu_box->pack_start(m_menu_bar, false, false);
 	menu_box->pack_start(*new Gtk::MenuBar(), true, true); // separator

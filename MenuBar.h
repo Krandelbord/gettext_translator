@@ -14,6 +14,7 @@ class MenuBar : public Gtk::MenuBar {
 		sigc::signal<void> &signal_prev_msg();
 		sigc::signal<void> &signal_jump_next_msg();
 		sigc::signal<void> &signal_jump_prev_msg();
+		sigc::signal<void> &signal_copy_msgid();
 
 	private:
 		Gtk::Menu *createFileMenu();
@@ -29,6 +30,7 @@ class MenuBar : public Gtk::MenuBar {
 		sigc::signal<void>  m_signal_prev_msg;
 		sigc::signal<void>  m_signal_jump_next_msg;
 		sigc::signal<void>  m_signal_jump_prev_msg;
+		sigc::signal<void>  m_signal_copy_msgid;
 };
 
 #endif /* MENU_BAR_H */

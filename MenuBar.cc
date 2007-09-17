@@ -39,6 +39,8 @@ Gtk::Menu *MenuBar::createToolsMenu() {
 	Gtk::Widget *img = Gtk::manage(new Gtk::Image(Gtk::Stock::JUMP_TO, Gtk::ICON_SIZE_MENU));
 	m->items().push_back(Gtk::Menu_Helpers::ImageMenuElem("Jump to...", *img, m_signal_jump_to));
 	m->items().push_back( Gtk::Menu_Helpers::MenuElem("Kill'em all", sigc::mem_fun(*this, &MenuBar::onQuitMenuitem) ) );
+	m->items().push_back(Gtk::Menu_Helpers::MenuElem("Copy original message to translation", Gtk::AccelKey("<Control>space"), m_signal_copy_msgid));
+
 	m->items().push_back(Gtk::Menu_Helpers::MenuElem("Previous Message", Gtk::AccelKey("Page_Up"), m_signal_prev_msg));
 	m->items().push_back(Gtk::Menu_Helpers::MenuElem("Next Message", Gtk::AccelKey("Page_Down"), m_signal_next_msg));
 
@@ -81,4 +83,8 @@ sigc::signal<void> &MenuBar::signal_jump_next_msg() {
 
 sigc::signal<void> &MenuBar::signal_jump_prev_msg() {
 	return m_signal_jump_prev_msg;
+}
+
+sigc::signal<void>  &MenuBar::signal_copy_msgid() {
+	return m_signal_copy_msgid;
 }
