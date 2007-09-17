@@ -191,6 +191,7 @@ void MainWindow::onOpenFile() {
 }
 
 void MainWindow::onSaveFile() {
+	this->fromGui2Po();
 	Gtk::FileChooserDialog save_dialog(*this, "Save file", Gtk::FILE_CHOOSER_ACTION_SAVE);
 	save_dialog.add_button(Gtk::Stock::CANCEL, 0);
 	save_dialog.add_button(Gtk::Stock::SAVE, 1);
