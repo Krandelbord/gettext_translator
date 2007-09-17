@@ -64,6 +64,7 @@ void MainWindow::onFileOpened(const Glib::ustring &file_path) {
 	m_status_bar.setFuzzy(stat.getFuzzy());
 	m_status_bar.setTotal(stat.getTotal());
 	m_status_bar.setUntranslated(stat.getUntranslated());
+	this->onNextMessage(); //to skip message nr 0
 }
 
 void MainWindow::onSizeChanged(Gtk::Requisition *r) {
