@@ -60,6 +60,7 @@ void TranslatedTextPanel::setText(std::vector<Glib::ustring> msgs, int plural_fo
 	if (m_notebook.get_n_pages() < plural_forms) {
 		for (int i=m_notebook.get_n_pages(); i < plural_forms; ++i) {
 			SpellTxtView *tr_tv = Gtk::manage(new SpellTxtView());
+			tr_tv->signal_copy_msgid().connect(m_signal_copy_msgid);
 			std::ostringstream ostr;
 			ostr << "plural " << i+1;
 			m_notebook.append_page(*tr_tv, ostr.str());
