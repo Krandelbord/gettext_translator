@@ -25,13 +25,13 @@ TranslatedTextPanel::TranslatedTextPanel() :
 	m_notebook.set_show_border(false);
 	this->add(m_notebook);
 
-	m_notebook.append_page(m_tr_tv, "plural 1");
-	m_tr_tv.set_wrap_mode(Gtk::WRAP_WORD);
-	m_tr_list.push_back(&m_tr_tv);
+	m_notebook.append_page(m_spell_tv, "plural 1");
+	m_spell_tv.set_wrap_mode(Gtk::WRAP_WORD);
+	m_tr_list.push_back(&m_spell_tv);
 }
 
 void TranslatedTextPanel::setSpellCheck(const Glib::ustring &spl_lang) {
-	m_tr_tv.setLanguage(spl_lang);
+	m_spell_tv.setLanguage(spl_lang);
 }
 
 void TranslatedTextPanel::setText(const Glib::ustring &new_txt, bool is_fuzzy) {
@@ -43,7 +43,7 @@ void TranslatedTextPanel::setText(const Glib::ustring &new_txt, bool is_fuzzy) {
 		m_untr_ind.turnOn();
 	} else m_untr_ind.turnOff();
 
-	Glib::RefPtr<Gtk::TextBuffer> buf = m_tr_tv.get_buffer();
+	Glib::RefPtr<Gtk::TextBuffer> buf = m_spell_tv.get_buffer();
 	buf->set_text(new_txt);
 
 	for (int i=1; i < m_notebook.get_n_pages(); ++i) {
@@ -58,11 +58,11 @@ void TranslatedTextPanel::setText(std::vector<Glib::ustring> msgs, int plural_fo
 	
 	if (m_notebook.get_n_pages() < plural_forms) {
 		for (int i=m_notebook.get_n_pages(); i < plural_forms; ++i) {
-			SpellTxtView *tr_tv = Gtk::manage(new SpellTxtView());
+			SpellTxtView *spell_tv = Gtk::manage(new SpellTxtView());
 			std::ostringstream ostr;
 			ostr << "plural " << i+1;
-			m_notebook.append_page(*tr_tv, ostr.str());
-			m_tr_list.push_back(tr_tv);
+			m_notebook.append_page(*spell_tv, ostr.str());
+			m_tr_list.push_back(spell_tv);
 		}
 	} // hmm.. maybe we should sometimes delete pages if we don't need them
 
@@ -72,8 +72,8 @@ void TranslatedTextPanel::setText(std::vector<Glib::ustring> msgs, int plural_fo
 	std::list<SpellTxtView*>::iterator tr_it = m_tr_list.begin();
 
 	do {
-		SpellTxtView *tr_tv = *tr_it;
-		Glib::RefPtr<Gtk::TextBuffer> buf = tr_tv->get_buffer();
+		SpellTxtView *spell_tv = *tr_it;
+		Glib::RefPtr<Gtk::TextBuffer> buf = spell_tv->get_buffer();
 		if (it!=msgs.end()) {
 			buf->set_text(*it);
 			if ((*it).length()==0) m_untr_ind.turnOn();
@@ -90,15 +90,15 @@ void TranslatedTextPanel::setText(std::vector<Glib::ustring> msgs, int plural_fo
 }
 
 Glib::ustring TranslatedTextPanel::getText() {
-	Glib::RefPtr<Gtk::TextBuffer> buf = m_tr_tv.get_buffer();
+	Glib::RefPtr<Gtk::TextBuffer> buf = m_spell_tv.get_buffer();
 	return buf->get_text();
 }
 
 std::vector<Glib::ustring> TranslatedTextPanel::getPluralTexts() {
 	std::vector<Glib::ustring> txts;
 	for (TrTViewList::iterator tr_it = m_tr_list.begin(); tr_it!=m_tr_list.end(); ++tr_it) {
-		SpellTxtView *tr_tv = *tr_it;
-		Glib::RefPtr<Gtk::TextBuffer> buf = tr_tv->get_buffer();
+		SpellTxtView *spell_tv = *tr_it;
+		Glib::RefPtr<Gtk::TextBuffer> buf = spell_tv->get_buffer();
 		txts.push_back(buf->get_text());
 	}
 	return txts;

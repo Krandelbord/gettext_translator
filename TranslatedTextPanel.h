@@ -20,7 +20,7 @@ class TranslatedTextPanel : public Gtk::VBox {
 		bool onKeyPressed(GdkEventKey *ev);
 		Gtk::HBox m_title_box;
 		Gtk::Label m_title_label;
-		SpellTxtView m_tr_tv;
+		SpellTxtView m_spell_tv;
 		Gtk::HBox m_indicators_box;
 		Gtk::Notebook m_notebook;
 		
