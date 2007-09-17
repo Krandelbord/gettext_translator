@@ -206,5 +206,13 @@ bool MainWindow::on_delete_event(GdkEventAny *event) {
 }
 
 void MainWindow::onCopyMsgid() {
-	m_tr_panel.setText(m_po_reader->getMsgid(), true);
+	if ( (m_po_reader->getMsgstrPlural()).empty() ) {
+		m_tr_panel.setText(m_po_reader->getMsgid(), true);
+	} else {
+		std::vector<Glib::ustring> msgs;
+		for (guint i=0; i < m_po_reader->getPluralFormsNumber(); ++i) {
+			msgs.push_back(m_po_reader->getMsgid());
+		}
+		m_tr_panel.setText(msgs, m_po_reader->getPluralFormsNumber());
+	}
 }
