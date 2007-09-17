@@ -139,6 +139,10 @@ bool PoReader::isFuzzy() {
 	return po_message_is_fuzzy(m_current_msg);
 }
 
+void PoReader::setFuzzy(bool fuzzines) {
+	po_message_set_fuzzy(m_current_msg, fuzzines);
+}
+
 bool PoReader::isTranslated() {
 	const char *msg_str = po_message_msgstr(m_current_msg);
 	if (msg_str[0]=='\0') {

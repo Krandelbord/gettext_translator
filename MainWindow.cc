@@ -96,6 +96,7 @@ void MainWindow::fromGui2Po() {
 		m_po_reader->setMsgstr(replaceAllReturn(m_tr_panel.getText(), "\\n\n", "\n"));
 	}
 	m_po_reader->setComments(m_helper_panel.getComment());
+	m_po_reader->setFuzzy(m_tr_panel.getFuzzy());
 }
 
 void MainWindow::fromPo2Gui() {
