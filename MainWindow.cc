@@ -237,5 +237,9 @@ bool MainWindow::onKeyPressed(GdkEventKey *event) {
 	if (KEY_COPY_MSGID) {
 		this->onCopyMsgid();
 	}
-	return true;
+
+	if (KEY_TOGGLE_FUZZY) {
+		this->onSwitchFuzzy();
+	}
+	return false; // Do not stop other handlers for this event
 }

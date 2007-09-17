@@ -13,4 +13,7 @@
 #define		KEY__CTRL_SPACE event->keyval==32 && MOD__CTRL_ONLY
 #define 	KEY_COPY_MSGID KEY__CTRL_SPACE
 
+#define		KEY__CTRL_U event->keyval==117 && MOD__CTRL_ONLY
+#define 	KEY_TOGGLE_FUZZY KEY__CTRL_U
+
 #endif /* KEYS_H */
