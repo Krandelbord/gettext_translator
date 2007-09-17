@@ -162,7 +162,7 @@ void MainWindow::onJumpTo() {
 	Gtk::Button *btn = dialog.add_button(Gtk::Stock::OK, 1); 
 	dialog.set_default(*btn);
 	dialog.show_all();
-	if (dialog.run()) {
+	if (dialog.run()==1) {
 		this->fromGui2Po();
 		m_po_reader->jumpTo(spin->get_value());
 		this->fromPo2Gui();
