@@ -10,4 +10,5 @@ HeaderEdit::~HeaderEdit() {
 
 bool HeaderEdit::on_delete_event(GdkEventAny *event) {
 	delete this;
+	return true;
 }
