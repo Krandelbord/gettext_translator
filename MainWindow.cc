@@ -37,7 +37,6 @@ MainWindow::MainWindow(guint width, guint height) : m_text_panel("Original text 
 
 	m_box.pack_start(m_hpan, true, true, 2);
 	Configuration conf;
-	this->show_all();
 	int proc = conf.getValue("GUI", "Left pane percentage");
 	int pixels = static_cast<int>(this->get_width()*proc/100.0);
 	m_hpan.set_position(pixels);
