@@ -22,7 +22,7 @@ SpellTxtView::~SpellTxtView() {
 }
 
 bool SpellTxtView::on_key_press_event(GdkEventKey* event) {
-	if (event->keyval==32 && (event->state & GDK_CONTROL_MASK)) {
+	if (event->keyval==32 && MOD__CTRL_ONLY) {
 		// ctrl + space pressed
 		m_signal_copy_msgid.emit();
 	}
