@@ -32,6 +32,7 @@ MainWindow::MainWindow(guint width, guint height) : m_toolbar(NULL), m_text_pane
 	m_toolbar.signal_jump_next_message().connect(sigc::mem_fun(this, &MainWindow::onJumpNextMessage));
 	m_toolbar.signal_jump_previous_message().connect(sigc::mem_fun(this, &MainWindow::onJumpPreviousMessage));
 	m_toolbar.signal_language_changed().connect(sigc::mem_fun(m_tr_panel, &TranslatedTextPanel::setSpellCheck));
+	m_toolbar.signal_save_file().connect(sigc::mem_fun(this, &MainWindow::onSaveFile));
 	m_box.pack_start(*new Gtk::HSeparator(), false, false);
 
 	m_box.pack_start(m_hpan, true, true, 2);
@@ -188,6 +189,14 @@ void MainWindow::onOpenFile() {
 	if (fc_dialog.run()==1) {
 		this->onFileOpened(fc_dialog.get_filename());
 	}
+}
+
+void MainWindow::onSaveFile() {
+	Gtk::FileChooserDialog save_dialog(*this, "Save file", Gtk::FILE_CHOOSER_ACTION_SAVE);
+	save_dialog.add_button(Gtk::Stock::CANCEL, 0);
+	save_dialog.add_button(Gtk::Stock::SAVE, 1);
+
+	if (save_dialog.run()==1) m_po_reader->saveToFile(save_dialog.get_filename());
 }
 
 void MainWindow::onHeaderEdit() {

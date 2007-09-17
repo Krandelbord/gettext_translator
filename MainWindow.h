@@ -41,6 +41,7 @@ class MainWindow : public Gtk::Window {
 		void onJumpPreviousMessage();
 		void onJumpTo();
 		void onOpenFile();
+		void onSaveFile();
 		void onHeaderEdit();
 		void onCopyMsgid();
 };

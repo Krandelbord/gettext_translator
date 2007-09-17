@@ -7,7 +7,7 @@ Toolbar::Toolbar(PoReader *po_reader) : m_spell_tb(Gtk::Stock::SPELL_CHECK) {
 	this->set_tooltips(true);
 
 	this->append(*new Gtk::ToolButton(Gtk::Stock::OPEN), m_signal_open_file);
-	this->append(*new Gtk::ToolButton(Gtk::Stock::SAVE), sigc::mem_fun(this, &Toolbar::onSaveFile));
+	this->append(*new Gtk::ToolButton(Gtk::Stock::SAVE), m_signal_save_file);
 	this->append(*new Gtk::SeparatorToolItem());
 
 	/*
@@ -61,16 +61,6 @@ void Toolbar::onLanguageChanged(const Glib::ustring &new_lang) {
 	m_signal_language_changed.emit(new_lang);
 }
 
-void Toolbar::onSaveFile() {
-	//TODO: add transiet 
-	debug("On save file\n");
-	Gtk::FileChooserDialog save_dialog("Save file", Gtk::FILE_CHOOSER_ACTION_SAVE);
-	save_dialog.add_button(Gtk::Stock::CANCEL, 0);
-	save_dialog.add_button(Gtk::Stock::SAVE, 1);
-
-	if (save_dialog.run()) m_po_reader->saveToFile(save_dialog.get_filename());
-}
-
 sigc::signal<void> &Toolbar::signal_message_changed() {
 	return m_signal_message_changed;
 }
@@ -97,6 +87,10 @@ sigc::signal<void, Glib::ustring> &Toolbar::signal_language_changed() {
 
 sigc::signal<void> &Toolbar::signal_open_file() {
 	return m_signal_open_file;
+}
+
+sigc::signal<void> &Toolbar::signal_save_file() {
+	return m_signal_save_file;
 }
 
 void Toolbar::setPoReader(PoReader *po_reader) {
