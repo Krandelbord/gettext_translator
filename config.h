@@ -17,6 +17,6 @@
 }
 #else
 #  define debug(args...) ;
-#endif
+#endif /* end of DEBUG MACRO */
 
 #endif /* CONFIG_H */
