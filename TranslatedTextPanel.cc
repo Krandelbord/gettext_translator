@@ -53,8 +53,8 @@ void TranslatedTextPanel::setText(const Glib::ustring &new_txt, bool is_fuzzy) {
 	}
 }
 
-void TranslatedTextPanel::setText(std::vector<Glib::ustring> msgs, int plural_forms) {
-	m_untr_ind.turnOff();
+void TranslatedTextPanel::setText(std::vector<Glib::ustring> msgs, int plural_forms, bool is_fuzzy) {
+	is_fuzzy ? m_fuzzy_ind.turnOn() : m_fuzzy_ind.turnOff();
 	m_notebook.set_current_page(0);
 	
 	if (m_notebook.get_n_pages() < plural_forms) {

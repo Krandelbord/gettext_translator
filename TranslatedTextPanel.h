@@ -10,7 +10,7 @@ class TranslatedTextPanel : public Gtk::VBox {
 		sigc::signal<void> &signal_copy_msgid();
 
 		void setText(const Glib::ustring &new_txt, bool is_fuzzy);
-		void setText(std::vector<Glib::ustring> msgs, int plural_forms);
+		void setText(std::vector<Glib::ustring> msgs, int plural_forms, bool is_fuzzy);
 		void setSpellCheck(const Glib::ustring &spl_lang);
 		Glib::ustring getText();
 		std::vector<Glib::ustring> getPluralTexts();

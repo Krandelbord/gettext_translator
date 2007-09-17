@@ -104,7 +104,7 @@ void MainWindow::fromPo2Gui() {
 	if (msgstr_plurals.empty()) {
 		m_tr_panel.setText(m_po_reader->getMsgstr(), m_po_reader->isFuzzy());
 	} else {
-		m_tr_panel.setText(msgstr_plurals, m_po_reader->getPluralFormsNumber());
+		m_tr_panel.setText(msgstr_plurals, m_po_reader->getPluralFormsNumber(), m_po_reader->isFuzzy());
 	}
 
 	m_status_bar.setCurrent(m_po_reader->getMessageNumber());
@@ -213,6 +213,6 @@ void MainWindow::onCopyMsgid() {
 		for (guint i=0; i < m_po_reader->getPluralFormsNumber(); ++i) {
 			msgs.push_back(m_po_reader->getMsgid());
 		}
-		m_tr_panel.setText(msgs, m_po_reader->getPluralFormsNumber());
+		m_tr_panel.setText(msgs, m_po_reader->getPluralFormsNumber(), true);
 	}
 }
