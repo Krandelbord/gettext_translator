@@ -1,5 +1,6 @@
 #include "SpellTxtView.h"
 #include "config.h"
+#include "keys.h"
 
 SpellTxtView::SpellTxtView() {
 	m_gtk_spell = NULL;

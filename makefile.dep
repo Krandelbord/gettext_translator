@@ -4,7 +4,7 @@ DictionariesMenu.o: DictionariesMenu.cc DictionariesMenu.h Utils.h \
 ErrorHandlers.o: ErrorHandlers.cc ErrorHandlers.h config.h
 HeaderEdit.o: HeaderEdit.cc HeaderEdit.h config.h
 HelperPanel.o: HelperPanel.cc HelperPanel.h
-HelpMenu.o: HelpMenu.cc HelpMenu.h
+HelpMenu.o: HelpMenu.cc HelpMenu.h config.h
 IndicatorWidget.o: IndicatorWidget.cc IndicatorWidget.h
 main.o: main.cc MainWindow.h MenuBar.h Toolbar.h TextPanel.h \
   HelperPanel.h PoReader.h TranslatedTextPanel.h SpellTxtView.h \
@@ -15,7 +15,7 @@ MainWindow.o: MainWindow.cc MainWindow.h MenuBar.h Toolbar.h TextPanel.h \
   Utils.h HeaderEdit.h config.h
 MenuBar.o: MenuBar.cc MenuBar.h config.h
 PoReader.o: PoReader.cc PoReader.h Utils.h ErrorHandlers.h config.h
-SpellTxtView.o: SpellTxtView.cc SpellTxtView.h config.h
+SpellTxtView.o: SpellTxtView.cc SpellTxtView.h config.h keys.h
 Statistics.o: Statistics.cc Statistics.h ErrorHandlers.h config.h
 StatusBar.o: StatusBar.cc StatusBar.h
 test_replace.o: test_replace.cc Utils.h
