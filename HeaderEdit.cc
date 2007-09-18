@@ -31,19 +31,23 @@ HeaderEdit::HeaderEdit(Gtk::Window *parent_win, PoReader *po_reader) :
 	m_table.attach(m_btn_box, 0, 2, m_row, m_row+1);
 	m_row++;
 	m_btn_box.pack_start(m_cancel_btn);
+	m_cancel_btn.signal_clicked().connect(sigc::mem_fun(this, &HeaderEdit::onCancel));
+
 	m_btn_box.pack_start(m_save_btn);
+	m_save_btn.signal_clicked().connect(sigc::mem_fun(this, &HeaderEdit::onSave));
 	this->show_all();
 }
 
 HeaderEdit::~HeaderEdit() {
 	debug("Destruktor\n");
-}
-
-bool HeaderEdit::on_delete_event(GdkEventAny *event) {
 	if (m_backup_msg_no != m_po_reader->getMessageNumber()) {
 		// rollback
 		m_po_reader->jumpTo(m_backup_msg_no);
 	}
+}
+
+bool HeaderEdit::on_delete_event(GdkEventAny *event) {
+	debug("on delete event\n");
 	delete this;
 	return true;
 }
@@ -71,4 +75,15 @@ Gtk::Widget *HeaderEdit::appendCommentsBox() {
 
 	m_frame.add(m_scr_win);
 	return (&m_frame);
+}
+
+void HeaderEdit::onSave() {
+	Glib::RefPtr<Gtk::TextBuffer> buf = m_txt_view.get_buffer();
+	m_po_reader->setComments(buf->get_text());
+
+	delete this;
+}
+
+void HeaderEdit::onCancel() {
+	delete this;
 }
