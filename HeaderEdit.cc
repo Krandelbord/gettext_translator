@@ -60,10 +60,15 @@ void HeaderEdit::appendHeaderEntry(const Glib::ustring &header) {
 
 void HeaderEdit::appendCommentsBox() {
 	m_po_reader->jumpTo(0);
+
 	Glib::RefPtr<Gtk::TextBuffer> buf = m_txt_view.get_buffer();
 	buf->set_text(m_po_reader->getComments());
-	m_scr_win.add(m_txt_view);
+	
+	m_frame.set_label("Comments");
 	m_scr_win.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
-	m_table.attach(m_scr_win, 0, 2, m_row, m_row+1);
+	m_scr_win.add(m_txt_view);
+
+	m_frame.add(m_scr_win);
+	m_table.attach(m_frame, 0, 2, m_row, m_row+1, Gtk::FILL|Gtk::EXPAND, Gtk::FILL|Gtk::EXPAND);
 	m_row++;
 }
