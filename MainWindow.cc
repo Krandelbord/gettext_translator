@@ -202,9 +202,11 @@ void MainWindow::onSaveFile() {
 	this->fromGui2Po();
 	Gtk::FileChooserDialog save_dialog(*this, "Save file", Gtk::FILE_CHOOSER_ACTION_SAVE);
 	save_dialog.add_button(Gtk::Stock::CANCEL, 0);
-	save_dialog.add_button(Gtk::Stock::SAVE, 1);
+	Gtk::Button *save_btn = save_dialog.add_button(Gtk::Stock::SAVE, 1);
+	save_dialog.set_default(*save_btn);
 
 	if (save_dialog.run()==1) m_po_reader->saveToFile(save_dialog.get_filename());
+	delete save_btn;
 }
 
 void MainWindow::onHeaderEdit() {
