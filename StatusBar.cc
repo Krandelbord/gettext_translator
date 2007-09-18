@@ -30,13 +30,23 @@ void StatusBar::setCurrent(size_t n) {
 }
 
 void StatusBar::setFuzzy(size_t n) {
+	m_fuzzy = n;
 	std::ostringstream os;
 	os << "Fuzzy" << ": " << n;
 	m_fuzzy_sb.push(os.str());
 }
 
+size_t StatusBar::getFuzzy() {
+	return m_fuzzy;
+}
+
 void StatusBar::setUntranslated(size_t n) {
+	m_untr = n;
 	std::ostringstream os;
 	os << "Untranslated" << ": " << n;
 	m_untr_sb.push(os.str());
+}
+
+size_t StatusBar::getUntranslated() {
+	return m_untr;
 }
