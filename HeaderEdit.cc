@@ -11,9 +11,10 @@ HeaderEdit::HeaderEdit(Gtk::Window *parent_win, PoReader *po_reader) :
 	this->set_transient_for(*parent_win);
 	this->set_modal(true);
 	this->set_border_width(5);
-	this->add(m_table);
+	this->add(m_paned);
 
-	this->appendCommentsBox();
+	m_paned.pack1(*this->appendCommentsBox(), Gtk::EXPAND|Gtk::FILL);
+	m_paned.pack2(m_table);
 
 	this->appendHeaderEntry("Report-Msgid-Bugs-To");
 	this->appendHeaderEntry("Project-Id-Version");
@@ -58,7 +59,7 @@ void HeaderEdit::appendHeaderEntry(const Glib::ustring &header) {
 	}
 }
 
-void HeaderEdit::appendCommentsBox() {
+Gtk::Widget *HeaderEdit::appendCommentsBox() {
 	m_po_reader->jumpTo(0);
 
 	Glib::RefPtr<Gtk::TextBuffer> buf = m_txt_view.get_buffer();
@@ -69,6 +70,5 @@ void HeaderEdit::appendCommentsBox() {
 	m_scr_win.add(m_txt_view);
 
 	m_frame.add(m_scr_win);
-	m_table.attach(m_frame, 0, 2, m_row, m_row+1, Gtk::FILL|Gtk::EXPAND, Gtk::FILL|Gtk::EXPAND);
-	m_row++;
+	return (&m_frame);
 }

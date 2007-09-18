@@ -18,10 +18,11 @@ class HeaderEdit : public Gtk::Window {
 		Gtk::HButtonBox		m_btn_box;
 		Gtk::Button			m_save_btn, m_cancel_btn;
 		Gtk::Frame			m_frame;
+		Gtk::VPaned			m_paned;
 
 		bool on_delete_event(GdkEventAny *event);
 		void appendHeaderEntry(const Glib::ustring &header);
-		void appendCommentsBox();
+		Gtk::Widget *appendCommentsBox();
 };
 
 #endif /* HEADER_EDIT_H */
