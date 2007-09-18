@@ -201,6 +201,12 @@ void MainWindow::onOpenFile() {
 void MainWindow::onSaveFile() {
 	this->fromGui2Po();
 	m_po_reader->setHeader("X-Generator", PROGRAM_NAME" "PROGRAM_VERSION);
+	time_t t = time(NULL);
+	struct tm *tmp;
+	tmp = localtime(&t);
+	char buf[BUFSIZ];
+	strftime(buf, BUFSIZ, "%Y-%m-%d %H:%M%z", tmp);
+	m_po_reader->setHeader("PO-Revision-Date", buf);
 	Gtk::FileChooserDialog save_dialog(*this, "Save file", Gtk::FILE_CHOOSER_ACTION_SAVE);
 	save_dialog.add_button(Gtk::Stock::CANCEL, 0);
 	Gtk::Button *save_btn = save_dialog.add_button(Gtk::Stock::SAVE, 1);
