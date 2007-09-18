@@ -32,6 +32,7 @@ Glib::ustring PoReader::getHeader(const Glib::ustring &header_name) {
 
 	const char *header = po_file_domain_header(m_pofile, NULL);
 	char *header_cstr = po_header_field(header, header_name.c_str());
+	if (header_cstr==NULL) return "";
 
 	if (m_file_encoding.empty()) {
 		retval=Glib::convert_with_fallback(header_cstr, "UTF-8", "iso-8859-1");
