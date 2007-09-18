@@ -1,5 +1,5 @@
-* add signal to save file
 * disable/enable toolbar buttons when file is not open
+* search function
 * add some syntax highlighting
 
 less important:
