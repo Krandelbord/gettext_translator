@@ -25,7 +25,9 @@ TranslatedTextPanel::TranslatedTextPanel() :
 	m_notebook.set_show_border(false);
 	this->add(m_notebook);
 
-	m_notebook.append_page(m_spell_tv, "plural 1");
+	m_scr_win.add(m_spell_tv);
+	m_scr_win.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+	m_notebook.append_page(m_scr_win, "plural 1");
 	m_spell_tv.set_wrap_mode(Gtk::WRAP_WORD);
 	m_tr_list.push_back(&m_spell_tv);
 }

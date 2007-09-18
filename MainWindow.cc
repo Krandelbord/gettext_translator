@@ -52,7 +52,10 @@ MainWindow::MainWindow(guint width, guint height) : m_text_panel("Original text 
 	m_hpan.pack1(m_vpan);
 	m_hpan.pack2(m_helper_panel);
 
-	m_vpan.pack1(m_text_panel);
+	Gtk::ScrolledWindow *scr_win = new Gtk::ScrolledWindow();
+	scr_win->set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+	scr_win->add(m_text_panel);
+	m_vpan.pack1(*scr_win);
 	m_tr_panel.setSpellCheck("pl");
 	m_vpan.pack2(m_tr_panel);
 

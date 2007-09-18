@@ -18,6 +18,8 @@ class TranslatedTextPanel : public Gtk::VBox {
 
 	private:
 		bool onKeyPressed(GdkEventKey *ev);
+
+		Gtk::ScrolledWindow m_scr_win;
 		Gtk::HBox m_title_box;
 		Gtk::Label m_title_label;
 		SpellTxtView m_spell_tv;
