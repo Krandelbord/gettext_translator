@@ -105,6 +105,14 @@ void MainWindow::fromGui2Po() {
 	} else {
 		m_po_reader->setMsgstr(replaceAllReturn(m_tr_panel.getText(), "\\n\n", "\n"));
 	}
+	
+	if (m_po_reader->isFuzzy() && m_tr_panel.getFuzzy()==false) {
+		m_status_bar.setFuzzy(m_status_bar.getFuzzy()-1);
+	}
+	if (!m_po_reader->isFuzzy() && m_tr_panel.getFuzzy()==true) {
+		m_status_bar.setFuzzy(m_status_bar.getFuzzy()+1);
+	}
+
 	m_po_reader->setComments(m_helper_panel.getComment());
 	m_po_reader->setFuzzy(m_tr_panel.getFuzzy());
 }
