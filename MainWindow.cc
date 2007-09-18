@@ -17,6 +17,8 @@ MainWindow::MainWindow(guint width, guint height) : m_text_panel("Original text 
 	//m_menu_bar.signal_message_changed().connect(sigc::mem_fun(this, &MainWindow::onMessageChanged));
 	m_menu_bar.signal_jump_to().connect(sigc::mem_fun(this, &MainWindow::onJumpTo));
 	m_menu_bar.signal_open_file().connect(sigc::mem_fun(this, &MainWindow::onOpenFile));
+	m_menu_bar.signal_save().connect(sigc::mem_fun(this, &MainWindow::onSaveFile));
+	m_menu_bar.signal_save_as().connect(sigc::mem_fun(this, &MainWindow::onSaveFile));
 	m_menu_bar.signal_header_edit().connect(sigc::mem_fun(this, &MainWindow::onHeaderEdit));
 	m_menu_bar.signal_switch_fuzzy().connect(sigc::mem_fun(this, &MainWindow::onSwitchFuzzy));
 	m_menu_bar.signal_prev_msg().connect(sigc::mem_fun(this, &MainWindow::onPreviousMessage));

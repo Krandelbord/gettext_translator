@@ -10,9 +10,9 @@ MenuBar::MenuBar() {
 
 Gtk::Menu *MenuBar::createFileMenu() {
 	Gtk::Menu *file_menu = new Gtk::Menu();
-	file_menu->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::OPEN,  m_signal_open_file) );
-	file_menu->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::SAVE) );
-	file_menu->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::SAVE_AS) );
+	file_menu->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::OPEN, Gtk::AccelKey("<Control>O"), m_signal_open_file) );
+	file_menu->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::SAVE, Gtk::AccelKey("<Control>S"), m_signal_save) );
+	file_menu->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::SAVE_AS, Gtk::AccelKey("<Shift><Control>S"), m_signal_save_as) );
 	file_menu->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::QUIT,  sigc::mem_fun(*this, &MenuBar::onQuitMenuitem) ) );
 	return file_menu;
 }
@@ -87,4 +87,12 @@ sigc::signal<void> &MenuBar::signal_jump_prev_msg() {
 
 sigc::signal<void>  &MenuBar::signal_copy_msgid() {
 	return m_signal_copy_msgid;
+}
+
+sigc::signal<void> &MenuBar::signal_save() {
+	return m_signal_save;
+}
+
+sigc::signal<void> &MenuBar::signal_save_as() {
+	return m_signal_save_as;
 }
