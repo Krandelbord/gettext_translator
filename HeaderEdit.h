@@ -20,6 +20,7 @@ class HeaderEdit : public Gtk::Window {
 
 		bool on_delete_event(GdkEventAny *event);
 		void appendHeaderEntry(const Glib::ustring &header);
+		void appendCommentsBox();
 };
 
 #endif /* HEADER_EDIT_H */

@@ -13,12 +13,7 @@ HeaderEdit::HeaderEdit(Gtk::Window *parent_win, PoReader *po_reader) :
 	this->set_border_width(5);
 	this->add(m_table);
 
-	m_po_reader->jumpTo(0);
-	Glib::RefPtr<Gtk::TextBuffer> buf = m_txt_view.get_buffer();
-	buf->set_text(m_po_reader->getComments());
-	m_scr_win.add(m_txt_view);
-	m_scr_win.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
-	m_table.attach(m_scr_win, 0, 2, 0, ++m_row);
+	this->appendCommentsBox();
 
 	this->appendHeaderEntry("Report-Msgid-Bugs-To");
 	this->appendHeaderEntry("Project-Id-Version");
@@ -61,4 +56,14 @@ void HeaderEdit::appendHeaderEntry(const Glib::ustring &header) {
 		m_table.attach(*entry, 1, 2, m_row, m_row+1, Gtk::FILL|Gtk::EXPAND, Gtk::SHRINK, 5, 5);
 		m_row++;
 	}
+}
+
+void HeaderEdit::appendCommentsBox() {
+	m_po_reader->jumpTo(0);
+	Glib::RefPtr<Gtk::TextBuffer> buf = m_txt_view.get_buffer();
+	buf->set_text(m_po_reader->getComments());
+	m_scr_win.add(m_txt_view);
+	m_scr_win.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+	m_table.attach(m_scr_win, 0, 2, m_row, m_row+1);
+	m_row++;
 }
