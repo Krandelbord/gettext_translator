@@ -37,7 +37,7 @@ Gtk::Menu *MenuBar::createToolsMenu() {
 	m->items().push_back( Gtk::Menu_Helpers::StockMenuElem(Gtk::Stock::ZOOM_IN) );
 
 	Gtk::Widget *img = Gtk::manage(new Gtk::Image(Gtk::Stock::JUMP_TO, Gtk::ICON_SIZE_MENU));
-	m->items().push_back(Gtk::Menu_Helpers::ImageMenuElem("Jump to...", *img, m_signal_jump_to));
+	m->items().push_back(Gtk::Menu_Helpers::ImageMenuElem("Jump to...", Gtk::AccelKey("<Control>G"), *img, m_signal_jump_to));
 	m->items().push_back( Gtk::Menu_Helpers::MenuElem("Kill'em all", sigc::mem_fun(*this, &MenuBar::onQuitMenuitem) ) );
 	m->items().push_back(Gtk::Menu_Helpers::MenuElem("Copy original message to translation", Gtk::AccelKey("<Control>space"), m_signal_copy_msgid));
 
