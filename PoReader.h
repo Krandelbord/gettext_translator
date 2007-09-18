@@ -11,6 +11,7 @@ class PoReader {
 	public:
 		PoReader(const Glib::ustring &file_path);
 		Glib::ustring getHeader(const Glib::ustring &header_name);
+		void setHeader(const Glib::ustring &name, const Glib::ustring &value);
 		Glib::ustring getEncoding();
 
 		Glib::ustring getMsgid();

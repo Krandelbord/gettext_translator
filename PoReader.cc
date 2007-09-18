@@ -42,6 +42,19 @@ Glib::ustring PoReader::getHeader(const Glib::ustring &header_name) {
 	return retval;
 }
 
+void PoReader::setHeader(const Glib::ustring &name, const Glib::ustring &value) {
+	const char *header = po_file_domain_header(m_pofile, NULL);
+	
+	Glib::ustring po_value = Glib::convert_with_fallback(value, m_file_encoding, "UTF-8");
+	char *new_header = po_header_set_field(header, name.c_str(), po_value.c_str());
+
+	guint backup_num = this->getMessageNumber();
+	if (backup_num!=0) this->jumpTo(0);
+	this->setMsgstr(new_header);
+	delete new_header;
+	this->jumpTo(backup_num);
+}
+
 guint PoReader::getPluralFormsNumber() {
 	Glib::ustring plural_forms = this->getHeader("Plural-Forms");
 	if (plural_forms.length()<=0) return 0;
