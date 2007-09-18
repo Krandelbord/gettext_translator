@@ -56,7 +56,7 @@ guint PoReader::getPluralFormsNumber() {
 }
 
 bool PoReader::jumpTo(size_t search_msg_number) {
-	if (search_msg_number<=0) return false;
+	if (search_msg_number<0) return false;
 	//TODO: add checking if someone is trying to jump after end of the file
 	//
 	po_message_iterator_free(m_miter);
