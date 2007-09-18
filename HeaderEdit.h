@@ -15,6 +15,8 @@ class HeaderEdit : public Gtk::Window {
 		Gtk::TextView       m_txt_view;
 		Gtk::ScrolledWindow m_scr_win;
 		guint				m_backup_msg_no;
+		Gtk::HButtonBox		m_btn_box;
+		Gtk::Button			m_save_btn, m_cancel_btn;
 
 		bool on_delete_event(GdkEventAny *event);
 		void appendHeaderEntry(const Glib::ustring &header);

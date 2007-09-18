@@ -1,7 +1,10 @@
 #include "HeaderEdit.h"
 #include "config.h"
 
-HeaderEdit::HeaderEdit(Gtk::Window *parent_win, PoReader *po_reader) {
+HeaderEdit::HeaderEdit(Gtk::Window *parent_win, PoReader *po_reader) : 
+	m_save_btn(Gtk::Stock::SAVE), 
+	m_cancel_btn(Gtk::Stock::CANCEL) {
+
 	m_po_reader = po_reader;
 	m_row = 0;
 	m_backup_msg_no = m_po_reader->getMessageNumber();
@@ -29,6 +32,10 @@ HeaderEdit::HeaderEdit(Gtk::Window *parent_win, PoReader *po_reader) {
 	this->appendHeaderEntry("Plural-Forms");
 	this->appendHeaderEntry("X-Generator");
 
+	m_table.attach(m_btn_box, 0, 2, m_row, m_row+1);
+	m_row++;
+	m_btn_box.pack_start(m_cancel_btn);
+	m_btn_box.pack_start(m_save_btn);
 	this->show_all();
 }
 
