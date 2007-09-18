@@ -208,7 +208,7 @@ void MainWindow::onSaveFile() {
 }
 
 void MainWindow::onHeaderEdit() {
-	HeaderEdit *he = new HeaderEdit();
+	HeaderEdit *he = new HeaderEdit(this, m_po_reader);
 	he->show_all();
 }
 

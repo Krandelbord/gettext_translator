@@ -2,13 +2,22 @@
 #define HEADER_EDIT_H
 
 #include <gtkmm.h>
+#include "PoReader.h"
 
 class HeaderEdit : public Gtk::Window {
 	public:
-		HeaderEdit();
+		HeaderEdit(Gtk::Window *parent_win, PoReader *po_reader);
 		~HeaderEdit();
 	private:
+		PoReader  			*m_po_reader;
+		guint      			m_row;
+		Gtk::Table 			m_table;
+		Gtk::TextView       m_txt_view;
+		Gtk::ScrolledWindow m_scr_win;
+		guint				m_backup_msg_no;
+
 		bool on_delete_event(GdkEventAny *event);
+		void appendHeaderEntry(const Glib::ustring &header);
 };
 
 #endif /* HEADER_EDIT_H */
