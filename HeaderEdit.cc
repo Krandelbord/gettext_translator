@@ -55,8 +55,8 @@ bool HeaderEdit::on_delete_event(GdkEventAny *event) {
 void HeaderEdit::appendHeaderEntry(const Glib::ustring &header) {
 	Glib::ustring h_value = m_po_reader->getHeader(header);
 	if (h_value.length() > 0) {
-		m_table.attach(*new Gtk::Label(header), 0, 1, m_row, m_row+1, Gtk::SHRINK, Gtk::SHRINK, 5, 5);
-		Gtk::Entry *entry = new Gtk::Entry();
+		m_table.attach(*Gtk::manage(new Gtk::Label(header)), 0, 1, m_row, m_row+1, Gtk::SHRINK, Gtk::SHRINK, 5, 5);
+		Gtk::Entry *entry = Gtk::manage(new Gtk::Entry());
 		entry->set_text(h_value);
 		m_table.attach(*entry, 1, 2, m_row, m_row+1, Gtk::FILL|Gtk::EXPAND, Gtk::SHRINK, 5, 5);
 		m_row++;
@@ -81,6 +81,25 @@ void HeaderEdit::onSave() {
 	Glib::RefPtr<Gtk::TextBuffer> buf = m_txt_view.get_buffer();
 	m_po_reader->setComments(buf->get_text());
 
+	Gtk::Table_Helpers::TableList list = m_table.children();
+
+	for (Gtk::Table_Helpers::TableList::reverse_iterator it = list.rbegin(); it!=list.rend(); ++it) {
+		Gtk::Widget *wdg = (*it).get_widget();
+		Glib::ustring wdg_name = wdg->get_name();
+
+		Gtk::Label *lb = NULL;
+		Gtk::Entry *en = NULL;
+		if (wdg->get_name()=="gtkmm__GtkLabel") {
+			lb = dynamic_cast<Gtk::Label*>(wdg);
+			debug("label  = %s\n", lb->get_text().c_str());
+			++it;
+			Gtk::Widget *wdg = (*it).get_widget();
+			if (wdg->get_name()=="gtkmm__GtkEntry") {
+				en = dynamic_cast<Gtk::Entry*>(wdg);
+				m_po_reader->setHeader(lb->get_text(), en->get_text());
+			}
+		}
+	}
 	delete this;
 }
 
