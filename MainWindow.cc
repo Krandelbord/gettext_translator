@@ -200,6 +200,7 @@ void MainWindow::onOpenFile() {
 
 void MainWindow::onSaveFile() {
 	this->fromGui2Po();
+	m_po_reader->setHeader("X-Generator", PROGRAM_NAME" "PROGRAM_VERSION);
 	Gtk::FileChooserDialog save_dialog(*this, "Save file", Gtk::FILE_CHOOSER_ACTION_SAVE);
 	save_dialog.add_button(Gtk::Stock::CANCEL, 0);
 	Gtk::Button *save_btn = save_dialog.add_button(Gtk::Stock::SAVE, 1);
