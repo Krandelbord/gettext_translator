@@ -16,6 +16,9 @@ class Toolbar : public Gtk::Toolbar {
 		sigc::signal<void> &signal_open_file();
 		sigc::signal<void> &signal_save_file();
 
+		void disable_items();
+		void enable_items();
+
 	private:
 		Gtk::Tooltips m_tooltips;
 		Gtk::MenuToolButton m_spell_tb;
@@ -31,6 +34,8 @@ class Toolbar : public Gtk::Toolbar {
 		sigc::signal<void>  m_signal_save_file;
 
 		sigc::signal<void, Glib::ustring> m_signal_language_changed;
+		typedef std::vector<Gtk::ToolItem*> ItemsList;
+		ItemsList m_disable_list;
 };
 
 #endif /* TOOLBAR_H */

@@ -7,7 +7,11 @@ Toolbar::Toolbar() : m_spell_tb(Gtk::Stock::SPELL_CHECK) {
 	this->set_tooltips(true);
 
 	this->append(*new Gtk::ToolButton(Gtk::Stock::OPEN), m_signal_open_file);
-	this->append(*new Gtk::ToolButton(Gtk::Stock::SAVE), m_signal_save_file);
+	
+	Gtk::ToolButton *ti = new Gtk::ToolButton(Gtk::Stock::SAVE);
+	m_disable_list.push_back(ti);
+	this->append(*ti, m_signal_save_file);
+
 	this->append(*new Gtk::SeparatorToolItem());
 
 	/*
@@ -17,8 +21,13 @@ Toolbar::Toolbar() : m_spell_tb(Gtk::Stock::SPELL_CHECK) {
 	this->append(*new Gtk::SeparatorToolItem());
 	*/
 
-	this->append(*new Gtk::ToolButton(Gtk::Stock::FIND));
-	this->append(*new Gtk::ToolButton(Gtk::Stock::FIND_AND_REPLACE));
+	ti = new Gtk::ToolButton(Gtk::Stock::FIND);
+	m_disable_list.push_back(ti);
+	this->append(*ti);
+
+	ti = new Gtk::ToolButton(Gtk::Stock::FIND_AND_REPLACE);
+	m_disable_list.push_back(ti);
+	this->append(*ti);
 
 	m_spell_tb.set_label("Spellcheker");
 	this->append(m_spell_tb);
@@ -29,25 +38,28 @@ Toolbar::Toolbar() : m_spell_tb(Gtk::Stock::SPELL_CHECK) {
 	this->append(*new Gtk::SeparatorToolItem());
 
 	Gtk::ToolButton *back_tb = new Gtk::ToolButton(Gtk::Stock::GO_BACK);
+	m_disable_list.push_back(back_tb);
 	back_tb->set_label("Back");
 	back_tb->set_tooltip(m_tooltips, "Previous message");
 	back_tb->signal_clicked().connect(m_signal_previous_message);
 	this->append(*back_tb);
 
 	Gtk::ToolButton *forward_tb = new Gtk::ToolButton(Gtk::Stock::GO_FORWARD);
+	m_disable_list.push_back(forward_tb);
 	forward_tb->set_label("Next");
 	forward_tb->set_tooltip(m_tooltips, "Next message");
 	forward_tb->signal_clicked().connect(m_signal_next_message); // propagate signal
 	this->append(*forward_tb);
 
 	Gtk::ToolButton *first_tb = new Gtk::ToolButton(Gtk::Stock::GOTO_FIRST);
-	//first_tb->set_state(Gtk::STATE_INSENSITIVE);
+	m_disable_list.push_back(first_tb);
 	first_tb->set_label("Previous");
 	first_tb->set_tooltip(m_tooltips, "Jumps to previous fuzzy or untranslated message");
 	first_tb->signal_clicked().connect(m_signal_jump_previous_message);
 	this->append(*first_tb);
 
 	Gtk::ToolButton *last_tb = new Gtk::ToolButton(Gtk::Stock::GOTO_LAST);
+	m_disable_list.push_back(last_tb);
 	last_tb->set_label("Next");
 	last_tb->set_tooltip(m_tooltips, "Jumps to next fuzzy or untranslated message");
 	last_tb->signal_clicked().connect(m_signal_jump_next_message);
@@ -92,4 +104,14 @@ sigc::signal<void> &Toolbar::signal_open_file() {
 sigc::signal<void> &Toolbar::signal_save_file() {
 	return m_signal_save_file;
 }
+void Toolbar::disable_items() {
+	for (ItemsList::iterator it = m_disable_list.begin(); it!=m_disable_list.end(); ++it) {
+		(*it)->set_sensitive(false);
+	}
+}
 
+void Toolbar::enable_items() {
+	for (ItemsList::iterator it = m_disable_list.begin(); it!=m_disable_list.end(); ++it) {
+		(*it)->set_sensitive(true);
+	}
+}

@@ -34,6 +34,7 @@ MainWindow::MainWindow(guint width, guint height) : m_text_panel("Original text 
 	m_box.pack_start(*menu_box, false, false);
 	
 	m_box.pack_start(m_toolbar, false, false);
+	m_toolbar.disable_items();
 	m_toolbar.signal_open_file().connect(sigc::mem_fun(this, &MainWindow::onOpenFile));
 	m_toolbar.signal_previous_message().connect(sigc::mem_fun(this, &MainWindow::onPreviousMessage));
 	m_toolbar.signal_next_message().connect(sigc::mem_fun(this, &MainWindow::onNextMessage));
@@ -70,6 +71,7 @@ void MainWindow::onFileOpened(const Glib::ustring &file_path) {
 	m_po_reader = new PoReader(file_path);
 	
 	m_menu_bar.enable_elements();
+	m_toolbar.enable_items();
 
 	Statistics stat(file_path);
 	m_status_bar.setFuzzy(stat.getFuzzy());
