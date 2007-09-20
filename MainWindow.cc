@@ -14,7 +14,7 @@ MainWindow::MainWindow(guint width, guint height) : m_text_panel("Original text 
 	this->set_default_size(width, height);
 	this->add(m_box);
 
-	//m_menu_bar.signal_message_changed().connect(sigc::mem_fun(this, &MainWindow::onMessageChanged));
+	m_menu_bar.disable_elements(); // disable elements that operate on m_po_reader. Because we have m_po_reader == NULL
 	m_menu_bar.signal_jump_to().connect(sigc::mem_fun(this, &MainWindow::onJumpTo));
 	m_menu_bar.signal_open_file().connect(sigc::mem_fun(this, &MainWindow::onOpenFile));
 	m_menu_bar.signal_save().connect(sigc::mem_fun(this, &MainWindow::onSaveFile));
@@ -69,6 +69,8 @@ void MainWindow::onFileOpened(const Glib::ustring &file_path) {
 	if (m_po_reader!=NULL) delete m_po_reader;
 	m_po_reader = new PoReader(file_path);
 	
+	m_menu_bar.enable_elements();
+
 	Statistics stat(file_path);
 	m_status_bar.setFuzzy(stat.getFuzzy());
 	m_status_bar.setTotal(stat.getTotal());
