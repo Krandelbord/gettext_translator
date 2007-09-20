@@ -10,12 +10,16 @@ MenuBar::MenuBar() {
 
 Gtk::Menu *MenuBar::createFileMenu() {
 	Gtk::Menu *file_menu = new Gtk::Menu();
-	StockMenuElem *m = new StockMenuElem(Gtk::Stock::OPEN, Gtk::AccelKey("<Control>O"), m_signal_open_file);
-	disable_list.push_back(m);
-	file_menu->items().push_back(*m);
 	file_menu->items().push_back( StockMenuElem(Gtk::Stock::OPEN, Gtk::AccelKey("<Control>O"), m_signal_open_file) );
-	file_menu->items().push_back( StockMenuElem(Gtk::Stock::SAVE, Gtk::AccelKey("<Control>S"), m_signal_save) );
-	file_menu->items().push_back( StockMenuElem(Gtk::Stock::SAVE_AS, Gtk::AccelKey("<Shift><Control>S"), m_signal_save_as) );
+
+	StockMenuElem *me = new StockMenuElem(Gtk::Stock::SAVE, Gtk::AccelKey("<Control>S"), m_signal_save);
+	m_disable_list.push_back(me);
+	file_menu->items().push_back(*me);
+
+	me = new StockMenuElem(Gtk::Stock::SAVE_AS, Gtk::AccelKey("<Shift><Control>S"), m_signal_save_as);
+	m_disable_list.push_back(me);
+	file_menu->items().push_back(*me);
+
 	file_menu->items().push_back( StockMenuElem(Gtk::Stock::QUIT,  sigc::mem_fun(*this, &MenuBar::onQuitMenuitem) ) );
 	this->disable_elements();
 	return file_menu;
@@ -102,14 +106,14 @@ sigc::signal<void> &MenuBar::signal_save_as() {
 }
 
 void MenuBar::disable_elements() {
-	for (ElementsList::iterator it = disable_list.begin(); it!=disable_list.end(); ++it) {
+	for (ElementsList::iterator it = m_disable_list.begin(); it!=m_disable_list.end(); ++it) {
 		Glib::RefPtr<Gtk::MenuItem> e = (*it)->get_child();
 		e->set_sensitive(false);
 	}
 }
 
 void MenuBar::enable_elements() {
-	for (ElementsList::iterator it = disable_list.begin(); it!=disable_list.end(); ++it) {
+	for (ElementsList::iterator it = m_disable_list.begin(); it!=m_disable_list.end(); ++it) {
 		Glib::RefPtr<Gtk::MenuItem> e = (*it)->get_child();
 		e->set_sensitive(true);
 	}

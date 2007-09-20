@@ -39,7 +39,7 @@ class MenuBar : public Gtk::MenuBar {
 		sigc::signal<void>  m_signal_save;
 		sigc::signal<void>  m_signal_save_as;
 		typedef std::vector<Element*> ElementsList;
-		ElementsList disable_list;
+		ElementsList m_disable_list;
 };
 
 #endif /* MENU_BAR_H */
