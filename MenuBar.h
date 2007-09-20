@@ -2,6 +2,7 @@
 #define MENU_BAR_H
 
 #include <gtkmm.h>
+using namespace Gtk::Menu_Helpers;
 
 class MenuBar : public Gtk::MenuBar {
 	public:
@@ -17,6 +18,8 @@ class MenuBar : public Gtk::MenuBar {
 		sigc::signal<void> &signal_copy_msgid();
 		sigc::signal<void> &signal_save();
 		sigc::signal<void> &signal_save_as();
+		void disable_elements();
+		void enable_elements();
 
 	private:
 		Gtk::Menu *createFileMenu();
@@ -35,6 +38,8 @@ class MenuBar : public Gtk::MenuBar {
 		sigc::signal<void>  m_signal_copy_msgid;
 		sigc::signal<void>  m_signal_save;
 		sigc::signal<void>  m_signal_save_as;
+		typedef std::vector<Element*> ElementsList;
+		ElementsList disable_list;
 };
 
 #endif /* MENU_BAR_H */
