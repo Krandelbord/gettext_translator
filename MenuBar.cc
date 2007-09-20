@@ -21,7 +21,6 @@ Gtk::Menu *MenuBar::createFileMenu() {
 	file_menu->items().push_back(*me);
 
 	file_menu->items().push_back( StockMenuElem(Gtk::Stock::QUIT,  sigc::mem_fun(*this, &MenuBar::onQuitMenuitem) ) );
-	this->disable_elements();
 	return file_menu;
 }
 
@@ -34,9 +33,13 @@ Gtk::Menu *MenuBar::createEditMenu() {
 	m->items().push_back( SeparatorElem());
 
 	Gtk::Widget *img = Gtk::manage(new Gtk::Image(Gtk::Stock::EDIT, Gtk::ICON_SIZE_MENU));
-	m->items().push_back(ImageMenuElem("Edit Headers...", *img, m_signal_header_edit));
+	Element *me = new ImageMenuElem("Edit Headers...", *img, m_signal_header_edit);
+	m_disable_list.push_back(me);
+	m->items().push_back(*me);
 
-	m->items().push_back(MenuElem("Toggle Fuzzy", Gtk::AccelKey("<control>U"), m_signal_switch_fuzzy));
+	me = new MenuElem("Toggle Fuzzy", Gtk::AccelKey("<control>U"), m_signal_switch_fuzzy);
+	m_disable_list.push_back(me);
+	m->items().push_back(*me);
 	return m;
 }
 
@@ -45,15 +48,31 @@ Gtk::Menu *MenuBar::createToolsMenu() {
 	m->items().push_back( StockMenuElem(Gtk::Stock::ZOOM_IN) );
 
 	Gtk::Widget *img = Gtk::manage(new Gtk::Image(Gtk::Stock::JUMP_TO, Gtk::ICON_SIZE_MENU));
-	m->items().push_back(ImageMenuElem("Jump to...", Gtk::AccelKey("<Control>G"), *img, m_signal_jump_to));
+	Element *me = new ImageMenuElem("Jump to...", Gtk::AccelKey("<Control>G"), *img, m_signal_jump_to);
+	m_disable_list.push_back(me);
+	m->items().push_back(*me);
+
 	m->items().push_back( MenuElem("Kill'em all", sigc::mem_fun(*this, &MenuBar::onQuitMenuitem) ) );
-	m->items().push_back(MenuElem("Copy original message to translation", Gtk::AccelKey("<Control>space"), m_signal_copy_msgid));
 
-	m->items().push_back(MenuElem("Previous Message", Gtk::AccelKey("Page_Up"), m_signal_prev_msg));
-	m->items().push_back(MenuElem("Next Message", Gtk::AccelKey("Page_Down"), m_signal_next_msg));
+	me = new MenuElem("Copy original message to translation", Gtk::AccelKey("<Control>space"), m_signal_copy_msgid);
+	m_disable_list.push_back(me);
+	m->items().push_back(*me);
 
-	m->items().push_back(MenuElem("Jump to previous message", Gtk::AccelKey("<Control>Page_Up"), m_signal_jump_prev_msg));
-	m->items().push_back(MenuElem("Jump to next message", Gtk::AccelKey("<Control>Page_Down"), m_signal_jump_next_msg));
+	me = new MenuElem("Previous Message", Gtk::AccelKey("Page_Up"), m_signal_prev_msg);
+	m_disable_list.push_back(me);
+	m->items().push_back(*me);
+
+	me = new MenuElem("Next Message", Gtk::AccelKey("Page_Down"), m_signal_next_msg);
+	m_disable_list.push_back(me);
+	m->items().push_back(*me);
+
+	me = new MenuElem("Jump to previous message", Gtk::AccelKey("<Control>Page_Up"), m_signal_jump_prev_msg);
+	m_disable_list.push_back(me);
+	m->items().push_back(*me);
+	
+	me = new MenuElem("Jump to next message", Gtk::AccelKey("<Control>Page_Down"), m_signal_jump_next_msg);
+	m_disable_list.push_back(me);
+	m->items().push_back(*me);
 	return m;
 }
 
