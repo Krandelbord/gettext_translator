@@ -2,7 +2,7 @@
 #define CONFIG_H
 
 #define PROGRAM_NAME "Gettext Translator"
-#define PROGRAM_VERSION "0.8 beta"
+#define PROGRAM_VERSION "0.9"
 
 #ifdef DEBUG
 #include <glib.h>

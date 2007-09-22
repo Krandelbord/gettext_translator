@@ -44,8 +44,6 @@ int main(int argc, char **argv) {
 	okno.move(x, y);
 	okno.show_all();
 
-	okno.onFileOpened("claws3.0-pl.po");
-
 	app.run(okno);
 
 	return 0;
