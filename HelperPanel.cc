@@ -1,5 +1,7 @@
 #include "HelperPanel.h"
 #include <sstream>
+#include "config.h"
+
 #define SPACING 6
 using namespace Glib;
 using namespace std;
@@ -11,7 +13,7 @@ HelperPanel::HelperPanel() {
 	
 	m_main_box.pack_start(m_usage_lines, false, false, SPACING);
 	m_usage_lines.set_alignment(Gtk::ALIGN_LEFT, Gtk::ALIGN_CENTER);
-	m_usage_lines.set_markup("<b>Used in</b>:");
+	m_usage_lines.set_markup(_("<b>Used in</b>:"));
 	m_usage_scr.add(m_usage_lines_content);
 	m_usage_scr.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
 	m_usage_lines_content.set_sensitive(false);
@@ -30,7 +32,7 @@ HelperPanel::HelperPanel() {
 	m_main_box.pack_start(m_scr);
 	m_scr.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
 	m_scr.add(m_comment_entry);
-	m_comment_lb.set_markup("<b>Comment: </b>");
+	m_comment_lb.set_markup(_("<b>Comment: </b>"));
 	m_comment_lb.set_alignment(Gtk::ALIGN_LEFT, Gtk::ALIGN_CENTER);
 
 	this->show_all();
@@ -46,11 +48,11 @@ void HelperPanel::setUsageLines(std::vector<Glib::ustring> usage_lines) {
 }
 
 void HelperPanel::setContext(const Glib::ustring &context) {
-	m_context.set_markup("<b>Context:</b> "+context);
+	m_context.set_markup(_("<b>Context:</b> ")+context);
 }
 
 void HelperPanel::setExtractedComments(const Glib::ustring &extracted_comments) {
-	m_extracted_comments.set_markup("<b>Extracted notes:</b> "+extracted_comments);
+	m_extracted_comments.set_markup(_("<b>Extracted notes:</b> ")+extracted_comments);
 }
 
 void HelperPanel::setComment(const Glib::ustring &comment) {

@@ -4,8 +4,8 @@
 #include <sstream>
 
 TranslatedTextPanel::TranslatedTextPanel() :
-	m_fuzzy_ind("Fuzzy"), m_untr_ind("Untranslated"), m_err_ind("Error") {
-	m_title_label.set_text("Transalted text (msgstr): ");
+	m_fuzzy_ind(_("Fuzzy")), m_untr_ind(_("Untranslated")), m_err_ind(_("Error")) {
+	m_title_label.set_text(_("Transalted text (msgstr): "));
 	m_title_label.set_alignment(Gtk::ALIGN_LEFT, Gtk::ALIGN_CENTER);
 	this->pack_start(*new Gtk::HSeparator(), false, false);
 
@@ -27,7 +27,11 @@ TranslatedTextPanel::TranslatedTextPanel() :
 
 	m_scr_win.add(m_spell_tv);
 	m_scr_win.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
-	m_notebook.append_page(m_scr_win, "plural 1");
+	
+	std::ostringstream ostr;
+	ostr << _("plural") << " 1";
+	m_notebook.append_page(m_scr_win, ostr.str());
+
 	m_spell_tv.set_wrap_mode(Gtk::WRAP_WORD);
 	m_tr_list.push_back(&m_spell_tv);
 }
@@ -62,7 +66,7 @@ void TranslatedTextPanel::setText(std::vector<Glib::ustring> msgs, int plural_fo
 		for (int i=m_notebook.get_n_pages(); i < plural_forms; ++i) {
 			SpellTxtView *spell_tv = Gtk::manage(new SpellTxtView());
 			std::ostringstream ostr;
-			ostr << "plural " << i+1;
+			ostr << _("plural") << " " << i+1;
 			m_notebook.append_page(*spell_tv, ostr.str());
 			m_tr_list.push_back(spell_tv);
 		}

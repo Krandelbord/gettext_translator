@@ -30,10 +30,9 @@ install-translations: *.po
 	#for plik in $^ ; do echo $$plik ; done
 
 install: create_dirs
-	msgfmt pl.po -o $(GETTEXT_DIR)pl/LC_MESSAGES/glipperus.mo
-	msgfmt uk.po -o $(GETTEXT_DIR)uk/LC_MESSAGES/glipperus.mo
+	msgfmt pl.po -o $(GETTEXT_DIR)pl/LC_MESSAGES/Gettext\ Translator.mo
 
 .PHONY : clean
 clean :
-	-rm glipperus.pot
+	-rm $(POT_FILE)
 	-rm $(mo_files)

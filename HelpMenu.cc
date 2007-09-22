@@ -15,7 +15,7 @@ HelpMenu::HelpMenu(Window *main_win) {
 				)
 			);
 
-	this->items().push_back(Menu_Helpers::MenuElem("_Help", *help_content_menu));
+	this->items().push_back(Menu_Helpers::MenuElem(_("_Help"), *help_content_menu));
 }
 
 void HelpMenu::onAbout(Window *main_win) {
@@ -29,15 +29,15 @@ void HelpMenu::onAbout(Window *main_win) {
 	
 	about.set_version(PROGRAM_VERSION);
 
-	about.set_translator_credits("");
+	about.set_translator_credits(_("Translator credits"));
 
 	std::ostringstream os;
 	int v = libgettextpo_version;
-	os << "Used libraries:" << std::endl;
-	os << "libGettext-po version ";
+	os << _("Used libraries:") << std::endl;
+	os << _("libGettext-po version ");
 	os << (v>>16) << "." << (v>>8) << "." << (v-v>>8-v>>16) << std::endl; 
 	
-	os << "Gtkmm version " << GTKMM_MAJOR_VERSION;
+	os << _("Gtkmm version ") << GTKMM_MAJOR_VERSION;
 	os << "." << GTKMM_MINOR_VERSION << "." <<  GTKMM_MICRO_VERSION << std::endl;
 
 	about.set_comments(os.str());

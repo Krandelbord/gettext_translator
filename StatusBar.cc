@@ -1,5 +1,6 @@
 #include "StatusBar.h"
 #include <sstream>
+#include "config.h"
 
 StatusBar::StatusBar() {
 	m_fuzzy_sb.set_has_resize_grip(false);
@@ -19,20 +20,20 @@ StatusBar::StatusBar() {
 
 void StatusBar::setTotal(size_t n) {
 	std::ostringstream os;
-	os << "Total" << ": " << n;
+	os << _("Total") << ": " << n;
 	m_total_sb.push(os.str());
 }
 
 void StatusBar::setCurrent(size_t n) {
 	std::ostringstream os;
-	os << "Current" << ": " << n;
+	os << _("Current") << ": " << n;
 	this->push(os.str());
 }
 
 void StatusBar::setFuzzy(size_t n) {
 	m_fuzzy = n;
 	std::ostringstream os;
-	os << "Fuzzy" << ": " << n;
+	os << _("Fuzzy") << ": " << n;
 	m_fuzzy_sb.push(os.str());
 }
 
@@ -43,7 +44,7 @@ size_t StatusBar::getFuzzy() {
 void StatusBar::setUntranslated(size_t n) {
 	m_untr = n;
 	std::ostringstream os;
-	os << "Untranslated" << ": " << n;
+	os << _("Untranslated") << ": " << n;
 	m_untr_sb.push(os.str());
 }
 

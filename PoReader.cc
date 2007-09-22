@@ -9,7 +9,7 @@ PoReader::PoReader(const Glib::ustring &file_path) {
 	struct po_xerror_handler error_handler;
 	error_handler.xerror = xerror_handler;
 	error_handler.xerror2 = xerror2_handler;
-	debug("Otwieranie pliku %s\n", file_path.c_str());
+	debug("Opening file %s\n", file_path.c_str());
 	m_pofile = po_file_read(file_path.c_str(), &error_handler);
 
 	m_file_encoding = this->getEncoding();
@@ -100,7 +100,7 @@ bool PoReader::nextMessage() {
 		m_current_msg = msg;
 		return true;
 	} else {
-		debug("Nastepna wiadomosc - ERRRO \n");
+		debug("Nexmessage ERRROR \n");
 		return false;
 	}
 }
@@ -223,13 +223,13 @@ void PoReader::setMsgstrPlural(MsgContainer msgs) {
 }
 
 void PoReader::saveToFile(const Glib::ustring &out_fname) {
-	debug("Zapis do pliku %s\n", out_fname.c_str());
+	debug("Saveing to file %s\n", out_fname.c_str());
 	struct po_xerror_handler error_handler;
 	error_handler.xerror = xerror_handler;
 	error_handler.xerror2 = xerror2_handler;
 
 	po_file_t out_file = po_file_write(m_pofile, out_fname.c_str(), &error_handler);
-	if (!out_file) debug("ERRROR przy zapisie\n"); 
+	if (!out_file) debug("ERRROR when saveing\n"); 
 }
 
 PoReader::~PoReader() {

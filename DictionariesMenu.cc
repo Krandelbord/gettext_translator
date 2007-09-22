@@ -3,7 +3,7 @@
 #include "config.h"
 
 DictionariesMenu::DictionariesMenu() {
-	this->set_title("Change spellcheker dictionary");
+	this->set_title(_("Change spellcheker dictionary"));
 	std::vector<Glib::ustring> dict_list = getDictionaryList();
 	for (std::vector<Glib::ustring>::iterator it = dict_list.begin(); it != dict_list.end(); ++it) {
 		this->items().push_back( 

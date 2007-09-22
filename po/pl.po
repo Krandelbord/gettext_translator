@@ -1,0 +1,192 @@
+# Polish Translation of GettextTranslator
+# Copyright (C) 2007 GNU GPL v2
+# This file is distributed under the same license as the PACKAGE package.
+# Emil Nowak <emiml@wp.pl>, 2007.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Translation of GettextTranslator\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-09-23 01:21+0200\n"
+"PO-Revision-Date: 2007-09-23 01:21+0200\n"
+"Last-Translator: Emil Nowak <emiml@wp.pl>\n"
+"Language-Team: None <none@none.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Gettext Translator 0.9\n"
+
+#: ../DictionariesMenu.cc:1
+msgid "Change spellcheker dictionary"
+msgstr "Zmiana słownika do sprawdzania pisowni"
+
+#: ../HeaderEdit.cc:1
+msgid "Comments"
+msgstr "Komentarze"
+
+#: ../HelperPanel.cc:1
+msgid "<b>Used in</b>:"
+msgstr "<b>Miejsce użycia</b>:"
+
+#: ../HelperPanel.cc:1
+msgid "<b>Comment: </b>"
+msgstr "<b>Komentarz: </b>"
+
+#: ../HelperPanel.cc:1
+msgid "<b>Context:</b> "
+msgstr "<b>Kontekst:</b> "
+
+#: ../HelperPanel.cc:1
+msgid "<b>Extracted notes:</b> "
+msgstr "<b>Wydobyte komentarze :</b> "
+
+#: ../HelpMenu.cc:1
+msgid "_Help"
+msgstr "_Pomoc"
+
+#: ../HelpMenu.cc:1
+msgid "Translator credits"
+msgstr "Tłumaczenie na język polski: Emil Nowak <emiml@wp.pl>"
+
+#: ../HelpMenu.cc:1
+msgid "Used libraries:"
+msgstr "Użyte biblioteki:"
+
+#: ../HelpMenu.cc:1
+msgid "libGettext-po version "
+msgstr "wersja libGettext-po"
+
+#: ../HelpMenu.cc:1
+msgid "Gtkmm version "
+msgstr "wersja Gtkmm"
+
+#: ../MainWindow.cc:1
+msgid "Original text (msgid):"
+msgstr "Oryginalny komunikat (msgid):"
+
+#: ../MainWindow.cc:1
+msgid "Open file"
+msgstr "Otwórz plik"
+
+#: ../MainWindow.cc:1
+msgid "gettext files (*.po, *.pot)"
+msgstr "pliki gettexta (*.po, *.pot)"
+
+#: ../MainWindow.cc:1
+msgid "all files (*.*)"
+msgstr "wszystkie pliki (*.*)"
+
+#: ../MainWindow.cc:1
+msgid "Save file"
+msgstr "Otwórz plik"
+
+#: ../MenuBar.cc:1
+msgid "_File"
+msgstr "_Plik"
+
+#: ../MenuBar.cc:1
+msgid "_Edit"
+msgstr "_Educja"
+
+#: ../MenuBar.cc:1
+msgid "_Tools"
+msgstr "_Narzędzia"
+
+#: ../MenuBar.cc:1
+msgid "Edit Headers..."
+msgstr "Edytuj Nagłówek..."
+
+#: ../MenuBar.cc:1
+msgid "Toggle Fuzzy"
+msgstr "Odznacz/Zaznacz jako wątpliwe"
+
+#: ../MenuBar.cc:1
+msgid "Jump to..."
+msgstr "Przejdź do..."
+
+#: ../MenuBar.cc:1
+msgid "Copy original message to translation"
+msgstr "Kopiuj oryginalny komunikat do tłumaczenia"
+
+#: ../MenuBar.cc:1
+msgid "Previous Message"
+msgstr "Poprzedni komunikat"
+
+#: ../MenuBar.cc:1
+msgid "Next Message"
+msgstr "Następny komunikat"
+
+#: ../MenuBar.cc:1
+msgid "Jump to previous message"
+msgstr "Przeskocz do poprzedniego komunikatu"
+
+#: ../MenuBar.cc:1
+msgid "Jump to next message"
+msgstr "Przeskocz do następnego komunikatu"
+
+#: ../StatusBar.cc:1
+msgid "Total"
+msgstr "Wszystkich"
+
+#: ../StatusBar.cc:1
+msgid "Current"
+msgstr "Aktualny"
+
+#: ../StatusBar.cc:1 ../TranslatedTextPanel.cc:1
+msgid "Fuzzy"
+msgstr "Wątpliwe"
+
+#: ../StatusBar.cc:1 ../TranslatedTextPanel.cc:1
+msgid "Untranslated"
+msgstr "Nieprzetłumaczone"
+
+#: ../Toolbar.cc:1
+msgid "Spellcheker"
+msgstr "Sprawdzanie pisowni"
+
+#: ../Toolbar.cc:1
+msgid "Back"
+msgstr "Wstecz"
+
+#: ../Toolbar.cc:1
+msgid "Previous message"
+msgstr "Poprzedni komunikat"
+
+#: ../Toolbar.cc:1 ../Toolbar.cc:1
+msgid "Next"
+msgstr "Następny"
+
+#: ../Toolbar.cc:1
+msgid "Next message"
+msgstr "Następny komunikat"
+
+#: ../Toolbar.cc:1
+msgid "Previous"
+msgstr "Poprzedni"
+
+#: ../Toolbar.cc:1
+msgid "Jumps to previous fuzzy or untranslated message"
+msgstr ""
+"Przechodzi do poprzednio wątpliwego lub nieprzetłumaczonego komunikatu"
+
+#: ../Toolbar.cc:1
+msgid "Jumps to next fuzzy or untranslated message"
+msgstr ""
+"Przechodzi do następnego wątpliwego lub nieprzetłumaczonego komunikatu"
+
+#: ../Toolbar.cc:1
+msgid "Spellcheker - "
+msgstr "Sprawdzanie pisowni - "
+
+#: ../TranslatedTextPanel.cc:1
+msgid "Error"
+msgstr "Błąd"
+
+#: ../TranslatedTextPanel.cc:1
+msgid "Transalted text (msgstr): "
+msgstr "Tłumaczenie (msgstr):"
+
+#: ../TranslatedTextPanel.cc:1 ../TranslatedTextPanel.cc:1
+msgid "plural"
+msgstr "liczba mnoga"

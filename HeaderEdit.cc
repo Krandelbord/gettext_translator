@@ -69,7 +69,7 @@ Gtk::Widget *HeaderEdit::appendCommentsBox() {
 	Glib::RefPtr<Gtk::TextBuffer> buf = m_txt_view.get_buffer();
 	buf->set_text(m_po_reader->getComments());
 	
-	m_frame.set_label("Comments");
+	m_frame.set_label(_("Comments"));
 	m_scr_win.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
 	m_scr_win.add(m_txt_view);
 

@@ -2,10 +2,10 @@
 #include "config.h"
 
 MenuBar::MenuBar() {
-	this->items().push_back(MenuElem("_File", *this->createFileMenu()));
-	this->items().push_back(MenuElem("_Edit", *this->createEditMenu()));
-	this->items().push_back(MenuElem("_Tools", *this->createToolsMenu()));
-	this->append(*new Gtk::MenuItem("Dummy", true));
+	this->items().push_back(MenuElem(_("_File"), *this->createFileMenu()));
+	this->items().push_back(MenuElem(_("_Edit"), *this->createEditMenu()));
+	this->items().push_back(MenuElem(_("_Tools"), *this->createToolsMenu()));
+	//this->append(*new Gtk::MenuItem("Dummy", true));
 }
 
 Gtk::Menu *MenuBar::createFileMenu() {
@@ -33,11 +33,11 @@ Gtk::Menu *MenuBar::createEditMenu() {
 	m->items().push_back( SeparatorElem());
 
 	Gtk::Widget *img = Gtk::manage(new Gtk::Image(Gtk::Stock::EDIT, Gtk::ICON_SIZE_MENU));
-	Element *me = new ImageMenuElem("Edit Headers...", *img, m_signal_header_edit);
+	Element *me = new ImageMenuElem(_("Edit Headers..."), *img, m_signal_header_edit);
 	m_disable_list.push_back(me);
 	m->items().push_back(*me);
 
-	me = new MenuElem("Toggle Fuzzy", Gtk::AccelKey("<control>U"), m_signal_switch_fuzzy);
+	me = new MenuElem(_("Toggle Fuzzy"), Gtk::AccelKey("<control>U"), m_signal_switch_fuzzy);
 	m_disable_list.push_back(me);
 	m->items().push_back(*me);
 	return m;
@@ -48,29 +48,27 @@ Gtk::Menu *MenuBar::createToolsMenu() {
 	m->items().push_back( StockMenuElem(Gtk::Stock::ZOOM_IN) );
 
 	Gtk::Widget *img = Gtk::manage(new Gtk::Image(Gtk::Stock::JUMP_TO, Gtk::ICON_SIZE_MENU));
-	Element *me = new ImageMenuElem("Jump to...", Gtk::AccelKey("<Control>G"), *img, m_signal_jump_to);
+	Element *me = new ImageMenuElem(_("Jump to..."), Gtk::AccelKey("<Control>G"), *img, m_signal_jump_to);
 	m_disable_list.push_back(me);
 	m->items().push_back(*me);
 
-	m->items().push_back( MenuElem("Kill'em all", sigc::mem_fun(*this, &MenuBar::onQuitMenuitem) ) );
-
-	me = new MenuElem("Copy original message to translation", Gtk::AccelKey("<Control>space"), m_signal_copy_msgid);
+	me = new MenuElem(_("Copy original message to translation"), Gtk::AccelKey("<Control>space"), m_signal_copy_msgid);
 	m_disable_list.push_back(me);
 	m->items().push_back(*me);
 
-	me = new MenuElem("Previous Message", Gtk::AccelKey("Page_Up"), m_signal_prev_msg);
+	me = new MenuElem(_("Previous Message"), Gtk::AccelKey("Page_Up"), m_signal_prev_msg);
 	m_disable_list.push_back(me);
 	m->items().push_back(*me);
 
-	me = new MenuElem("Next Message", Gtk::AccelKey("Page_Down"), m_signal_next_msg);
+	me = new MenuElem(_("Next Message"), Gtk::AccelKey("Page_Down"), m_signal_next_msg);
 	m_disable_list.push_back(me);
 	m->items().push_back(*me);
 
-	me = new MenuElem("Jump to previous message", Gtk::AccelKey("<Control>Page_Up"), m_signal_jump_prev_msg);
+	me = new MenuElem(_("Jump to previous message"), Gtk::AccelKey("<Control>Page_Up"), m_signal_jump_prev_msg);
 	m_disable_list.push_back(me);
 	m->items().push_back(*me);
 	
-	me = new MenuElem("Jump to next message", Gtk::AccelKey("<Control>Page_Down"), m_signal_jump_next_msg);
+	me = new MenuElem(_("Jump to next message"), Gtk::AccelKey("<Control>Page_Down"), m_signal_jump_next_msg);
 	m_disable_list.push_back(me);
 	m->items().push_back(*me);
 	return m;

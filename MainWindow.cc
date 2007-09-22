@@ -8,7 +8,7 @@
 #include "HeaderEdit.h"
 #include "config.h"
 
-MainWindow::MainWindow(guint width, guint height) : m_text_panel("Original text (msgid):") {
+MainWindow::MainWindow(guint width, guint height) : m_text_panel(_("Original text (msgid):")) {
 	m_po_reader = NULL;
 	this->set_title(PROGRAM_NAME);
 	this->set_default_size(width, height);
@@ -192,16 +192,16 @@ void MainWindow::onJumpTo() {
 }
 
 void MainWindow::onOpenFile() {
-	Gtk::FileChooserDialog fc_dialog(*this, "open file");
+	Gtk::FileChooserDialog fc_dialog(*this, _("Open file"));
 	Gtk::FileFilter po_filter;
 	po_filter.add_pattern("*.po");
 	po_filter.add_pattern("*.pot");
-	po_filter.set_name("gettext files (*.po, *.pot)");
+	po_filter.set_name(_("gettext files (*.po, *.pot)"));
 	fc_dialog.add_filter(po_filter);
 
 	Gtk::FileFilter all_filter;
 	all_filter.add_pattern("*.*");
-	all_filter.set_name("all files (*.*)");
+	all_filter.set_name(_("all files (*.*)"));
 	fc_dialog.add_filter(all_filter);
 
 	fc_dialog.add_button(Gtk::Stock::CANCEL, 0);
@@ -221,7 +221,7 @@ void MainWindow::onSaveFile() {
 	char buf[BUFSIZ];
 	strftime(buf, BUFSIZ, "%Y-%m-%d %H:%M%z", tmp);
 	m_po_reader->setHeader("PO-Revision-Date", buf);
-	Gtk::FileChooserDialog save_dialog(*this, "Save file", Gtk::FILE_CHOOSER_ACTION_SAVE);
+	Gtk::FileChooserDialog save_dialog(*this, _("Save file"), Gtk::FILE_CHOOSER_ACTION_SAVE);
 	save_dialog.add_button(Gtk::Stock::CANCEL, 0);
 	Gtk::Button *save_btn = save_dialog.add_button(Gtk::Stock::SAVE, 1);
 	save_dialog.set_default(*save_btn);

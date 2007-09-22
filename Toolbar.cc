@@ -29,7 +29,7 @@ Toolbar::Toolbar() : m_spell_tb(Gtk::Stock::SPELL_CHECK) {
 	m_disable_list.push_back(ti);
 	this->append(*ti);
 
-	m_spell_tb.set_label("Spellcheker");
+	m_spell_tb.set_label(_("Spellcheker"));
 	this->append(m_spell_tb);
 	DictionariesMenu *dict_menu = new DictionariesMenu();
 	dict_menu->signal_language_changed().connect(sigc::mem_fun(this, &Toolbar::onLanguageChanged));
@@ -39,29 +39,29 @@ Toolbar::Toolbar() : m_spell_tb(Gtk::Stock::SPELL_CHECK) {
 
 	Gtk::ToolButton *back_tb = new Gtk::ToolButton(Gtk::Stock::GO_BACK);
 	m_disable_list.push_back(back_tb);
-	back_tb->set_label("Back");
-	back_tb->set_tooltip(m_tooltips, "Previous message");
+	back_tb->set_label(_("Back"));
+	back_tb->set_tooltip(m_tooltips, _("Previous message"));
 	back_tb->signal_clicked().connect(m_signal_previous_message);
 	this->append(*back_tb);
 
 	Gtk::ToolButton *forward_tb = new Gtk::ToolButton(Gtk::Stock::GO_FORWARD);
 	m_disable_list.push_back(forward_tb);
-	forward_tb->set_label("Next");
-	forward_tb->set_tooltip(m_tooltips, "Next message");
+	forward_tb->set_label(_("Next"));
+	forward_tb->set_tooltip(m_tooltips, _("Next message"));
 	forward_tb->signal_clicked().connect(m_signal_next_message); // propagate signal
 	this->append(*forward_tb);
 
 	Gtk::ToolButton *first_tb = new Gtk::ToolButton(Gtk::Stock::GOTO_FIRST);
 	m_disable_list.push_back(first_tb);
-	first_tb->set_label("Previous");
-	first_tb->set_tooltip(m_tooltips, "Jumps to previous fuzzy or untranslated message");
+	first_tb->set_label(_("Previous"));
+	first_tb->set_tooltip(m_tooltips, _("Jumps to previous fuzzy or untranslated message"));
 	first_tb->signal_clicked().connect(m_signal_jump_previous_message);
 	this->append(*first_tb);
 
 	Gtk::ToolButton *last_tb = new Gtk::ToolButton(Gtk::Stock::GOTO_LAST);
 	m_disable_list.push_back(last_tb);
-	last_tb->set_label("Next");
-	last_tb->set_tooltip(m_tooltips, "Jumps to next fuzzy or untranslated message");
+	last_tb->set_label(_("Next"));
+	last_tb->set_tooltip(m_tooltips, _("Jumps to next fuzzy or untranslated message"));
 	last_tb->signal_clicked().connect(m_signal_jump_next_message);
 	this->append(*last_tb);
 
@@ -69,7 +69,7 @@ Toolbar::Toolbar() : m_spell_tb(Gtk::Stock::SPELL_CHECK) {
 }
 
 void Toolbar::onLanguageChanged(const Glib::ustring &new_lang) {
-	m_spell_tb.set_label("Spellcheker - "+new_lang);
+	m_spell_tb.set_label(_("Spellcheker - ")+new_lang);
 	m_signal_language_changed.emit(new_lang);
 }
 
