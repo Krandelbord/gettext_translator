@@ -1,5 +1,8 @@
 * search function
 * add some syntax highlighting
+* set defualt spellcheker to current locale
+* check what happens when there is no such aspel dictionary for language
+* check maximum number when jump'ing to msg
 
 less important:
 # implement do/undo functionaliy
