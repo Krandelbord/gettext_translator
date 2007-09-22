@@ -1,7 +1,7 @@
 CXXFLAGS+=-Wall
 prefix=/usr/
 DEBUG='true'
-
+BIN_FILE=translator
 ############ You can edit above this line #######################
 CXXFLAGS+=`pkg-config --cflags gtkmm-2.4 gtkspell-2.0`
 LDFLAGS+=`pkg-config --libs gtkspell-2.0 gtk+-2.0 gtkmm-2.4` -lgettextpo
@@ -13,7 +13,7 @@ ifdef DEBUG
 	CXXFLAGS+=-g3 -DDEBUG
 endif
 
-translator: main.o Utils.o SpellTxtView.o MainWindow.o MenuBar.o Configuration.o TextPanel.o \
+$(BIN_FILE): main.o Utils.o SpellTxtView.o MainWindow.o MenuBar.o Configuration.o TextPanel.o \
 			TranslatedTextPanel.o IndicatorWidget.o PoReader.o HelperPanel.o Toolbar.o DictionariesMenu.o \
 			ErrorHandlers.o Statistics.o StatusBar.o HelpMenu.o HeaderEdit.o
 	$(CXX) $(LDFLAGS) $^ -o $@
@@ -28,6 +28,11 @@ dep:
 	$(CXX) -MM *.cc >makefile.dep
 
 include makefile.dep
+
+install:
+	install -d $(DESTDIR)$(prefix)/bin
+	install $(BIN_FILE) $(DESTDIR)$(prefix)/bin/
+	$(MAKE) install prefix=$(prefix) -C po/
 
 .PHONY: clean
 
