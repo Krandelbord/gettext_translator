@@ -19,4 +19,8 @@
 #  define debug(args...) ;
 #endif /* end of DEBUG MACRO */
 
+#include <libintl.h>
+#define PACKAGE PROGRAM_NAME
+#define _(s) gettext(s)
+
 #endif /* CONFIG_H */

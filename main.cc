@@ -23,6 +23,10 @@ void saveDefaults() {
 	}
 }
 int main(int argc, char **argv) {
+	bindtextdomain(PACKAGE, GETTEXT_PATH);
+	bind_textdomain_codeset(PACKAGE, "UTF-8");
+	textdomain(PACKAGE);
+
 	Glib::set_application_name(PROGRAM_NAME);
 	Gtk::Main app(argc, argv);
 	saveDefaults();
