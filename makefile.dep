@@ -2,8 +2,8 @@ Configuration.o: Configuration.cc Configuration.h
 DictionariesMenu.o: DictionariesMenu.cc DictionariesMenu.h Utils.h \
   config.h
 ErrorHandlers.o: ErrorHandlers.cc ErrorHandlers.h config.h
-HeaderEdit.o: HeaderEdit.cc HeaderEdit.h config.h
-HelperPanel.o: HelperPanel.cc HelperPanel.h
+HeaderEdit.o: HeaderEdit.cc HeaderEdit.h PoReader.h config.h
+HelperPanel.o: HelperPanel.cc HelperPanel.h config.h
 HelpMenu.o: HelpMenu.cc HelpMenu.h config.h
 IndicatorWidget.o: IndicatorWidget.cc IndicatorWidget.h
 main.o: main.cc MainWindow.h MenuBar.h Toolbar.h TextPanel.h \
@@ -17,7 +17,7 @@ MenuBar.o: MenuBar.cc MenuBar.h config.h
 PoReader.o: PoReader.cc PoReader.h Utils.h ErrorHandlers.h config.h
 SpellTxtView.o: SpellTxtView.cc SpellTxtView.h config.h
 Statistics.o: Statistics.cc Statistics.h ErrorHandlers.h config.h
-StatusBar.o: StatusBar.cc StatusBar.h
+StatusBar.o: StatusBar.cc StatusBar.h config.h
 test_replace.o: test_replace.cc Utils.h
 TextPanel.o: TextPanel.cc TextPanel.h
 Toolbar.o: Toolbar.cc Toolbar.h DictionariesMenu.h config.h

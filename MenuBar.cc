@@ -45,7 +45,7 @@ Gtk::Menu *MenuBar::createEditMenu() {
 
 Gtk::Menu *MenuBar::createToolsMenu() {
 	Gtk::Menu *m = new Gtk::Menu();
-	m->items().push_back( StockMenuElem(Gtk::Stock::ZOOM_IN) );
+	//m->items().push_back( StockMenuElem(Gtk::Stock::ZOOM_IN) );
 
 	Gtk::Widget *img = Gtk::manage(new Gtk::Image(Gtk::Stock::JUMP_TO, Gtk::ICON_SIZE_MENU));
 	Element *me = new ImageMenuElem(_("Jump to..."), Gtk::AccelKey("<Control>G"), *img, m_signal_jump_to);
