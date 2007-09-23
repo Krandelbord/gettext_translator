@@ -1,6 +1,6 @@
 translations := $(wildcard *.po)
 mo_files:= $(patsubst %.po,%.mo,$(translations))
-GETTEXT_DIR=../$(DESTDIR)$(prefix)share/locale/
+GETTEXT_DIR=$(DESTDIR)$(prefix)share/locale/
 POT_FILE=gettext_translator.pot
 
 all: $(POT_FILE) $(mo_files)
