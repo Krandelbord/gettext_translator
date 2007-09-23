@@ -67,6 +67,8 @@ MainWindow::MainWindow(guint width, guint height) : m_text_panel(_("Original tex
 }
 
 void MainWindow::onFileOpened(const Glib::ustring &file_path) {
+	if (Glib::file_test(file_path, Glib::FILE_TEST_IS_DIR)) return;
+
 	if (m_po_reader!=NULL) delete m_po_reader;
 	m_po_reader = new PoReader(file_path);
 	
