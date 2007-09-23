@@ -2,6 +2,7 @@ CXXFLAGS+=-Wall
 prefix=/usr/
 DEBUG='true'
 BIN_FILE=translator
+
 ############ You can edit above this line #######################
 CXXFLAGS+=`pkg-config --cflags gtkmm-2.4 gtkspell-2.0`
 LDFLAGS+=`pkg-config --libs gtkspell-2.0 gtk+-2.0 gtkmm-2.4` -lgettextpo
