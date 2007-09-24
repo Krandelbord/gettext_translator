@@ -45,6 +45,7 @@ class MainWindow : public Gtk::Window {
 		void onHeaderEdit();
 		void onCopyMsgid();
 		void onSwitchFuzzy();
+		void onSearch();
 };
 
 #endif /* MAIN_WINDOW_H */

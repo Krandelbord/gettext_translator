@@ -26,6 +26,7 @@ MainWindow::MainWindow(guint width, guint height) : m_text_panel(_("Original tex
 	m_menu_bar.signal_jump_prev_msg().connect(sigc::mem_fun(this, &MainWindow::onJumpPreviousMessage));
 	m_menu_bar.signal_jump_next_msg().connect(sigc::mem_fun(this, &MainWindow::onJumpNextMessage));
 	m_menu_bar.signal_copy_msgid().connect(sigc::mem_fun(this, &MainWindow::onCopyMsgid));
+	m_menu_bar.signal_search().connect(sigc::mem_fun(this, &MainWindow::onSearch));
 	Gtk::HBox *menu_box = new Gtk::HBox();
 	menu_box->pack_start(m_menu_bar, false, false);
 	menu_box->pack_start(*new Gtk::MenuBar(), true, true); // separator
@@ -42,6 +43,7 @@ MainWindow::MainWindow(guint width, guint height) : m_text_panel(_("Original tex
 	m_toolbar.signal_jump_previous_message().connect(sigc::mem_fun(this, &MainWindow::onJumpPreviousMessage));
 	m_toolbar.signal_language_changed().connect(sigc::mem_fun(m_tr_panel, &TranslatedTextPanel::setSpellCheck));
 	m_toolbar.signal_save_file().connect(sigc::mem_fun(this, &MainWindow::onSaveFile));
+	m_toolbar.signal_search().connect(sigc::mem_fun(this, &MainWindow::onSearch));
 	m_box.pack_start(*new Gtk::HSeparator(), false, false);
 
 	m_box.pack_start(m_hpan, true, true, 2);
@@ -261,4 +263,64 @@ void MainWindow::onCopyMsgid() {
 
 void MainWindow::onSwitchFuzzy() {
 	m_tr_panel.setFuzzy(!m_tr_panel.getFuzzy());
+}
+
+void MainWindow::onSearch() {
+	debug("On search\n");
+	Gtk::Dialog dial;
+	dial.set_transient_for(*this);
+	
+	Gtk::HBox *hbox = Gtk::manage(new Gtk::HBox());
+	Gtk::Label *lb = Gtk::manage(new Gtk::Label(_("Search For")));
+	Gtk::Entry *entry = Gtk::manage(new Gtk::Entry());
+	hbox->pack_start(*lb);
+	hbox->pack_start(*entry, true, true, 5);
+
+	Gtk::HButtonBox *btn_box = new Gtk::HButtonBox();
+	Gtk::CheckButton *in_msgstr = Gtk::manage(new Gtk::CheckButton(_("Search in msgstr")));
+	in_msgstr->set_active(true);
+	Gtk::CheckButton *in_msgid = Gtk::manage(new Gtk::CheckButton(_("Search in msgid")));
+	Gtk::CheckButton *ignore_case = Gtk::manage(new Gtk::CheckButton(_("Ignore case")));
+	btn_box->add(*in_msgstr);
+	btn_box->add(*in_msgid);
+	btn_box->add(*ignore_case);
+
+	Gtk::VBox *box = dial.get_vbox();
+	box->pack_start(*hbox);
+	box->pack_start(*btn_box);
+	box->show_all();
+
+	dial.add_button(Gtk::Stock::CANCEL, 0);
+	dial.add_button(Gtk::Stock::FIND, 1);
+
+	if (dial.run()==1) {
+		debug("Searching...\n");
+		size_t backup_pos = m_po_reader->getMessageNumber();
+		bool found = false;
+		do {
+			debug("Porownywanie %s do %s\n", entry->get_text().c_str(), m_po_reader->getMsgstr().c_str());
+			if (in_msgstr->get_active() && m_po_reader->getMsgstr().find(entry->get_text())!=Glib::ustring::npos) found = true;
+			if (in_msgstr->get_active() && !m_po_reader->getMsgstrPlural().empty()) {
+				MsgContainer msgs = m_po_reader->getMsgstrPlural();
+				for (MsgContainer::iterator it = msgs.begin(); it!=msgs.end(); ++it) {
+					Glib::ustring msgstr = *it;
+					if (msgstr.find(entry->get_text())!=Glib::ustring::npos) found = true;
+				}
+			}
+			if (in_msgid->get_active()  && m_po_reader->getMsgid().find(entry->get_text())!=Glib::ustring::npos) found = true;
+		} while (m_po_reader->nextMessage() && !found);
+		
+		if (!found) {
+			m_po_reader->jumpTo(backup_pos);
+			debug("Nothing found \n");
+		} else {
+			debug("Znaleziono\n");
+			m_po_reader->previousMessage();
+			this->fromPo2Gui();
+			//this->onJumpTo(m_po_reader->getMessageNumber());
+		}
+
+	}
+	delete hbox;
+	delete btn_box;
 }
