@@ -22,10 +22,12 @@ Toolbar::Toolbar() : m_spell_tb(Gtk::Stock::SPELL_CHECK) {
 	*/
 
 	ti = new Gtk::ToolButton(Gtk::Stock::FIND);
+	ti->signal_clicked().connect(m_signal_search);
 	m_disable_list.push_back(ti);
 	this->append(*ti);
 
 	ti = new Gtk::ToolButton(Gtk::Stock::FIND_AND_REPLACE);
+	ti->signal_clicked().connect(m_signal_search_and_replace);
 	m_disable_list.push_back(ti);
 	this->append(*ti);
 
@@ -104,6 +106,15 @@ sigc::signal<void> &Toolbar::signal_open_file() {
 sigc::signal<void> &Toolbar::signal_save_file() {
 	return m_signal_save_file;
 }
+
+sigc::signal<void> &Toolbar::signal_search() {
+	return m_signal_search;
+}
+
+sigc::signal<void> &Toolbar::signal_search_and_replace() {
+	return m_signal_search_and_replace;
+}
+
 void Toolbar::disable_items() {
 	for (ItemsList::iterator it = m_disable_list.begin(); it!=m_disable_list.end(); ++it) {
 		(*it)->set_sensitive(false);

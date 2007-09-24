@@ -122,6 +122,14 @@ sigc::signal<void> &MenuBar::signal_save_as() {
 	return m_signal_save_as;
 }
 
+sigc::signal<void> &MenuBar::signal_search() {
+	return m_signal_search;
+}
+
+sigc::signal<void> &MenuBar::signal_search_and_replace() {
+	return m_signal_search_and_replace;
+}
+
 void MenuBar::disable_elements() {
 	for (ElementsList::iterator it = m_disable_list.begin(); it!=m_disable_list.end(); ++it) {
 		Glib::RefPtr<Gtk::MenuItem> e = (*it)->get_child();

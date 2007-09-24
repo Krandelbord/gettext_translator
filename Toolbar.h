@@ -15,6 +15,8 @@ class Toolbar : public Gtk::Toolbar {
 		sigc::signal<void, Glib::ustring> &signal_language_changed();
 		sigc::signal<void> &signal_open_file();
 		sigc::signal<void> &signal_save_file();
+		sigc::signal<void> &signal_search();
+		sigc::signal<void> &signal_search_and_replace();
 
 		void disable_items();
 		void enable_items();
@@ -32,8 +34,10 @@ class Toolbar : public Gtk::Toolbar {
 		sigc::signal<void>  m_signal_jump_previous_message;
 		sigc::signal<void>  m_signal_open_file;
 		sigc::signal<void>  m_signal_save_file;
-
+		sigc::signal<void>  m_signal_search;
+		sigc::signal<void>  m_signal_search_and_replace;
 		sigc::signal<void, Glib::ustring> m_signal_language_changed;
+
 		typedef std::vector<Gtk::ToolItem*> ItemsList;
 		ItemsList m_disable_list;
 };

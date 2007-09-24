@@ -18,6 +18,8 @@ class MenuBar : public Gtk::MenuBar {
 		sigc::signal<void> &signal_copy_msgid();
 		sigc::signal<void> &signal_save();
 		sigc::signal<void> &signal_save_as();
+		sigc::signal<void> &signal_search();
+		sigc::signal<void> &signal_search_and_replace();
 		void disable_elements();
 		void enable_elements();
 
@@ -38,6 +40,8 @@ class MenuBar : public Gtk::MenuBar {
 		sigc::signal<void>  m_signal_copy_msgid;
 		sigc::signal<void>  m_signal_save;
 		sigc::signal<void>  m_signal_save_as;
+		sigc::signal<void>  m_signal_search;
+		sigc::signal<void>  m_signal_search_and_replace;
 		typedef std::vector<Element*> ElementsList;
 		ElementsList m_disable_list;
 };
