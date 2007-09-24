@@ -1,4 +1,3 @@
-* search function
 * add some syntax highlighting
 * set defualt spellcheker to current locale
 * check maximum number when jump'ing to msg
