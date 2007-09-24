@@ -281,6 +281,7 @@ void MainWindow::onSearch() {
 	in_msgstr->set_active(true);
 	Gtk::CheckButton *in_msgid = Gtk::manage(new Gtk::CheckButton(_("Search in msgid")));
 	Gtk::CheckButton *ignore_case = Gtk::manage(new Gtk::CheckButton(_("Ignore case")));
+	ignore_case->set_active(true);
 	btn_box->add(*in_msgstr);
 	btn_box->add(*in_msgid);
 	btn_box->add(*ignore_case);
@@ -299,25 +300,40 @@ void MainWindow::onSearch() {
 		bool found = false;
 		do {
 			debug("Porownywanie %s do %s\n", entry->get_text().c_str(), m_po_reader->getMsgstr().c_str());
-			if (in_msgstr->get_active() && m_po_reader->getMsgstr().find(entry->get_text())!=Glib::ustring::npos) found = true;
+			if (in_msgstr->get_active()) {
+				if (ignore_case->get_active()) {
+					if ( IcaseCompare(m_po_reader->getMsgstr(), entry->get_text()) ) found = true;
+				} else {
+					if (compare(m_po_reader->getMsgstr(), entry->get_text() )) found = true;
+				}
+			}
 			if (in_msgstr->get_active() && !m_po_reader->getMsgstrPlural().empty()) {
 				MsgContainer msgs = m_po_reader->getMsgstrPlural();
 				for (MsgContainer::iterator it = msgs.begin(); it!=msgs.end(); ++it) {
 					Glib::ustring msgstr = *it;
-					if (msgstr.find(entry->get_text())!=Glib::ustring::npos) found = true;
+					if (ignore_case->get_active()) {
+						if ( IcaseCompare(msgstr, entry->get_text()) ) found = true;
+					} else {
+						if (compare(msgstr, entry->get_text()) ) found = true;
+					}
 				}
 			}
-			if (in_msgid->get_active()  && m_po_reader->getMsgid().find(entry->get_text())!=Glib::ustring::npos) found = true;
+			if (in_msgid->get_active()) {
+				if (ignore_case->get_active()) {
+					if (IcaseCompare(m_po_reader->getMsgid(), entry->get_text()) ) found = true;
+				} else {
+					if (compare(m_po_reader->getMsgid(), entry->get_text()) ) found = true;
+				}
+			}
 		} while (m_po_reader->nextMessage() && !found);
 		
 		if (!found) {
-			m_po_reader->jumpTo(backup_pos);
 			debug("Nothing found \n");
+			m_po_reader->jumpTo(backup_pos);
 		} else {
-			debug("Znaleziono\n");
+			debug("Found\n");
 			m_po_reader->previousMessage();
 			this->fromPo2Gui();
-			//this->onJumpTo(m_po_reader->getMessageNumber());
 		}
 
 	}
