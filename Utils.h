@@ -14,4 +14,7 @@ void replaceAll(Glib::ustring &string, const Glib::ustring &search, const Glib::
  */
 Glib::ustring replaceAllReturn(const Glib::ustring &string, const Glib::ustring &search, const Glib::ustring &sub);
 
+bool compare(const Glib::ustring &str1, const Glib::ustring &str2);
+bool IcaseCompare(const Glib::ustring &str1, const Glib::ustring &str2);
+
 #endif /* UTILS_H */

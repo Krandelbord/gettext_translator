@@ -31,3 +31,17 @@ Glib::ustring replaceAllReturn(const Glib::ustring &string, const Glib::ustring 
 	replaceAll(retval, search, sub);
 	return retval;
 }
+
+bool compare(const Glib::ustring &str1, const Glib::ustring &str2) {
+	if (str1.find(str2)!=Glib::ustring::npos) return true;
+	return false;
+}
+
+bool IcaseCompare(const Glib::ustring &str1, const Glib::ustring &str2) {
+	Glib::ustring u_str1 = str1.lowercase();
+	Glib::ustring u_str2 = str2.lowercase();
+
+	if (u_str1.find(u_str2)!=Glib::ustring::npos) return true;
+	return false;
+}
+
