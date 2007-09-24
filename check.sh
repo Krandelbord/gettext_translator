@@ -93,7 +93,6 @@ fi
 # podanie drugiego sprawdza czy ta biblioteka jest >= wersji
 #==============================================================================
 SPRAWDZ_LIB gtkmm-2.4
-SPRAWDZ_LIB gtkspell-2.0
 CHECK_LIB_RAW gettextpo
 
 echo -e "\nIt seems that you have all stuff needed to compile"
