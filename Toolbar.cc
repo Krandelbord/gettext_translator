@@ -26,10 +26,12 @@ Toolbar::Toolbar() : m_spell_tb(Gtk::Stock::SPELL_CHECK) {
 	m_disable_list.push_back(ti);
 	this->append(*ti);
 
+	/*
 	ti = new Gtk::ToolButton(Gtk::Stock::FIND_AND_REPLACE);
 	ti->signal_clicked().connect(m_signal_search_and_replace);
 	m_disable_list.push_back(ti);
 	this->append(*ti);
+	*/
 
 	m_spell_tb.set_label(_("Spellcheker"));
 	this->append(m_spell_tb);
