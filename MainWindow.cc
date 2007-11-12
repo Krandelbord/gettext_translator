@@ -204,8 +204,8 @@ void MainWindow::onOpenFile() {
 	fc_dialog.add_filter(po_filter);
 
 	Gtk::FileFilter all_filter;
-	all_filter.add_pattern("*.*");
-	all_filter.set_name(_("all files (*.*)"));
+	all_filter.add_pattern("*");
+	all_filter.set_name(_("all files "));
 	fc_dialog.add_filter(all_filter);
 
 	fc_dialog.add_button(Gtk::Stock::CANCEL, 0);
