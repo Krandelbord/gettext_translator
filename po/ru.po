@@ -1,0 +1,231 @@
+# Russian translation of kbabel. Please correct all my errors
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR: Emil Nowak <emil5@gp2.pl>, 2007
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gettext_translator\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-11-21 13:46+0100\n"
+"PO-Revision-Date: 2007-11-03 22:37+0100\n"
+"Last-Translator: Emil Nowak <emil5@go2.pl>\n"
+"Language-Team: none <none@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: ../DictionariesMenu.cc:1
+msgid "Change spellcheker dictionary"
+msgstr ""
+
+#: ../ErrorHandlers.cc:1
+msgid "Problem in line"
+msgstr ""
+
+#: ../ErrorHandlers.cc:1 ../ErrorHandlers.cc:1 ../ErrorHandlers.cc:1
+msgid "column"
+msgstr ""
+
+#: ../ErrorHandlers.cc:1
+msgid "Error in two messages\n"
+msgstr ""
+
+#: ../ErrorHandlers.cc:1
+msgid "First in line"
+msgstr ""
+
+#: ../ErrorHandlers.cc:1
+msgid "Second in line"
+msgstr ""
+
+#: ../HeaderEdit.cc:1
+msgid "Comments"
+msgstr "Комментарий"
+
+#: ../HelperPanel.cc:1
+msgid "<b>Used in</b>:"
+msgstr ""
+
+#: ../HelperPanel.cc:1
+msgid "<b>Comment: </b>"
+msgstr "<b>Комментарий: </b>"
+
+#: ../HelperPanel.cc:1
+msgid "<b>Context:</b> "
+msgstr "<b>Контекст:</b>"
+
+#: ../HelperPanel.cc:1
+msgid "<b>Extracted notes:</b> "
+msgstr ""
+
+#: ../HelpMenu.cc:1
+msgid "_Help"
+msgstr ""
+
+#: ../HelpMenu.cc:1
+msgid "Translator credits"
+msgstr ""
+
+#: ../HelpMenu.cc:1
+msgid "Used libraries:"
+msgstr ""
+
+#: ../HelpMenu.cc:1
+msgid "libGettext-po version "
+msgstr "Версия libGettext-po "
+
+#: ../HelpMenu.cc:1
+msgid "Gtkmm version "
+msgstr "Версия Gtkmm "
+
+#: ../MainWindow.cc:1
+msgid "Original text (msgid):"
+msgstr "Оригинальный текст (msgid):"
+
+#: ../MainWindow.cc:1
+msgid "Error when opening file"
+msgstr ""
+
+#: ../MainWindow.cc:1
+msgid "Open file"
+msgstr "Открыть файл"
+
+#: ../MainWindow.cc:1
+msgid "gettext files (*.po, *.pot)"
+msgstr "gettext файлы (*.po, *.pot)"
+
+#: ../MainWindow.cc:1
+#, fuzzy
+msgid "all files "
+msgstr "все файлы (*.*)"
+
+#: ../MainWindow.cc:1
+msgid "Save file"
+msgstr ""
+
+#: ../MainWindow.cc:1
+msgid "Search For"
+msgstr ""
+
+#: ../MainWindow.cc:1
+msgid "Search in msgstr"
+msgstr ""
+
+#: ../MainWindow.cc:1
+msgid "Search in msgid"
+msgstr ""
+
+#: ../MainWindow.cc:1
+msgid "Ignore case"
+msgstr ""
+
+#: ../MenuBar.cc:1
+msgid "_File"
+msgstr ""
+
+#: ../MenuBar.cc:1
+msgid "_Edit"
+msgstr "_Правка"
+
+#: ../MenuBar.cc:1
+msgid "_Tools"
+msgstr "_Инструменты"
+
+#: ../MenuBar.cc:1
+msgid "Edit Headers..."
+msgstr ""
+
+#: ../MenuBar.cc:1
+msgid "Toggle Fuzzy"
+msgstr ""
+
+#: ../MenuBar.cc:1
+msgid "Jump to..."
+msgstr "Перейти к записи..."
+
+#: ../MenuBar.cc:1
+msgid "Copy original message to translation"
+msgstr "Копировать текст msgid to msgstr"
+
+#: ../MenuBar.cc:1
+msgid "Previous Message"
+msgstr ""
+
+#: ../MenuBar.cc:1
+msgid "Next Message"
+msgstr ""
+
+#: ../MenuBar.cc:1
+msgid "Jump to previous message"
+msgstr ""
+
+#: ../MenuBar.cc:1
+msgid "Jump to next message"
+msgstr "Искать дальше"
+
+#: ../StatusBar.cc:1
+msgid "Total"
+msgstr "Всего"
+
+#: ../StatusBar.cc:1
+msgid "Current"
+msgstr "Текущая"
+
+#: ../StatusBar.cc:1 ../TranslatedTextPanel.cc:1
+msgid "Fuzzy"
+msgstr "Черновые"
+
+#: ../StatusBar.cc:1 ../TranslatedTextPanel.cc:1
+msgid "Untranslated"
+msgstr "Непереведённые"
+
+#: ../Toolbar.cc:1
+msgid "Spellcheker"
+msgstr "Проверка орфографии"
+
+#: ../Toolbar.cc:1
+msgid "Back"
+msgstr "Назад"
+
+#: ../Toolbar.cc:1
+msgid "Previous message"
+msgstr ""
+
+#: ../Toolbar.cc:1 ../Toolbar.cc:1
+msgid "Next"
+msgstr "Следующая"
+
+#: ../Toolbar.cc:1
+msgid "Next message"
+msgstr ""
+
+#: ../Toolbar.cc:1
+msgid "Previous"
+msgstr "Предыдущая"
+
+#: ../Toolbar.cc:1
+msgid "Jumps to previous fuzzy or untranslated message"
+msgstr ""
+
+#: ../Toolbar.cc:1
+msgid "Jumps to next fuzzy or untranslated message"
+msgstr ""
+
+#: ../Toolbar.cc:1
+msgid "Spellcheker - "
+msgstr "Проверка орфографии"
+
+#: ../TranslatedTextPanel.cc:1
+msgid "Error"
+msgstr "Ошибка"
+
+#: ../TranslatedTextPanel.cc:1
+msgid "Transalted text (msgstr): "
+msgstr "Перевод записи (msgstr): "
+
+#: ../TranslatedTextPanel.cc:1 ../TranslatedTextPanel.cc:1
+msgid "plural"
+msgstr "Множественные формы"
