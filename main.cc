@@ -3,6 +3,9 @@
 #include "Configuration.h"
 #include "config.h"
 
+bool GLOBAL_ERROR_OCCURED;
+Glib::ustring global_error_msg;
+
 void saveDefaults() {
 	Configuration conf;
 
@@ -23,6 +26,8 @@ void saveDefaults() {
 	}
 }
 int main(int argc, char **argv) {
+	GLOBAL_ERROR_OCCURED=false;
+
 	bindtextdomain(PACKAGE, GETTEXT_PATH);
 	bind_textdomain_codeset(PACKAGE, "UTF-8");
 	textdomain(PACKAGE);

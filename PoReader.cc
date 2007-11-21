@@ -3,6 +3,11 @@
 #include <sstream>
 #include "ErrorHandlers.h"
 #include "config.h"
+#include <exception>
+#include <iostream>
+
+extern bool GLOBAL_ERROR_OCCURED;
+extern Glib::ustring error_msg;
 
 PoReader::PoReader(const Glib::ustring &file_path) {
 	m_msg_number = 0;
@@ -10,7 +15,12 @@ PoReader::PoReader(const Glib::ustring &file_path) {
 	error_handler.xerror = xerror_handler;
 	error_handler.xerror2 = xerror2_handler;
 	debug("Opening file %s\n", file_path.c_str());
+
 	m_pofile = po_file_read(file_path.c_str(), &error_handler);
+
+	if (GLOBAL_ERROR_OCCURED) {
+		throw std::exception();
+	}
 
 	m_file_encoding = this->getEncoding();
 

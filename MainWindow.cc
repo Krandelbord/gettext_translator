@@ -8,6 +8,8 @@
 #include "HeaderEdit.h"
 #include "config.h"
 
+extern Glib::ustring global_error_msg;
+
 MainWindow::MainWindow(guint width, guint height) : m_text_panel(_("Original text (msgid):")) {
 	m_po_reader = NULL;
 	this->set_title(PROGRAM_NAME);
@@ -72,16 +74,32 @@ void MainWindow::onFileOpened(const Glib::ustring &file_path) {
 	if (Glib::file_test(file_path, Glib::FILE_TEST_IS_DIR)) return;
 
 	if (m_po_reader!=NULL) delete m_po_reader;
-	m_po_reader = new PoReader(file_path);
-	
-	m_menu_bar.enable_elements();
-	m_toolbar.enable_items();
+	try {
+		m_po_reader = new PoReader(file_path);
 
-	Statistics stat(file_path);
-	m_status_bar.setFuzzy(stat.getFuzzy());
-	m_status_bar.setTotal(stat.getTotal());
-	m_status_bar.setUntranslated(stat.getUntranslated());
-	this->onNextMessage(); //to skip message nr 0
+		m_menu_bar.enable_elements();
+		m_toolbar.enable_items();
+
+		Statistics stat(file_path);
+		m_status_bar.setFuzzy(stat.getFuzzy());
+		m_status_bar.setTotal(stat.getTotal());
+		m_status_bar.setUntranslated(stat.getUntranslated());
+		this->onNextMessage(); //to skip message nr 0
+	} catch (std::exception e) {
+		Gtk::Dialog dialog(_("Error when opening file"));
+		dialog.set_transient_for(*this);
+		Gtk::VBox *box = dialog.get_vbox();
+		Gtk::HBox intern_box;
+		box->pack_start(intern_box);
+		intern_box.pack_start(*Gtk::manage(new Gtk::Image(Gtk::Stock::DIALOG_ERROR, Gtk::ICON_SIZE_DIALOG)) );
+		Gtk::Label *lb = Gtk::manage(new Gtk::Label("<b>Error when opening file</b>\n\n"+global_error_msg));
+		lb->set_use_markup(true);
+		intern_box.pack_start(*lb, false, false, 5);
+
+		dialog.add_button(Gtk::Stock::OK, 1);
+		dialog.show_all();
+		dialog.run();
+	}
 }
 
 void MainWindow::onSizeChanged(Gtk::Requisition *r) {
