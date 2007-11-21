@@ -11,6 +11,10 @@
 extern Glib::ustring global_error_msg;
 
 MainWindow::MainWindow(guint width, guint height) : m_text_panel(_("Original text (msgid):")) {
+	m_search_msgstr = true;
+	m_search_msgid = false;
+	m_search_ignore_case = true;
+
 	m_po_reader = NULL;
 	this->set_title(PROGRAM_NAME);
 	this->set_default_size(width, height);
@@ -29,6 +33,7 @@ MainWindow::MainWindow(guint width, guint height) : m_text_panel(_("Original tex
 	m_menu_bar.signal_jump_next_msg().connect(sigc::mem_fun(this, &MainWindow::onJumpNextMessage));
 	m_menu_bar.signal_copy_msgid().connect(sigc::mem_fun(this, &MainWindow::onCopyMsgid));
 	m_menu_bar.signal_search().connect(sigc::mem_fun(this, &MainWindow::onSearch));
+	m_menu_bar.signal_search_next().connect(sigc::mem_fun(this, &MainWindow::searchExec));
 	Gtk::HBox *menu_box = new Gtk::HBox();
 	menu_box->pack_start(m_menu_bar, false, false);
 	menu_box->pack_start(*new Gtk::MenuBar(), true, true); // separator
@@ -286,35 +291,35 @@ void MainWindow::onSwitchFuzzy() {
 	m_tr_panel.setFuzzy(!m_tr_panel.getFuzzy());
 }
 
-void MainWindow::searchExec(const Glib::ustring &search_txt, bool ignore_case, bool in_msgid, bool in_msgstr) {
+void MainWindow::searchExec() {
 	debug("Searching...\n");
 	size_t backup_pos = m_po_reader->getMessageNumber();
 	bool found = false;
 	do {
-		debug("Porownywanie %s do %s\n", search_txt.c_str(), m_po_reader->getMsgstr().c_str());
-		if (in_msgstr) {
-			if (ignore_case) {
-				if ( IcaseCompare(m_po_reader->getMsgstr(), search_txt) ) found = true;
+		debug("Comparing %s do %s\n", m_last_search.c_str(), m_po_reader->getMsgstr().c_str());
+		if (m_search_msgstr) {
+			if (m_search_ignore_case) {
+				if ( IcaseCompare(m_po_reader->getMsgstr(), m_last_search) ) found = true;
 			} else {
-				if (compare(m_po_reader->getMsgstr(), search_txt )) found = true;
+				if (compare(m_po_reader->getMsgstr(), m_last_search )) found = true;
 			}
 		}
-		if (in_msgstr && !m_po_reader->getMsgstrPlural().empty()) {
+		if (m_search_msgstr && !m_po_reader->getMsgstrPlural().empty()) {
 			MsgContainer msgs = m_po_reader->getMsgstrPlural();
 			for (MsgContainer::iterator it = msgs.begin(); it!=msgs.end(); ++it) {
 				Glib::ustring msgstr = *it;
-				if (ignore_case) {
-					if ( IcaseCompare(msgstr, search_txt) ) found = true;
+				if (m_search_ignore_case) {
+					if ( IcaseCompare(msgstr, m_last_search) ) found = true;
 				} else {
-					if (compare(msgstr, search_txt) ) found = true;
+					if (compare(msgstr, m_last_search) ) found = true;
 				}
 			}
 		}
-		if (in_msgid) {
-			if (ignore_case) {
-				if (IcaseCompare(m_po_reader->getMsgid(), search_txt) ) found = true;
+		if (m_search_msgid) {
+			if (m_search_ignore_case) {
+				if (IcaseCompare(m_po_reader->getMsgid(), m_last_search) ) found = true;
 			} else {
-				if (compare(m_po_reader->getMsgid(), search_txt) ) found = true;
+				if (compare(m_po_reader->getMsgid(), m_last_search) ) found = true;
 			}
 		}
 	} while (m_po_reader->nextMessage() && !found);
@@ -344,10 +349,11 @@ void MainWindow::onSearch() {
 
 	Gtk::HButtonBox *btn_box = new Gtk::HButtonBox();
 	Gtk::CheckButton *in_msgstr = Gtk::manage(new Gtk::CheckButton(_("Search in msgstr")));
-	in_msgstr->set_active(true);
+	in_msgstr->set_active(m_search_msgstr);
 	Gtk::CheckButton *in_msgid = Gtk::manage(new Gtk::CheckButton(_("Search in msgid")));
+	in_msgid->set_active(m_search_msgid);
 	Gtk::CheckButton *ignore_case = Gtk::manage(new Gtk::CheckButton(_("Ignore case")));
-	ignore_case->set_active(true);
+	ignore_case->set_active(m_search_ignore_case);
 	btn_box->add(*in_msgstr);
 	btn_box->add(*in_msgid);
 	btn_box->add(*ignore_case);
@@ -362,7 +368,11 @@ void MainWindow::onSearch() {
 	dial.set_default(*find_btn);
 
 	if (dial.run()==1) {
-		searchExec(entry->get_text(), ignore_case->get_active(), in_msgid->get_active(), in_msgstr->get_active());	
+		m_search_ignore_case = ignore_case->get_active();
+		m_search_msgid = in_msgid->get_active();
+		m_search_msgstr = in_msgstr->get_active();
+		m_last_search = entry->get_text();
+		searchExec();	
 	}
 	delete hbox;
 	delete btn_box;

@@ -32,6 +32,13 @@ class MainWindow : public Gtk::Window {
 		StatusBar m_status_bar;
 		PoReader *m_po_reader;
 
+		/* Search options : */
+		Glib::ustring m_last_search;
+		Glib::ustring m_last_replace;
+		bool m_search_ignore_case;
+		bool m_search_msgstr;
+		bool m_search_msgid;
+
 		void fromGui2Po();
 		void fromPo2Gui();
 		void onLanguageChanged();
@@ -45,7 +52,7 @@ class MainWindow : public Gtk::Window {
 		void onHeaderEdit();
 		void onCopyMsgid();
 		void onSwitchFuzzy();
-		void searchExec(const Glib::ustring &search, bool ignore_case, bool in_msgid, bool in_msgstr);
+		void searchExec();
 		void onSearch();
 };
 
