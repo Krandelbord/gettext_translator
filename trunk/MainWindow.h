@@ -45,6 +45,7 @@ class MainWindow : public Gtk::Window {
 		void onHeaderEdit();
 		void onCopyMsgid();
 		void onSwitchFuzzy();
+		void searchExec(const Glib::ustring &search, bool ignore_case, bool in_msgid, bool in_msgstr);
 		void onSearch();
 };
 
