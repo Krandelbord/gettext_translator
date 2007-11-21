@@ -12,6 +12,8 @@
 
 less important:
 # implement do/undo functionaliy
+# when there is syntax error in file we could open it in plaintext editor
+  window with error line highlited
 
 Tests:
 * test what happens when saving to disk without empty space
