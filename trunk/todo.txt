@@ -9,6 +9,8 @@
 * add find to menu (now it is only in toolbar)
 * add find next
 * add search history or sth. to rememeber last search string
+* scrolling mouse on main-gui should switch messages forward nad backward
+* add some Help
 
 less important:
 # implement do/undo functionaliy
