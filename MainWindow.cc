@@ -286,6 +286,50 @@ void MainWindow::onSwitchFuzzy() {
 	m_tr_panel.setFuzzy(!m_tr_panel.getFuzzy());
 }
 
+void MainWindow::searchExec(const Glib::ustring &search_txt, bool ignore_case, bool in_msgid, bool in_msgstr) {
+	debug("Searching...\n");
+	size_t backup_pos = m_po_reader->getMessageNumber();
+	bool found = false;
+	do {
+		debug("Porownywanie %s do %s\n", search_txt.c_str(), m_po_reader->getMsgstr().c_str());
+		if (in_msgstr) {
+			if (ignore_case) {
+				if ( IcaseCompare(m_po_reader->getMsgstr(), search_txt) ) found = true;
+			} else {
+				if (compare(m_po_reader->getMsgstr(), search_txt )) found = true;
+			}
+		}
+		if (in_msgstr && !m_po_reader->getMsgstrPlural().empty()) {
+			MsgContainer msgs = m_po_reader->getMsgstrPlural();
+			for (MsgContainer::iterator it = msgs.begin(); it!=msgs.end(); ++it) {
+				Glib::ustring msgstr = *it;
+				if (ignore_case) {
+					if ( IcaseCompare(msgstr, search_txt) ) found = true;
+				} else {
+					if (compare(msgstr, search_txt) ) found = true;
+				}
+			}
+		}
+		if (in_msgid) {
+			if (ignore_case) {
+				if (IcaseCompare(m_po_reader->getMsgid(), search_txt) ) found = true;
+			} else {
+				if (compare(m_po_reader->getMsgid(), search_txt) ) found = true;
+			}
+		}
+	} while (m_po_reader->nextMessage() && !found);
+
+	if (!found) {
+		debug("Nothing found \n");
+		m_po_reader->jumpTo(backup_pos);
+	} else {
+		debug("Found\n");
+		m_po_reader->previousMessage();
+		this->fromPo2Gui();
+	}
+
+}
+
 void MainWindow::onSearch() {
 	debug("On search\n");
 	Gtk::Dialog dial;
@@ -294,6 +338,7 @@ void MainWindow::onSearch() {
 	Gtk::HBox *hbox = Gtk::manage(new Gtk::HBox());
 	Gtk::Label *lb = Gtk::manage(new Gtk::Label(_("Search For")));
 	Gtk::Entry *entry = Gtk::manage(new Gtk::Entry());
+	entry->set_activates_default(true);
 	hbox->pack_start(*lb);
 	hbox->pack_start(*entry, true, true, 5);
 
@@ -313,50 +358,11 @@ void MainWindow::onSearch() {
 	box->show_all();
 
 	dial.add_button(Gtk::Stock::CANCEL, 0);
-	dial.add_button(Gtk::Stock::FIND, 1);
+	Gtk::Button *find_btn = dial.add_button(Gtk::Stock::FIND, 1);
+	dial.set_default(*find_btn);
 
 	if (dial.run()==1) {
-		debug("Searching...\n");
-		size_t backup_pos = m_po_reader->getMessageNumber();
-		bool found = false;
-		do {
-			debug("Porownywanie %s do %s\n", entry->get_text().c_str(), m_po_reader->getMsgstr().c_str());
-			if (in_msgstr->get_active()) {
-				if (ignore_case->get_active()) {
-					if ( IcaseCompare(m_po_reader->getMsgstr(), entry->get_text()) ) found = true;
-				} else {
-					if (compare(m_po_reader->getMsgstr(), entry->get_text() )) found = true;
-				}
-			}
-			if (in_msgstr->get_active() && !m_po_reader->getMsgstrPlural().empty()) {
-				MsgContainer msgs = m_po_reader->getMsgstrPlural();
-				for (MsgContainer::iterator it = msgs.begin(); it!=msgs.end(); ++it) {
-					Glib::ustring msgstr = *it;
-					if (ignore_case->get_active()) {
-						if ( IcaseCompare(msgstr, entry->get_text()) ) found = true;
-					} else {
-						if (compare(msgstr, entry->get_text()) ) found = true;
-					}
-				}
-			}
-			if (in_msgid->get_active()) {
-				if (ignore_case->get_active()) {
-					if (IcaseCompare(m_po_reader->getMsgid(), entry->get_text()) ) found = true;
-				} else {
-					if (compare(m_po_reader->getMsgid(), entry->get_text()) ) found = true;
-				}
-			}
-		} while (m_po_reader->nextMessage() && !found);
-		
-		if (!found) {
-			debug("Nothing found \n");
-			m_po_reader->jumpTo(backup_pos);
-		} else {
-			debug("Found\n");
-			m_po_reader->previousMessage();
-			this->fromPo2Gui();
-		}
-
+		searchExec(entry->get_text(), ignore_case->get_active(), in_msgid->get_active(), in_msgstr->get_active());	
 	}
 	delete hbox;
 	delete btn_box;
