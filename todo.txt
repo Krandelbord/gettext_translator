@@ -6,6 +6,9 @@
 * catch error when encoding specified in header is not real enconding
 * if directory is highlihted in FileSelector Enter key should open directory
 * create backup files in ~/.config/transaltor/* or sth.
+* add find to menu (now it is only in toolbar)
+* add find next
+* add search history or sth. to rememeber last search string
 
 less important:
 # implement do/undo functionaliy
