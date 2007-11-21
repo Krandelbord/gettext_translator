@@ -3,6 +3,7 @@
 * add basic checking - if both messages ends and starts with newlines
 * set defualt spellcheker to current locale
 * check maximum number when jump'ing to msg
+* catch error when encoding specified in header is not real enconding
 
 less important:
 # implement do/undo functionaliy
