@@ -33,6 +33,11 @@ int main(int argc, char **argv) {
 	textdomain(PACKAGE);
 
 	Glib::set_application_name(PROGRAM_NAME);
+
+	Glib::OptionContext context(_("<some_file.po>"));
+	context.set_translation_domain(PACKAGE);
+	context.parse(argc, argv);
+
 	Gtk::Main app(argc, argv);
 	saveDefaults();
 
@@ -52,6 +57,12 @@ int main(int argc, char **argv) {
 	MainWindow okno(width, height);
 	okno.move(x, y);
 	okno.show_all();
+
+	if (argc>1) {
+		if (Glib::file_test(argv[1], Glib::FILE_TEST_EXISTS)) {
+			okno.onFileOpened(argv[1]);
+		}
+	}
 
 	app.run(okno);
 
