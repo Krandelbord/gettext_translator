@@ -1,0 +1,8 @@
+?package(gettext-translator):\
+        needs="x11"\
+        section="Apps/Text"\
+        hints="l10n"\
+        title="GettextTranslator"\
+        longtitle="GettextTranslator (Translation Tool)"\
+        command="/usr/bin/translator"
+

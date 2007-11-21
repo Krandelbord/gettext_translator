@@ -1,0 +1,10 @@
+* add some syntax highlighting
+* set defualt spellcheker to current locale
+* check maximum number when jump'ing to msg
+
+less important:
+# implement do/undo functionaliy
+
+Tests:
+* test what happens when saving to disk without empty space
+* saving to read_only disk
