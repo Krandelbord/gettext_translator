@@ -1,18 +1,22 @@
+FEATURES:
 * add some syntax highlighting
 * add showing spaces as middle-line dots
 * add basic checking - if both messages ends and starts with newlines
 * set defualt spellcheker to current locale
-* check maximum number when jump'ing to msg
-* catch error when encoding specified in header is not real enconding
 * if directory is highlihted in FileSelector Enter key should open directory
 * create backup files in ~/.config/transaltor/* or sth.
 * add find to menu (now it is only in toolbar)
 * add find next
 * add search history or sth. to rememeber last search string
 * scrolling mouse on main-gui should switch messages forward nad backward
+
+
+BUGS:
+* check maximum number when jump'ing to msg
+* catch error when encoding specified in header is not real enconding
 * add some Help
 
-less important:
+less important (probably next version):
 # implement do/undo functionaliy
 # when there is syntax error in file we could open it in plaintext editor
   window with error line highlited
