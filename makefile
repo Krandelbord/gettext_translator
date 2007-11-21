@@ -1,6 +1,6 @@
-CXXFLAGS+=-Wall -g0 -O2
+CXXFLAGS+=-Wall -g3
 prefix=/usr/
-DEBUG=
+DEBUG='true'
 BIN_FILE=translator
 
 ############ You can edit above this line #######################
