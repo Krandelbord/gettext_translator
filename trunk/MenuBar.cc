@@ -32,8 +32,22 @@ Gtk::Menu *MenuBar::createEditMenu() {
 
 	m->items().push_back( SeparatorElem());
 
-	Gtk::Widget *img = Gtk::manage(new Gtk::Image(Gtk::Stock::EDIT, Gtk::ICON_SIZE_MENU));
-	Element *me = new ImageMenuElem(_("Edit Headers..."), *img, m_signal_header_edit);
+	Gtk::Widget *img = Gtk::manage(new Gtk::Image(Gtk::Stock::FIND, Gtk::ICON_SIZE_MENU));
+	Element *me = new ImageMenuElem(_("Find..."), Gtk::AccelKey("<control>F"), *img, m_signal_search);
+	m_disable_list.push_back(me);
+	m->items().push_back(*me);
+	me = new MenuElem(_("Find Next"), Gtk::AccelKey("F3"), m_signal_search_next);
+	m_disable_list.push_back(me);
+	m->items().push_back(*me);
+	img = Gtk::manage(new Gtk::Image(Gtk::Stock::FIND_AND_REPLACE, Gtk::ICON_SIZE_MENU)); 
+	me = new ImageMenuElem(_("Find And Replace..."), Gtk::AccelKey("<control>R"), *img, m_signal_search_and_replace);
+	m_disable_list.push_back(me);
+	m->items().push_back(*me);
+
+	m->items().push_back( SeparatorElem());
+
+	img = Gtk::manage(new Gtk::Image(Gtk::Stock::EDIT, Gtk::ICON_SIZE_MENU));
+	me = new ImageMenuElem(_("Edit Headers..."), *img, m_signal_header_edit);
 	m_disable_list.push_back(me);
 	m->items().push_back(*me);
 
@@ -124,6 +138,10 @@ sigc::signal<void> &MenuBar::signal_save_as() {
 
 sigc::signal<void> &MenuBar::signal_search() {
 	return m_signal_search;
+}
+
+sigc::signal<void> &MenuBar::signal_search_next() {
+	return m_signal_search_next;
 }
 
 sigc::signal<void> &MenuBar::signal_search_and_replace() {
