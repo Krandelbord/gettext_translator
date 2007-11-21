@@ -344,6 +344,7 @@ void MainWindow::onSearch() {
 	Gtk::HBox *hbox = Gtk::manage(new Gtk::HBox());
 	Gtk::Label *lb = Gtk::manage(new Gtk::Label(_("Search For")));
 	Gtk::Entry *entry = Gtk::manage(new Gtk::Entry());
+	if (m_last_search.length() > 0) entry->set_text(m_last_search);
 	entry->set_activates_default(true);
 	hbox->pack_start(*lb);
 	hbox->pack_start(*entry, true, true, 5);
