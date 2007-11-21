@@ -294,6 +294,7 @@ void MainWindow::onSwitchFuzzy() {
 void MainWindow::searchExec() {
 	debug("Searching...\n");
 	size_t backup_pos = m_po_reader->getMessageNumber();
+	m_po_reader->nextMessage(); // we don't wan't to search in current message
 	bool found = false;
 	do {
 		debug("Comparing %s do %s\n", m_last_search.c_str(), m_po_reader->getMsgstr().c_str());
