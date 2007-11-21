@@ -1,4 +1,6 @@
 * add some syntax highlighting
+* add showing spaces as middle-line dots
+* add basic checking - if both messages ends and starts with newlines
 * set defualt spellcheker to current locale
 * check maximum number when jump'ing to msg
 
