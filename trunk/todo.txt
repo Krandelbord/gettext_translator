@@ -15,6 +15,7 @@ BUGS:
 * check maximum number when jump'ing to msg
 * catch error when encoding specified in header is not real enconding
 * add some Help
+* copy/cut/paste from menu do not work
 
 less important (probably next version):
 # implement do/undo functionaliy
