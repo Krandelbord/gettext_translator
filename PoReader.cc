@@ -16,6 +16,7 @@ PoReader::PoReader(const Glib::ustring &file_path) {
 	error_handler.xerror2 = xerror2_handler;
 	debug("Opening file %s\n", file_path.c_str());
 
+	GLOBAL_ERROR_OCCURED = false;
 	m_pofile = po_file_read(file_path.c_str(), &error_handler);
 
 	if (GLOBAL_ERROR_OCCURED) {
