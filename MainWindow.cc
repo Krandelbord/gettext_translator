@@ -90,13 +90,16 @@ void MainWindow::onFileOpened(const Glib::ustring &file_path) {
 		dialog.set_transient_for(*this);
 		Gtk::VBox *box = dialog.get_vbox();
 		Gtk::HBox intern_box;
+		Gtk::Label *title_lb = Gtk::manage(new Gtk::Label("<b>Error when opening file</b>"));
+		title_lb->set_use_markup(true);
+		box->pack_start(*title_lb);
 		box->pack_start(intern_box);
 		intern_box.pack_start(*Gtk::manage(new Gtk::Image(Gtk::Stock::DIALOG_ERROR, Gtk::ICON_SIZE_DIALOG)) );
-		Gtk::Label *lb = Gtk::manage(new Gtk::Label("<b>Error when opening file</b>\n\n"+global_error_msg));
+		Gtk::Label *lb = Gtk::manage(new Gtk::Label(global_error_msg));
 		lb->set_use_markup(true);
 		intern_box.pack_start(*lb, false, false, 5);
 
-		dialog.add_button(Gtk::Stock::OK, 1);
+		dialog.add_button(Gtk::Stock::CLOSE, 0);
 		dialog.show_all();
 		dialog.run();
 	}

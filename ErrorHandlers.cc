@@ -15,7 +15,7 @@ void xerror_handler (int severity,
 	std::ostringstream ss;
 
 	ss << _("Problem in line") << " " << lineno;
-	ss << " " << _("column") << " " << column << ": " << "\n\n";
+	ss << " " << _("column") << " " << column << ": " << "\n";
 	std::string charset;
 	Glib::get_charset(charset);
 	ss << Glib::convert(message_text, "UTF-8", charset);
