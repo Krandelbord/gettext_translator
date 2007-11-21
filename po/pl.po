@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Translation of GettextTranslator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-23 02:21+0200\n"
-"PO-Revision-Date: 2007-09-23 02:24+0200\n"
+"POT-Creation-Date: 2007-11-21 13:46+0100\n"
+"PO-Revision-Date: 2007-11-21 13:47+0100\n"
 "Last-Translator: Emil Nowak <emiml@wp.pl>\n"
 "Language-Team: None <none@none.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,6 +20,26 @@ msgstr ""
 #: ../DictionariesMenu.cc:1
 msgid "Change spellcheker dictionary"
 msgstr "Zmiana słownika do sprawdzania pisowni"
+
+#: ../ErrorHandlers.cc:1
+msgid "Problem in line"
+msgstr "Błąd w lini"
+
+#: ../ErrorHandlers.cc:1 ../ErrorHandlers.cc:1 ../ErrorHandlers.cc:1
+msgid "column"
+msgstr "kolumna"
+
+#: ../ErrorHandlers.cc:1
+msgid "Error in two messages\n"
+msgstr "Błąd w dwóch wiadomościach"
+
+#: ../ErrorHandlers.cc:1
+msgid "First in line"
+msgstr "Pierwszy w linii"
+
+#: ../ErrorHandlers.cc:1
+msgid "Second in line"
+msgstr "Drugi w linii"
 
 #: ../HeaderEdit.cc:1
 msgid "Comments"
@@ -66,6 +86,10 @@ msgid "Original text (msgid):"
 msgstr "Oryginalny komunikat (msgid):"
 
 #: ../MainWindow.cc:1
+msgid "Error when opening file"
+msgstr ""
+
+#: ../MainWindow.cc:1
 msgid "Open file"
 msgstr "Otwórz plik"
 
@@ -74,12 +98,28 @@ msgid "gettext files (*.po, *.pot)"
 msgstr "pliki gettexta (*.po, *.pot)"
 
 #: ../MainWindow.cc:1
-msgid "all files (*.*)"
-msgstr "wszystkie pliki (*.*)"
+msgid "all files "
+msgstr "wszystkie pliki"
 
 #: ../MainWindow.cc:1
 msgid "Save file"
 msgstr "Otwórz plik"
+
+#: ../MainWindow.cc:1
+msgid "Search For"
+msgstr ""
+
+#: ../MainWindow.cc:1
+msgid "Search in msgstr"
+msgstr ""
+
+#: ../MainWindow.cc:1
+msgid "Search in msgid"
+msgstr ""
+
+#: ../MainWindow.cc:1
+msgid "Ignore case"
+msgstr ""
 
 #: ../MenuBar.cc:1
 msgid "_File"
