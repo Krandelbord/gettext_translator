@@ -8,6 +8,7 @@ class HelpMenu : public Gtk::MenuBar {
 		HelpMenu(Gtk::Window *main_win);
 	private:
 		void onAbout(Gtk::Window *main_win);
+		void onHelp(Gtk::Window *main_win);
 
 };
 
