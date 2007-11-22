@@ -1,7 +1,8 @@
 current version:
-	* add find to menu (now it is only in toolbar)
-	* add find next
-	* add search history or sth. to rememeber last search string
-	* add some Help
+	* added find to menu (now it is only in toolbar)
+	* added find next
+	* added search history or sth. to rememeber last search string
+	* added some Help
+
 0.91:
 	Initial relase
