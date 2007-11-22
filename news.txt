@@ -1,4 +1,5 @@
 current version:
+	* added error handling on syntax error in po-file
 	* added find to menu (now it is only in toolbar)
 	* added find next
 	* added search history or sth. to rememeber last search string
