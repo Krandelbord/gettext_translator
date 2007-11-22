@@ -5,9 +5,6 @@ FEATURES:
 * set defualt spellcheker to current locale
 * if directory is highlihted in FileSelector Enter key should open directory
 * create backup files in ~/.config/transaltor/* or sth.
-* add find to menu (now it is only in toolbar)
-* add find next
-* add search history or sth. to rememeber last search string
 * scrolling mouse on main-gui should switch messages forward nad backward
 
 
