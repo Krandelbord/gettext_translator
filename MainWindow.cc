@@ -33,7 +33,8 @@ MainWindow::MainWindow(guint width, guint height) : m_text_panel(_("Original tex
 	m_menu_bar.signal_jump_next_msg().connect(sigc::mem_fun(this, &MainWindow::onJumpNextMessage));
 	m_menu_bar.signal_copy_msgid().connect(sigc::mem_fun(this, &MainWindow::onCopyMsgid));
 	m_menu_bar.signal_search().connect(sigc::mem_fun(this, &MainWindow::onSearch));
-	m_menu_bar.signal_search_next().connect(sigc::mem_fun(this, &MainWindow::searchExec));
+	m_menu_bar.signal_search_next().connect( sigc::hide_return(sigc::mem_fun(this, &MainWindow::searchExec)) );
+	m_menu_bar.signal_search_and_replace().connect(sigc::mem_fun(this, &MainWindow::onReplace));
 	Gtk::HBox *menu_box = new Gtk::HBox();
 	menu_box->pack_start(m_menu_bar, false, false);
 	menu_box->pack_start(*new Gtk::MenuBar(), true, true); // separator
@@ -291,7 +292,10 @@ void MainWindow::onSwitchFuzzy() {
 	m_tr_panel.setFuzzy(!m_tr_panel.getFuzzy());
 }
 
-void MainWindow::searchExec() {
+/**
+ * @returns true if semotinhg was found
+ */
+bool MainWindow::searchExec() {
 	debug("Searching...\n");
 	size_t backup_pos = m_po_reader->getMessageNumber();
 	m_po_reader->nextMessage(); // we don't wan't to search in current message
@@ -328,10 +332,12 @@ void MainWindow::searchExec() {
 	if (!found) {
 		debug("Nothing found \n");
 		m_po_reader->jumpTo(backup_pos);
+		return false;
 	} else {
 		debug("Found\n");
 		m_po_reader->previousMessage();
 		this->fromPo2Gui();
+		return true;
 	}
 
 }
@@ -339,6 +345,7 @@ void MainWindow::searchExec() {
 void MainWindow::onSearch() {
 	debug("On search\n");
 	Gtk::Dialog dial;
+	dial.set_title(_("Search"));
 	dial.set_transient_for(*this);
 	
 	Gtk::HBox *hbox = Gtk::manage(new Gtk::HBox());
@@ -378,4 +385,83 @@ void MainWindow::onSearch() {
 	}
 	delete hbox;
 	delete btn_box;
+}
+
+void MainWindow::onReplace() {
+	Gtk::Dialog dial;
+	dial.set_title(_("Search and replace"));
+	dial.set_transient_for(*this);
+	
+	Gtk::Table *tab = Gtk::manage(new Gtk::Table());
+	Gtk::Label *lb = Gtk::manage(new Gtk::Label(_("Search in translated messages for")));
+	Gtk::Entry *entry = Gtk::manage(new Gtk::Entry());
+	if (m_last_search.length() > 0) entry->set_text(m_last_search);
+	entry->set_activates_default(true);
+	tab->attach(*lb, 0, 1, 0, 1);
+	tab->attach(*entry, 1, 2, 0, 1, Gtk::FILL, Gtk::FILL, 5, 5);
+
+	Gtk::Label *lb_rp = Gtk::manage(new Gtk::Label(_("Replace with")));
+	Gtk::Entry *entry_rp = Gtk::manage(new Gtk::Entry());
+	if (m_last_replace.length() > 0) entry_rp->set_text(m_last_replace);
+	entry_rp->set_activates_default(true);
+	tab->attach(*lb_rp, 0, 1, 1, 2);
+	tab->attach(*entry_rp, 1, 2, 1, 2, Gtk::FILL, Gtk::FILL, 5, 5);
+
+
+	Gtk::HButtonBox *btn_box = new Gtk::HButtonBox();
+	Gtk::CheckButton *replace_all = Gtk::manage(new Gtk::CheckButton(_("Replace all")));
+	replace_all->set_active(true);
+	btn_box->add(*replace_all);
+
+	Gtk::VBox *box = dial.get_vbox();
+	box->pack_start(*tab);
+	box->pack_start(*btn_box);
+	box->show_all();
+
+	dial.add_button(Gtk::Stock::CANCEL, 0);
+	Gtk::Button *find_btn = dial.add_button(Gtk::Stock::FIND_AND_REPLACE, 1);
+	dial.set_default(*find_btn);
+
+	if (dial.run()==1) {
+		m_last_search = entry->get_text();
+		m_last_replace = entry_rp->get_text();
+
+		// If we dont find string in current message search for a first one
+		if (!doReplace(m_last_search, m_last_replace) && !replace->get_active()) {
+			// backup search options
+			bool tmp_ignore_case = m_search_ignore_case;
+			m_search_ignore_case = false;
+			bool tmp_search_msgid = m_search_msgid;
+			m_search_msgid = false;
+			bool tmp_search_msgstr = m_search_msgstr;
+			m_search_msgstr = true;
+
+			size_t start_pos = m_po_reader->getMessageNumber();
+			searchExec();
+			size_t after_find_pos = m_po_reader->getMessageNumber();
+			if (start_pos!=after_find_pos) {
+				doReplace(m_last_search, m_last_replace);
+			}
+			m_search_ignore_case = tmp_ignore_case;
+			m_search_msgstr = tmp_search_msgstr;
+			m_search_msgid = tmp_search_msgid;
+		}
+	}
+	delete tab;
+	delete btn_box;
+}
+
+/**
+ * @returns if replace was made
+ */
+bool MainWindow::doReplace(const Glib::ustring &str1, const Glib::ustring &str2) {
+	Glib::ustring msgstr = m_tr_panel.getText();
+	size_t string_pos = msgstr.find(str1);
+	//TODO: what about plural
+	if (string_pos!=Glib::ustring::npos) {
+		msgstr.replace( string_pos, msgstr.length(), str2);
+		m_tr_panel.setText(msgstr, m_tr_panel.getFuzzy());
+		return true;
+	}
+	return false;
 }

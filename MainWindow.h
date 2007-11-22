@@ -52,8 +52,10 @@ class MainWindow : public Gtk::Window {
 		void onHeaderEdit();
 		void onCopyMsgid();
 		void onSwitchFuzzy();
-		void searchExec();
+		bool searchExec();
 		void onSearch();
+		void onReplace();
+		bool doReplace(const Glib::ustring &str1, const Glib::ustring &str2);
 };
 
 #endif /* MAIN_WINDOW_H */
