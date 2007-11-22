@@ -468,7 +468,7 @@ void MainWindow::onReplace() {
 		Gtk::Widget *img = Gtk::manage(new Gtk::Image(Gtk::Stock::DIALOG_INFO, Gtk::ICON_SIZE_DIALOG));
 		hbox->pack_start(*img);
 		std::ostringstream ss;
-		ss << replace_count << " " << ngettext("string replaced", "strings replaced", replace_count);
+		ss << replace_count << " " << ngettext("message modified", "messages modified", replace_count);
 		Gtk::Label *lbsum = Gtk::manage(new Gtk::Label(ss.str()));
 		hbox->pack_start(*lbsum);
 		box->show_all();
@@ -486,13 +486,29 @@ void MainWindow::onReplace() {
  * @returns if replace was made
  */
 bool MainWindow::doReplace(const Glib::ustring &str1, const Glib::ustring &str2) {
-	Glib::ustring msgstr = m_tr_panel.getText();
-	size_t string_pos = msgstr.find(str1);
-	//TODO: what about plural
-	if (string_pos!=Glib::ustring::npos) {
-		msgstr.replace( string_pos, msgstr.length(), str2);
-		m_tr_panel.setText(msgstr, m_tr_panel.getFuzzy());
-		return true;
+	if (m_tr_panel.getPluralTexts().empty()) {
+		Glib::ustring msgstr = m_tr_panel.getText();
+		size_t string_pos = msgstr.find(str1);
+		if (string_pos!=Glib::ustring::npos) {
+			msgstr.replace( string_pos, msgstr.length(), str2);
+			m_tr_panel.setText(msgstr, m_tr_panel.getFuzzy());
+			return true;
+		}
+		return false;
+	} else {
+		bool replaced = false;
+		MsgContainer msgs = m_tr_panel.getPluralTexts();
+		MsgContainer new_msgstr;
+		for (MsgContainer::iterator it = msgs.begin(); it!=msgs.end(); ++it) {
+			Glib::ustring msgstr = *it;
+			size_t string_pos = msgstr.find(str1);
+			if (string_pos!=Glib::ustring::npos) {
+				msgstr.replace( string_pos, msgstr.length(), str2);
+				replaced = true;
+			}
+			new_msgstr.push_back(msgstr);
+		}
+		m_tr_panel.setText(new_msgstr, m_po_reader->getPluralFormsNumber(), m_tr_panel.getFuzzy());
+		return replaced;
 	}
-	return false;
 }
