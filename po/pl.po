@@ -8,12 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Translation of GettextTranslator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-21 13:46+0100\n"
-"PO-Revision-Date: 2007-11-21 13:47+0100\n"
+"POT-Creation-Date: 2007-11-22 14:31+0100\n"
+"PO-Revision-Date: 2007-11-22 14:54+0100\n"
 "Last-Translator: Emil Nowak <emiml@wp.pl>\n"
 "Language-Team: None <none@none.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms:  nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && "
+"(n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Gettext Translator 0.9\n"
 
@@ -31,7 +33,7 @@ msgstr "kolumna"
 
 #: ../ErrorHandlers.cc:1
 msgid "Error in two messages\n"
-msgstr "Błąd w dwóch wiadomościach"
+msgstr "Błąd w dwóch wiadomościach\n"
 
 #: ../ErrorHandlers.cc:1
 msgid "First in line"
@@ -63,7 +65,7 @@ msgstr "<b>Wydobyte komentarze :</b> "
 
 #: ../HelpMenu.cc:1
 msgid "_Help"
-msgstr "_Pomoc"
+msgstr "Pomo_c"
 
 #: ../HelpMenu.cc:1
 msgid "Translator credits"
@@ -81,13 +83,40 @@ msgstr "wersja libGettext-po"
 msgid "Gtkmm version "
 msgstr "wersja Gtkmm"
 
+#: ../HelpMenu.cc:1
+msgid "Gettext Translator - Help"
+msgstr "Gettext Translator - Pomoc"
+
+#: ../HelpMenu.cc:1
+msgid ""
+"<b>Gettext Translator Help</b>\n"
+"\n"
+"This program should be so easy to use that you should't need manual/help.\n"
+"If you have some problems please contact author on emil5@go2.pl or jabber "
+"emil.nowak@jabber.org\n"
+"You can visit program homepage at http://emiml.pl/translator/"
+msgstr ""
+"<b>Gettext Translator - Pomoc</b>\n"
+"\n"
+"Ten program jest raczej na tyle prosty w obsłudze, że raczej nikt nie "
+"potrzebuje do niego instrukcji obsługi ani pomocy .\n"
+"Jeżeli masz jakieś problemy z jego używaniem możesz skontaktować się z "
+"autorem wysyłając e-mail na emil5@go2.pl lub przez jabbera "
+"emil.nowak@jabber.org\n"
+"Możesz też odwiedzić stronę programu pod adresem "
+"http://emiml.pl/translator/"
+
+#: ../main.cc:1
+msgid "<some_file.po>"
+msgstr "<jakiś_plik.po>"
+
 #: ../MainWindow.cc:1
 msgid "Original text (msgid):"
 msgstr "Oryginalny komunikat (msgid):"
 
 #: ../MainWindow.cc:1
 msgid "Error when opening file"
-msgstr ""
+msgstr "Wystąpił błąd podczas otwierania pliku"
 
 #: ../MainWindow.cc:1
 msgid "Open file"
@@ -106,20 +135,55 @@ msgid "Save file"
 msgstr "Otwórz plik"
 
 #: ../MainWindow.cc:1
+msgid "Search"
+msgstr "Szukaj"
+
+#: ../MainWindow.cc:1
 msgid "Search For"
-msgstr ""
+msgstr "Szukana fraza"
 
 #: ../MainWindow.cc:1
 msgid "Search in msgstr"
-msgstr ""
+msgstr "Szukanie w msgstr"
 
 #: ../MainWindow.cc:1
 msgid "Search in msgid"
-msgstr ""
+msgstr "Szukanie w msgid"
 
 #: ../MainWindow.cc:1
 msgid "Ignore case"
-msgstr ""
+msgstr "Ignoruj wielkość liter"
+
+#: ../MainWindow.cc:1
+msgid "Search and replace"
+msgstr "Znajdź i zamień"
+
+#: ../MainWindow.cc:1
+msgid "Search in translated messages for"
+msgstr "Fraza do wyszukania w tłumaczeniach"
+
+#: ../MainWindow.cc:1
+msgid "Replace with"
+msgstr "Zamień na"
+
+#: ../MainWindow.cc:1
+msgid "Replace all"
+msgstr "Zamieniaj wszystkie"
+
+#: ../MainWindow.cc:1
+msgid "Search and replace - summary"
+msgstr "Znajdź i zamień - podsumowanie"
+
+#: ../MainWindow.cc:1
+msgid "<b>Search And Replace Summary</b>"
+msgstr "<b>Podsumowanie operacji Znajdź i Zamień</b>"
+
+#: ../MainWindow.cc:1
+msgid "message modified"
+msgid_plural "messages modified"
+msgstr[0] "wiadomość została zmodyfikowana"
+msgstr[1] "wiadomości zostały zmodyfikowane"
+msgstr[2] "wiadomości zostało zmodyfikowanych"
 
 #: ../MenuBar.cc:1
 msgid "_File"
@@ -132,6 +196,18 @@ msgstr "_Edycja"
 #: ../MenuBar.cc:1
 msgid "_Tools"
 msgstr "_Narzędzia"
+
+#: ../MenuBar.cc:1
+msgid "Find..."
+msgstr "Znajdź..."
+
+#: ../MenuBar.cc:1
+msgid "Find Next"
+msgstr "Znajdź Następny"
+
+#: ../MenuBar.cc:1
+msgid "Find And Replace..."
+msgstr "Znajdź i Zamień..."
 
 #: ../MenuBar.cc:1
 msgid "Edit Headers..."
