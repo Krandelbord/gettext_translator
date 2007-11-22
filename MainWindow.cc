@@ -1,3 +1,4 @@
+#include <sstream>
 #include "MainWindow.h"
 #include "MenuBar.h"
 #include "Configuration.h"
@@ -410,7 +411,7 @@ void MainWindow::onReplace() {
 
 	Gtk::HButtonBox *btn_box = new Gtk::HButtonBox();
 	Gtk::CheckButton *replace_all = Gtk::manage(new Gtk::CheckButton(_("Replace all")));
-	replace_all->set_active(true);
+	replace_all->set_active(false);
 	btn_box->add(*replace_all);
 
 	Gtk::VBox *box = dial.get_vbox();
@@ -422,31 +423,61 @@ void MainWindow::onReplace() {
 	Gtk::Button *find_btn = dial.add_button(Gtk::Stock::FIND_AND_REPLACE, 1);
 	dial.set_default(*find_btn);
 
+	size_t replace_count = 0;
 	if (dial.run()==1) {
 		m_last_search = entry->get_text();
 		m_last_replace = entry_rp->get_text();
 
-		// If we dont find string in current message search for a first one
-		if (!doReplace(m_last_search, m_last_replace) && !replace->get_active()) {
-			// backup search options
-			bool tmp_ignore_case = m_search_ignore_case;
-			m_search_ignore_case = false;
-			bool tmp_search_msgid = m_search_msgid;
-			m_search_msgid = false;
-			bool tmp_search_msgstr = m_search_msgstr;
-			m_search_msgstr = true;
+		// backup search options
+		bool tmp_ignore_case = m_search_ignore_case;
+		m_search_ignore_case = false;
+		bool tmp_search_msgid = m_search_msgid;
+		m_search_msgid = false;
+		bool tmp_search_msgstr = m_search_msgstr;
+		m_search_msgstr = true;
 
-			size_t start_pos = m_po_reader->getMessageNumber();
-			searchExec();
-			size_t after_find_pos = m_po_reader->getMessageNumber();
-			if (start_pos!=after_find_pos) {
+		// If we dont find string in current message search for a first one
+		if (!doReplace(m_last_search, m_last_replace)) {
+			if (searchExec()) {
 				doReplace(m_last_search, m_last_replace);
+				replace_count++;
 			}
-			m_search_ignore_case = tmp_ignore_case;
-			m_search_msgstr = tmp_search_msgstr;
-			m_search_msgid = tmp_search_msgid;
 		}
+		if (replace_all->get_active()) {
+			while (searchExec()) {
+				doReplace(m_last_search, m_last_replace);
+				replace_count++;
+			}
+		}
+		m_search_ignore_case = tmp_ignore_case;
+		m_search_msgstr = tmp_search_msgstr;
+		m_search_msgid = tmp_search_msgid;
 	}
+	
+	if (replace_all->get_active()) {
+		Gtk::Dialog dial_sum;
+		dial_sum.set_title(_("Search and replace - summary"));
+		dial_sum.set_transient_for(*this);
+		box = dial_sum.get_vbox();
+		Gtk::Label *lb_title = Gtk::manage(new Gtk::Label(_("<b>Search And Replace Summary</b>")));
+		lb_title->set_use_markup(true);
+		box->pack_start(*lb_title);
+		Gtk::HBox *hbox = Gtk::manage(new Gtk::HBox());
+		box->pack_start(*hbox);
+
+		Gtk::Widget *img = Gtk::manage(new Gtk::Image(Gtk::Stock::DIALOG_INFO, Gtk::ICON_SIZE_DIALOG));
+		hbox->pack_start(*img);
+		std::ostringstream ss;
+		ss << replace_count << " " << ngettext("string replaced", "strings replaced", replace_count);
+		Gtk::Label *lbsum = Gtk::manage(new Gtk::Label(ss.str()));
+		hbox->pack_start(*lbsum);
+		box->show_all();
+		dial_sum.add_button(Gtk::Stock::CLOSE, 0);
+		dial_sum.run();
+		delete lb_title;
+		delete hbox;
+	}
+
 	delete tab;
 	delete btn_box;
 }
