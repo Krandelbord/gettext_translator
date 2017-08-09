@@ -1,5 +1,6 @@
 #include "Configuration.h"
 #include <glibmm.h>
+#include <cstdio>
 
 Configuration::Configuration() {
 	m_key_file = g_key_file_new();

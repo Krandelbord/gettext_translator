@@ -6,6 +6,7 @@
 
 #ifdef DEBUG
 #include <glib.h>
+#include <stdio_ext.h>
 #  define debug(args...) { \
 	GTimeVal time; \
 	g_get_current_time(&time); \

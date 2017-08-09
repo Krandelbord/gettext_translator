@@ -1,5 +1,6 @@
 #include "MenuBar.h"
 #include "config.h"
+using namespace Gtk::Menu_Helpers;
 
 MenuBar::MenuBar() {
 	this->items().push_back(MenuElem(_("_File"), *this->createFileMenu()));

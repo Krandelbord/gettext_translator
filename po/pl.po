@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Translation of GettextTranslator\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-11-22 14:31+0100\n"
-"PO-Revision-Date: 2007-11-22 14:54+0100\n"
+"PO-Revision-Date: 2008-11-12 18:18+0100\n"
 "Last-Translator: Emil Nowak <emiml@wp.pl>\n"
 "Language-Team: None <none@none.org>\n"
 "MIME-Version: 1.0\n"
@@ -77,7 +77,7 @@ msgstr "Użyte biblioteki:"
 
 #: ../HelpMenu.cc:1
 msgid "libGettext-po version "
-msgstr "wersja libGettext-po"
+msgstr "wersja libGettext-po bla bla"
 
 #: ../HelpMenu.cc:1
 msgid "Gtkmm version "
