@@ -15,7 +15,7 @@ MainWindow::MainWindow(guint width, guint height) : m_text_panel(_("Original tex
 	m_search_msgstr = true;
 	m_search_msgid = false;
 	m_search_ignore_case = true;
-
+	m_msg_count = 0;
 	m_po_reader = NULL;
 	this->set_title(PROGRAM_NAME);
 	this->set_default_size(width, height);
@@ -89,7 +89,8 @@ void MainWindow::onFileOpened(const Glib::ustring &file_path) {
 
 		Statistics stat(file_path);
 		m_status_bar.setFuzzy(stat.getFuzzy());
-		m_status_bar.setTotal(stat.getTotal());
+		m_msg_count = stat.getTotal();
+		m_status_bar.setTotal(m_msg_count);
 		m_status_bar.setUntranslated(stat.getUntranslated());
 		this->onNextMessage(); //to skip message nr 0
 	} catch (std::exception e) {
@@ -206,7 +207,7 @@ void MainWindow::onJumpTo() {
 	Gtk::Dialog dialog;
 	dialog.set_transient_for(*this);
 	Gtk::SpinButton *spin = new Gtk::SpinButton(3, 0);
-	spin->set_range(1, 1233); // TODO: enter max numer for file
+	spin->set_range(1, m_msg_count);
 	spin->set_increments(1, 10);
 	Gtk::VBox *box = dialog.get_vbox();
 	//box->pack_start(Gtk::manage(*new Gtk::Label("Enter message number")));

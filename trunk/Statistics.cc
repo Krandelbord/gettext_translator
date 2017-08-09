@@ -1,6 +1,7 @@
 #include "Statistics.h"
 #include "ErrorHandlers.h"
 #include "config.h"
+#include <cstring>
 
 Statistics::Statistics(const Glib::ustring &filename) {
 	m_fuzzy_count = 0;

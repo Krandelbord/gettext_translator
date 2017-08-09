@@ -14,7 +14,9 @@ BUGS:
 * copy/cut/paste from menu do not work
 * In plural messages pg-down and pg-up should skip to next/previous form not
   to next message
-
+* When browsing pidgin messages somewhere around message 1300 window was reized
+  to be wider than current screen resolution
+ 
 less important (probably next version):
 # implement do/undo functionaliy
 # when there is syntax error in file we could open it in plaintext editor

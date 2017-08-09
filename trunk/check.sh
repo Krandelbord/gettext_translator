@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 kol_czerw="\e[1;31m"
 kol_zielo="\e[1;33m"
@@ -56,7 +56,7 @@ NEWTMP=${TMPFILE}.c
 mv "${TMPFILE}" "${NEWTMP}"
 echo "int main(int argc, char **argv) {return 0;}" >> ${NEWTMP}
 
-cc -l$1 $NEWTMP -o /dev/null
+cc -l$1 $NEWTMP -o /dev/null 2>/dev/null
 if [ $? -ne 0 ]; then
 	echo -e "${kol_czerw}$1 is not installed correctly${kol_reset}"
 	rm ${NEWTMP} 2>/dev/null
@@ -92,8 +92,10 @@ fi
 # podanie jednego argumentu sprawdza tylko czy dana biblioteka istnieje,
 # podanie drugiego sprawdza czy ta biblioteka jest >= wersji
 #==============================================================================
-SPRAWDZ_LIB gtkmm-2.4
+SPRAWDZ_LIB gtkmm-2.4 
+SPRAWDZ_LIB gtkspell-2.0
 CHECK_LIB_RAW gettextpo
+CHECK_LIB_RAW aspell
 
 echo -e "\nIt seems that you have all stuff needed to compile"
 echo "Type make, to compile program"

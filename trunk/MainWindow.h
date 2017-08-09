@@ -38,6 +38,7 @@ class MainWindow : public Gtk::Window {
 		bool m_search_ignore_case;
 		bool m_search_msgstr;
 		bool m_search_msgid;
+		size_t m_msg_count;
 
 		void fromGui2Po();
 		void fromPo2Gui();
