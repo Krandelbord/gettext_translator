@@ -1,7 +1,7 @@
 language: cpp
 
 before_install:
-  sudo apt-get -qq update
-  sudo apt-get install -y libgtkspell-dev libgtk2.0-dev libgtkmm-2.4-dev
+  - sudo apt-get -qq update
+  - sudo apt-get install -y libgtkspell-dev libgtk2.0-dev libgtkmm-2.4-dev
 
 install: make
