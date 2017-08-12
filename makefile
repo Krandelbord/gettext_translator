@@ -1,4 +1,4 @@
-CXXFLAGS+=-Wall -g3
+CXXFLAGS+=-Wall -g3 -D_GLIBCXX_USE_CXX11_ABI=0
 prefix=/usr/
 DEBUG='true'
 BIN_FILE=translator
