@@ -1,11 +1,11 @@
-CXXFLAGS+=-Wall -g3 -D_GLIBCXX_USE_CXX11_ABI=0
+CXXFLAGS+=-Wall -g0 -O2
 prefix=/usr/
 DEBUG='true'
 BIN_FILE=translator
 
 ############ You can edit above this line #######################
 CXXFLAGS+=`pkg-config --cflags gtkmm-2.4 gtkspell-2.0`
-LDFLAGS+=`pkg-config --libs gtkspell-2.0 gtk+-2.0 gtkmm-2.4` -lgettextpo -laspell
+LDFLAGS+=`pkg-config --libs gtkspell-2.0 gtkmm-2.4` -lgettextpo -laspell
 
 # internal stuff - usally you don't have to edit below this line
 CPPFLAGS+=-DGETTEXT_PATH=\"$(prefix)/share/locale\"
@@ -17,10 +17,10 @@ endif
 $(BIN_FILE): main.o Utils.o SpellTxtView.o MainWindow.o MenuBar.o Configuration.o TextPanel.o \
 			TranslatedTextPanel.o IndicatorWidget.o PoReader.o HelperPanel.o Toolbar.o DictionariesMenu.o \
 			ErrorHandlers.o Statistics.o StatusBar.o HelpMenu.o HeaderEdit.o
-	$(CXX) $(LDFLAGS) $^ -o $@
+	$(CXX) -o $@ $^ $(LDFLAGS)
 
 test_replace: test_replace.o Utils.o
-	$(CXX) $(LDFLAGS) $^ -o $@
+	$(CXX) $^ -o $@ $(LDFLAGS)
 
 po:
 	$(MAKE) -C po/
