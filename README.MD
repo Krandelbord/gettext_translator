@@ -5,6 +5,8 @@
 ## Screenshot
 ![gettext_translator screenshot](https://user-images.githubusercontent.com/8105637/29140303-5a19518a-7d4a-11e7-8d78-3fb2c291afa2.png "Gettext translator screen")
 
+[![Travis Build Status](https://travis-ci.org/Krandelbord/gettext_translator.svg?branch=master)](https://travis-ci.org/Krandelbord/gettext_translator)
+
 ## Compilation
 to compile this program you need
 GNU Make
